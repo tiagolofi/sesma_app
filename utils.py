@@ -158,15 +158,15 @@ def extrato(file: str, skip: int, range_cols: str):
 
 	return df
 
-def export_data(data, output_name: str):
+def export_data(data):
 	print('exportando arquivo...')
 	try:
-		data.to_csv( 
-			path_or_buf=output_name+'.csv', 
+		arquivo = data.to_csv( 
 			sep=";", 
-			index=False, 
-			encoding='utf-8-sig'
-		)
-		return print('arquivo exportado com sucesso!')
+			index=False
+		).encode('utf-8-sig')
+		print('arquivo exportado com sucesso!')
+		return arquivo
 	except:
+		pass
 		return print('erro ao exportar arquivo...')

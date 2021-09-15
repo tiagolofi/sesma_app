@@ -60,11 +60,9 @@ if st.button('Visualizar planilha'):
 else:	
 	st.write('')
 
-if st.button('Exportar planilha'):
-	try:
-		utils.export_data(data=tabela, output_name=type_problem+'corrigido')
-		st.write('Planilha exportada!')
-	except:
-		st.write('Erro ao exportar!')
-else:
-	st.write('')
+st.download_button(
+	'Exportar planilha', 
+	data=utils.export_data(data=tabela),
+	file_name=type_problem+'corrigido.csv',
+	mime='text/csv'
+)

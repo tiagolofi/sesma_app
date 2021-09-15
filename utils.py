@@ -1,8 +1,9 @@
 
 from pandas import read_excel
 from statistics import mode
-from re import sub, findall
+from re import sub, findall, ASCII
 from pandas import concat
+from datetime import datetime, date
 import warnings
 
 def fns(file: str, skip: int, range_cols: str):
@@ -32,6 +33,23 @@ def fns(file: str, skip: int, range_cols: str):
 
 	df = df.drop(exclude_values) # exclui linha sobressalentes
 
+	list_integers = [
+		'Nº OB', 'Banco OB', 'Agência OB', 'Conta OB', 'Processo'
+	]
+
+	for i in list_integers:
+		df[i] = [int(n) for n in list(df[i])]
+
+	list_values = ['Valor Total', 'Desconto', 'Valor Líquido']
+	for i in list_values:
+		df[i] = [''.join(findall('[\d\,]+', n)) for n in df[i]]
+		df[i] = [sub(',', '.', n) for n in df[i]]
+		df[i] = df[i].astype(float)
+		df[i] = ['{:.2f}'.format(n) for n in df[i]]
+
+	if 'Nº Proposta' in df.columns:
+		df['Nº Proposta'] = [int(i) for i in df['Nº Proposta']]
+
 	return df
 
 def sigef(file: str, skip: int, range_cols: str):
@@ -60,7 +78,7 @@ def sigef(file: str, skip: int, range_cols: str):
 
 	df.columns = [
 		'PP', 'TIPO', 'OB', 'FONTE', 'DATA_PGO', 
-		'NOTA_EMPENHO', 'ND', 'NL', 'Data NL', 
+		'NOTA_EMPENHO', 'ND', 'NL', 'DATA_NL', 
 		'CE', 'N_PROCESSO', 'VALOR'
 	]
 
@@ -71,20 +89,32 @@ def sigef(file: str, skip: int, range_cols: str):
 	df['N_PROCESSO'] = [sub('/21$', '/2021', i) for i in df['N_PROCESSO']]
 	df['N_PROCESSO'] = [sub('/20$', '/2020', i) for i in df['N_PROCESSO']]
 	df['N_PROCESSO'] = [sub('/19$', '/2019', i) for i in df['N_PROCESSO']]
-	# df['N_PROCESSO'] = [findall('[\d|\/]+', i)[0] for i in df['N_PROCESSO']]
 	df['VALOR'] = df['VALOR'].astype(float)
+	df['VALOR'] = ['{:.2f}'.format(i) for i in df['VALOR']]
 	df['N_PROCESSO'] = df['N_PROCESSO'].astype(str)
 
 	tabela = concat([df, dfx], axis=1)
 
-	print('finalizando tratamento...')
+	print('separando info credores...')
 	tabela['Unnamed: 3'] = tabela['Unnamed: 3'].ffill()
 
 	tabela = tabela.dropna(axis='index')
 
 	tabela = tabela.rename(columns={'Unnamed: 3': 'CREDOR'})
 
+	tabela['CREDOR_CPFCNPJ'] = [''.join(findall('[\d]+', i)) for i in tabela['CREDOR']]
+	tabela['CREDOR_NOME'] = [' '.join(findall('[A-Z|ÇÃÁÂÁÀÉÊÍÓÔÚ]+', i)) for i in tabela['CREDOR']]
+
+	tabela = tabela.drop(columns=['CREDOR'])
+	 
 	return tabela
+
+def valida_ob(ob: str, ano: str):
+	ob = str(ob)
+	if ob[0:4] == '2021':
+		return sub(ob[0:4], ano+'OB', ob)
+	else:
+		return ob
 
 def extrato(file: str, skip: int, range_cols: str):
 	print('lendo arquivo...')
@@ -112,9 +142,20 @@ def extrato(file: str, skip: int, range_cols: str):
 		'VALOR', 'DESCRICAO'
 	]
 
-	df = df.drop(['OBS'], axis=1)
+	list_integers = [
+		'AGENCIA', 'LOTE', 'N_DOCUMENTO', 'COD_HISTORICO'
+	]
 
-	df['HISTORICO'] = [i.strip() for i in df['HISTORICO']]
+	for i in list_integers:
+		df[i] = [int(n) for n in list(df[i])]
+
+	df = df.drop(['OBS'], axis=1)
+	df['N_DOCUMENTO'] = df['N_DOCUMENTO'].astype(str)
+	df['N_DOCUMENTO'] = [valida_ob(i, ano='2021') for i in df['N_DOCUMENTO']]
+	df['VALOR'] = [''.join(findall('[\d\,]+', i)) for i in df['VALOR']]
+	df['VALOR'] = [sub(',', '.', i) for i in df['VALOR']]
+	df['VALOR'] = df['VALOR'].astype(float)
+	df['VALOR'] = ['{:.2f}'.format(i) for i in df['VALOR']]
 
 	return df
 
@@ -124,7 +165,6 @@ def export_data(data, output_name: str):
 		data.to_csv( 
 			path_or_buf=output_name+'.csv', 
 			sep=";", 
-			decimal=',',
 			index=False, 
 			encoding='utf-8-sig'
 		)

@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 st.write('''
-# Tratamento das Fontes de Dados Fiscais - SES/MA
+# Tratamento das Fontes de Receitas - SES/MA
 ''')
 
 c1, c2, c3 = st.columns(3)
@@ -50,7 +50,10 @@ def create_data():
 		)
 	return tabela
 
-tabela = create_data()
+try:
+	tabela = create_data()
+except:
+	pass
 
 if st.button('Visualizar planilha'): 
 	st.write(tabela)
@@ -59,7 +62,7 @@ else:
 
 if st.button('Exportar planilha'):
 	try:
-		utils.export_data(data=tabela, output_name='arquivo')
+		utils.export_data(data=tabela, output_name=type_problem+'corrigido')
 		st.write('Planilha exportada!')
 	except:
 		st.write('Erro ao exportar!')

@@ -52,7 +52,7 @@ def create_data():
 
 if st.button('Visualizar planilha'):
 	try:
-		tabela = create_data(),
+		tabela = create_data()
 		exportable = utils.export_data(data=tabela)
 		st.download_button(
 			'Exportar planilha', 

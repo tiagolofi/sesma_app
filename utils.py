@@ -65,10 +65,13 @@ def sigef(file: str, skip: int, range_cols: str):
 	]
 
 	print('corrigindo número de processos (válido a partir de 2019)')
+	df['N_PROCESSO'] = [sub('\D', '/', i) for i in df['N_PROCESSO']]
+	df['N_PROCESSO'] = [findall('[\d]+', i) for i in df['N_PROCESSO']]
+	df['N_PROCESSO'] = ['/'.join(i) for i in df['N_PROCESSO']]
 	df['N_PROCESSO'] = [sub('/21$', '/2021', i) for i in df['N_PROCESSO']]
 	df['N_PROCESSO'] = [sub('/20$', '/2020', i) for i in df['N_PROCESSO']]
 	df['N_PROCESSO'] = [sub('/19$', '/2019', i) for i in df['N_PROCESSO']]
-	df['N_PROCESSO'] = [findall('[\d|\/]+', i)[0] for i in df['N_PROCESSO']]
+	# df['N_PROCESSO'] = [findall('[\d|\/]+', i)[0] for i in df['N_PROCESSO']]
 	df['VALOR'] = df['VALOR'].astype(float)
 	df['N_PROCESSO'] = df['N_PROCESSO'].astype(str)
 

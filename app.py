@@ -5,8 +5,6 @@ from pandas import read_csv
 
 icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-financeiro.png'
 
-tabela = None
-
 st.set_page_config(
 	layout='wide', 
 	page_title='Tratamento das Fontes de Dados Fiscais',
@@ -54,7 +52,8 @@ def create_data():
 
 if st.button('Visualizar planilha'):
 	try:
-		tabela = create_data()
+		tabela = create_data(),
+		exportable = utils.export_data(data=tabela)
 	except:
 		pass 
 	st.write(tabela)
@@ -63,7 +62,7 @@ else:
 
 st.download_button(
 	'Exportar planilha', 
-	data=utils.export_data(data=tabela),
+	data=exportable,
 	file_name=type_problem+'corrigido.csv',
 	mime='text/csv'
 )

@@ -50,12 +50,11 @@ def create_data():
 		)
 	return tabela
 
-try:
-	tabela = create_data()
-except:
-	pass
-
-if st.button('Visualizar planilha'): 
+if st.button('Visualizar planilha'):
+	try:
+		tabela = create_data()
+	except:
+		pass 
 	st.write(tabela)
 else:	
 	st.write('')

@@ -54,15 +54,15 @@ if st.button('Visualizar planilha'):
 	try:
 		tabela = create_data(),
 		exportable = utils.export_data(data=tabela)
+		st.download_button(
+			'Exportar planilha', 
+			data=exportable,
+			file_name=type_problem+'corrigido.csv',
+			mime='text/csv'
+		)
 	except:
 		pass 
 	st.write(tabela)
 else:	
 	st.write('')
 
-st.download_button(
-	'Exportar planilha', 
-	data=exportable,
-	file_name=type_problem+'corrigido.csv',
-	mime='text/csv'
-)

@@ -1,9 +1,8 @@
 
 from pandas import read_excel
 from statistics import mode
-from re import sub, findall, ASCII
+from re import sub, findall
 from pandas import concat
-from datetime import datetime, date
 import warnings
 
 def fns(file: str, skip: int, range_cols: str):

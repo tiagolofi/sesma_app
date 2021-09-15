@@ -5,6 +5,8 @@ from pandas import read_csv
 
 icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-financeiro.png'
 
+tabela = None
+
 st.set_page_config(
 	layout='wide', 
 	page_title='Tratamento das Fontes de Dados Fiscais',

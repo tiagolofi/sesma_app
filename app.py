@@ -55,7 +55,7 @@ if st.button('Visualizar planilha'):
 		tabela = create_data()
 		exportable = utils.export_data(data=tabela)
 	except:
-		pass 
+		st.write('Erro ao definir características da planilha!') 
 	st.write(tabela)
 	st.download_button(
 			'Exportar planilha', 

@@ -51,6 +51,13 @@ def fns(file: str, skip: int, range_cols: str):
 
 	return df
 
+def valida_cnpj(cnpj):
+	if len(cnpj) == 19:
+		cnpj = cnpj[-1]
+		return cnpj
+	else:
+		return cnpj
+
 def sigef(file: str, skip: int, range_cols: str):
 	
 	print('lendo arquivo...')
@@ -101,6 +108,7 @@ def sigef(file: str, skip: int, range_cols: str):
 	tabela = tabela.rename(columns={'Unnamed: 3': 'CREDOR'})
 
 	tabela['CREDOR_CPFCNPJ'] = [''.join(findall('[\d\.\/\-]+', i)) for i in tabela['CREDOR']]
+	tabela['CREDOR_CPFCNPJ'] = [valida_cnpj(i) for i in tabela['CREDOR_CPFCNPJ']]
 	tabela['CREDOR_NOME'] = [' '.join(findall('[A-Z|ÇÃÁÂÁÀÉÊÍÓÔÚ]+', i)) for i in tabela['CREDOR']]
 
 	tabela = tabela.drop(columns=['CREDOR'])

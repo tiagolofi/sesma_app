@@ -4,6 +4,7 @@ from statistics import mode
 from re import sub, findall
 from pandas import concat
 import warnings
+import base64
 
 def fns(file: str, skip: int, range_cols: str):
 	
@@ -44,7 +45,6 @@ def fns(file: str, skip: int, range_cols: str):
 		df[i] = [''.join(findall('[\d\,]+', n)) for n in df[i]]
 		df[i] = [sub(',', '.', n) for n in df[i]]
 		df[i] = df[i].astype(float)
-		df[i] = ['{:.2f}'.format(n) for n in df[i]]
 
 	if 'Nº Proposta' in df.columns:
 		df['Nº Proposta'] = [int(i) for i in df['Nº Proposta']]
@@ -89,7 +89,6 @@ def sigef(file: str, skip: int, range_cols: str):
 	df['N_PROCESSO'] = [sub('/20$', '/2020', i) for i in df['N_PROCESSO']]
 	df['N_PROCESSO'] = [sub('/19$', '/2019', i) for i in df['N_PROCESSO']]
 	df['VALOR'] = df['VALOR'].astype(float)
-	df['VALOR'] = ['{:.2f}'.format(i) for i in df['VALOR']]
 	df['N_PROCESSO'] = df['N_PROCESSO'].astype(str)
 
 	tabela = concat([df, dfx], axis=1)
@@ -155,14 +154,17 @@ def extrato(file: str, skip: int, range_cols: str):
 	df['VALOR'] = [sub(',', '.', i) for i in df['VALOR']]
 	df['VALOR'] = df['VALOR'].astype(float)
 	df['VALOR'] = ['{:.2f}'.format(i) for i in df['VALOR']]
+	df['VALOR'] = df['VALOR'].astype(float)
 
 	return df
 
 def export_data(data):
 	print('exportando arquivo...')
 	try:
-		arquivo = data.to_csv( 
-			sep=";", 
+		arquivo = data.to_csv(
+			sep=';',
+			decimal=',',
+			float_format='%.2f',
 			index=False
 		).encode('utf-8-sig')
 		print('arquivo exportado com sucesso!')

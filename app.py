@@ -60,7 +60,7 @@ if st.button('Visualizar planilha'):
 	st.download_button(
 			'Exportar planilha', 
 			data=exportable,
-			file_name=type_problem+'corrigido.csv',
+			file_name=type_problem+'.csv',
 			mime='text/csv'
 		)
 else:	

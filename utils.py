@@ -100,7 +100,7 @@ def sigef(file: str, skip: int, range_cols: str):
 
 	tabela = tabela.rename(columns={'Unnamed: 3': 'CREDOR'})
 
-	tabela['CREDOR_CPFCNPJ'] = [''.join(findall('[\d\.\-]+', i)) for i in tabela['CREDOR']]
+	tabela['CREDOR_CPFCNPJ'] = [''.join(findall('[\d\.\/\-]+', i)) for i in tabela['CREDOR']]
 	tabela['CREDOR_NOME'] = [' '.join(findall('[A-Z|ÇÃÁÂÁÀÉÊÍÓÔÚ]+', i)) for i in tabela['CREDOR']]
 
 	tabela = tabela.drop(columns=['CREDOR'])

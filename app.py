@@ -53,7 +53,10 @@ def create_data():
 if st.button('Visualizar planilha'):
 	try:
 		tabela = create_data()
-		exportable = utils.export_data(data=tabela)
+		try:
+			exportable = utils.export_data(data=tabela)
+		except:
+			st.write('Não há planilha para exportar')
 	except:
 		st.write('Erro ao definir características da planilha!') 
 	try:

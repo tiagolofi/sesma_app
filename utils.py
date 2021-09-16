@@ -53,7 +53,7 @@ def fns(file: str, skip: int, range_cols: str):
 
 def valida_cnpj(cnpj):
 	if len(cnpj) == 19:
-		cnpj = cnpj[-1]
+		cnpj = cnpj[0:18]
 		return cnpj
 	else:
 		return cnpj

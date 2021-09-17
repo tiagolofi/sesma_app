@@ -35,11 +35,13 @@ with c5:
 	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
 with c6:
 	st.write('''
-	\n
-	\n
+	### Descrição do App
 	Aplicação para limpeza de dados das principais bases de dados usadas 
 	pelo Controle Financeiro da Secretaria de Estado da Saúde do Maranhão. 
 	Esta aplicação possui diretrizes de segurança e recebe manutenção constante.
+	Você pode consultar as planilhas disponíveis para limpeza na opção fonte de dados.
+	Sugestões apareceção na tela caso a planilha não seja renderizada corretamente.
+	Em 'Settings' no canto superior direito é possível configurar o Tema (Light ou Dark) e o tamanho da tela.
 	''')
 
 try:

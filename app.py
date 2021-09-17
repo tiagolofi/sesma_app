@@ -69,7 +69,7 @@ if st.button('Visualizar planilha'):
 		st.error('Sem arquivo para exportar...')
 		st.stop() 
 	try:
-		with st.spinner('Tratando informações...')
+		with st.spinner('Tratando informações...'):
 			st.write(tabela)
 			st.success('Limpeza feita com sucesso!')
 	except:

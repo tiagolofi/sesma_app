@@ -2,7 +2,7 @@
 from pandas import read_excel
 from statistics import mode
 from re import sub, findall
-from pandas import concat
+from pandas import concat, isna
 import warnings
 import base64
 
@@ -266,6 +266,8 @@ def sigef3(file: str, skip: int, range_cols: str):
 	df['Unnamed: 11'] = df['Unnamed: 11'].astype(float)	
 
 	df.columns = colnames
+
+	df = df[~isna(df['N_EMPENHO'])]
 
 	return df
 

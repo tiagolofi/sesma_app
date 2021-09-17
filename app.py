@@ -16,10 +16,6 @@ st.write('''
 # Tratamento das Fontes de Dados - SES/MA
 ''')
 
-st.write('''
-#### Aplicação para limpeza de dados das principais bases de dados usadas pelo Controle Financeiro da Secretaria de Estado da Saúde do Maranhão.\n
-''')
-
 c1, c2, c3, c4 = st.columns(4)
 with c1:
 	type_problem = st.selectbox(
@@ -33,7 +29,14 @@ with c3:
 with c4:
 	info_range2 = st.text_input(label='Coluna Final:', help='ex: B ou b')
 
-file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
+c5, c6 = st.columns(2)
+
+with c5:
+	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
+with c6:
+	st.write('''
+	#### Aplicação para limpeza de dados das principais bases de dados usadas pelo Controle Financeiro da Secretaria de Estado da Saúde do Maranhão.\n
+	''')
 
 try:
 	info_range = info_range1.upper()+':'+info_range2.upper()

@@ -61,7 +61,7 @@ if st.button('Visualizar planilha'):
 	try:
 		tabela = create_data()
 	except:
-		st.error('Erro ao definir características da planilha!')
+		st.warning('Erro ao definir características da planilha!')
 		st.stop()
 	try:
 		exportable = utils.export_data(data=tabela)
@@ -69,7 +69,9 @@ if st.button('Visualizar planilha'):
 		st.error('Sem arquivo para exportar...')
 		st.stop() 
 	try:
-		st.write(tabela)
+		with st.spinner('Tratando informações...')
+			st.write(tabela)
+			st.success('Limpeza feita com sucesso!')
 	except:
 		st.error('Não é possível exibir a planilha!')
 		st.stop()

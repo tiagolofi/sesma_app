@@ -4,3 +4,10 @@ Limpeza de Bases de Dados usadas pelo Controle Financeiro da Secretaria de Estad
 
 Layout:
 ![](front.png)
+
+## Updates
+
+1. Adicionar FNS Custeio
+2. Adicionar tabela auxiliar Subação e Complemento
+3. Adicionar SIGEF Execução Orçamentária
+4. Relacionamentos entre planilhas (Adicionar Links para outros Apps?)

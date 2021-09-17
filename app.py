@@ -57,31 +57,34 @@ def create_data():
 		)
 	return tabela
 
-if st.button('Visualizar planilha'):
-	try:
-		tabela = create_data()
-	except:
-		st.warning('Erro ao definir características da planilha!')
-		st.stop()
-	try:
-		exportable = utils.export_data(data=tabela)
-	except:
-		st.error('Sem arquivo para exportar...')
-		st.stop() 
-	try:
-		with st.spinner('Tratando informações...'):
-			st.write(tabela)
-			st.success('Limpeza feita com sucesso!')
-	except:
-		st.error('Não é possível exibir a planilha!')
-		st.stop()
-	st.download_button(
-			'Exportar planilha', 
-			data=exportable,
-			file_name=type_problem+'.csv',
-			mime='text/csv'
-		)
-else:	
+try:
+	if st.button('Visualizar planilha'):
+		try:
+			tabela = create_data()
+		except:
+			st.warning('Erro ao definir características da planilha!')
+			st.stop()
+		try:
+			exportable = utils.export_data(data=tabela)
+		except:
+			st.error('Sem arquivo para exportar...')
+			st.stop() 
+		try:
+			with st.spinner('Tratando informações...'):
+				st.write(tabela)
+				st.success('Limpeza feita com sucesso!')
+		except:
+			st.error('Não é possível exibir a planilha!')
+			st.stop()
+		st.download_button(
+				'Exportar planilha', 
+				data=exportable,
+				file_name=type_problem+'.csv',
+				mime='text/csv'
+			)
+	else:
+		st.stop()	
+except:
 	st.warning('Insira um arquivo do excel...')
 	st.stop()
 

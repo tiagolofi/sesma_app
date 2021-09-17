@@ -277,6 +277,7 @@ def sigef3(file: str, skip: int, range_cols: str):
 	df['SUBACAO'] = df['SUBACAO'].astype(int)
 
 	df = df.merge(subacao, how='left', left_on='SUBACAO', right_on='Código')
+	df = df.drop(columns=['Código'])
 
 	return df
 

@@ -166,6 +166,49 @@ def extrato(file: str, skip: int, range_cols: str):
 
 	return df
 
+def sigef2(file: str, skip: int, range_cols: str):
+
+	colnames = [
+		'NUMERO', 'DATA', 'DOM_BANC_ORIGEM', 
+		'SITUACAO', 'PREP_PAG', 'FONTE',
+		'FAVORECIDO', 'DOM_BANC_DEST', 'VALOR' 
+	]
+
+	print('lendo arquivo...')
+	try:
+		df = read_excel(
+			io=file,  
+			skiprows=skip-2,
+			usecols = range_cols
+		)
+	except:
+		return print('erro ao ler arquivo...')
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+	
+	info_ob = df[df['Unnamed: 0'].str.contains('OB', na=False)]
+	info_ob = info_ob.drop(['Unnamed: 3', 'Unnamed: 5', 'Unnamed: 6'], axis=1)
+
+	desc = df[df['Unnamed: 1'].str.contains('PP', na=False)]
+	desc = desc.drop(['Unnamed: 0', 'Unnamed: 7'], axis=1)
+
+	tabela = concat([info_ob, desc], axis='columns')
+	tabela['Unnamed: 0'] = tabela['Unnamed: 0'].ffill()
+	tabela['Unnamed: 1'] = tabela['Unnamed: 1'].ffill()
+	tabela['Unnamed: 2'] = tabela['Unnamed: 2'].ffill()
+	tabela['Unnamed: 7'] = tabela['Unnamed: 7'].ffill()
+	tabela = tabela.dropna()
+
+	tabela.columns = colnames
+
+	tabela['FAVORECIDO'] = [i.split(' ', 1) for i in tabela['FAVORECIDO']]
+	tabela['FAVORECIDO_CPFCNPJ'] = [i[0] for i in tabela['FAVORECIDO']]
+	tabela['FAVORECIDO_NOME'] = [i[1] for i in tabela['FAVORECIDO']]
+	tabela = tabela.drop(columns=['FAVORECIDO'])
+	tabela['VALOR'] = tabela['VALOR'].astype(float)
+
+	return tabela
+
 def export_data(data):
 	print('exportando arquivo...')
 	try:

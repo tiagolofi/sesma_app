@@ -7,9 +7,9 @@ Layout:
 
 ## Updates
 
-1. Adicionar FNS Custeio
+1. Adicionar FNS Custeio (Feito)
 2. Adicionar tabela auxiliar Subação e Complemento (Feito)
 3. Adicionar SIGEF Execução Orçamentária (Feito)
 4. Relacionamentos entre planilhas (Feito)
 5. Adicionar SIGEF Ordem Bancária (Feito)
-6. Adicionar HELP
+6. Adicionar HELP (Feito)

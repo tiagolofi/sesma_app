@@ -7,13 +7,13 @@ icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-f
 
 st.set_page_config(
 	layout='wide', 
-	page_title='Tratamento das Fontes de Dados Fiscais',
+	page_title='Tratamento das Fontes de Dados',
 	page_icon=icon,
 	initial_sidebar_state='collapsed'
 )
 
 st.write('''
-# Tratamento das Fontes de Receitas - SES/MA
+# Tratamento das Fontes de Dados - SES/MA
 ''')
 
 c1, c2, c3, c4 = st.columns(4)

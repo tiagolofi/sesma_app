@@ -16,7 +16,7 @@ st.write('''
 # Tratamento das Fontes de Receitas - SES/MA
 ''')
 
-c1, c2, c3 = st.columns(3)
+c1, c2, c3, c4 = st.columns(4)
 with c1:
 	type_problem = st.selectbox(
 			label='Fonte de dados:',
@@ -25,9 +25,16 @@ with c1:
 with c2:
 	info_skip = st.number_input(label = 'Linhas iniciais para pular:', value=0)
 with c3:
-	info_range = st.text_input(label='Colunas para recortar:', help='e.g: B:M')
+	info_range1 = st.text_input(label='Colunas Inicial:', help='ex: A ou a')
+with c4:
+	info_range2 = st.text_input(label='Coluna Final:', help='ex: B ou b')
 
 file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
+
+try:
+	info_range = info_range1.upper()+':'+info_range2.upper()
+except:
+	pass
 
 def create_data():
 	if type_problem == 'FNS':

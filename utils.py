@@ -268,10 +268,15 @@ def sigef3(file: str, skip: int, range_cols: str):
 	df.columns = colnames
 	df = df[~isna(df['CREDOR_NOME'])]
 
-	subacao = read_excel('subacao_complemento.xlsx')
+	subacao = read_excel('subacao_complemento.xls', skiprows=12, usecols='B:D')
+	subacao = subacao.dropna(how='all', axis='columns')
+	subacao = subacao.dropna(how='all', axis='index')
+	subacao = subacao[:-2]
+	subacao['Código'] = subacao['Código'].astype(int)
+
 	df['SUBACAO'] = df['SUBACAO'].astype(int)
 
-	df = df.merge(subacao, how='left', on='SUBACAO')
+	df = df.merge(subacao, how='left', left_on='SUBACAO', right_on='Código')
 
 	return df
 

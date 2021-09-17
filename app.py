@@ -35,7 +35,9 @@ with c5:
 	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
 with c6:
 	st.write('''
-	#### Aplicação para limpeza de dados das principais bases de dados usadas pelo Controle Financeiro da Secretaria de Estado da Saúde do Maranhão.\n
+	Aplicação para limpeza de dados das principais bases de dados usadas 
+	pelo Controle Financeiro da Secretaria de Estado da Saúde do Maranhão. 
+	Esta aplicação possui diretrizes de segurança e recebe manutenção constante.
 	''')
 
 try:

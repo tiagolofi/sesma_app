@@ -63,7 +63,7 @@ try:
 			tabela = create_data()
 			st.success('Limpeza feita com sucesso!')
 		except:
-			st.warning('Erro ao definir características da planilha!')
+			st.error('Erro ao definir características da planilha!')
 			st.stop()
 		try:
 			exportable = utils.export_data(data=tabela)
@@ -85,6 +85,6 @@ try:
 	else:
 		st.stop()	
 except:
-	st.warning('Insira um arquivo do excel...')
+	st.error('Insira um arquivo do excel...')
 	st.stop()
 

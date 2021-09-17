@@ -117,7 +117,7 @@ def sigef(file: str, skip: int, range_cols: str):
 
 def valida_ob(ob: str, ano: str):
 	ob = str(ob)
-	if ob[0:4] == '2021':
+	if ob[0:4] == '2021' and len(ob) == 10:
 		return sub(ob[0:4], ano+'OB', ob)
 	else:
 		return ob

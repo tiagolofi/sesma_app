@@ -268,6 +268,16 @@ def sigef3(file: str, skip: int, range_cols: str):
 	df.columns = colnames
 	df = df[~isna(df['CREDOR_NOME'])]
 
+	if df['A LIQUIDAR'] != df['EMPENHADO'] - df['LIQUIDADO']:
+		df['VALIDACAO_LIQUIDACAO'] = 'Erro no Valor Liquidado'
+	else:
+		df['VALIDACAO'] = 'Valor Liquidado Correto'
+
+	if df['A PAGAR'] != df['LIQUIDADO'] - df['PAGO']:
+		df['VALIDACAO_PAGAMENTO'] = 'Erro no Valor Pago'
+	else:
+		df['VALIDACAO_PAGAMENTO'] = 'Valor Pago Correto'
+
 	return df
 
 def export_data(data):

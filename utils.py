@@ -209,12 +209,6 @@ def sigef2(file: str, skip: int, range_cols: str):
 
 	return tabela
 
-def valida_calculo(x, y):
-	if x != y:
-		return 'Erro no Valor'
-	else:
-		return 'Valor correto'
-
 def sigef3(file: str, skip: int, range_cols: str):
 
 	colnames = [
@@ -273,10 +267,6 @@ def sigef3(file: str, skip: int, range_cols: str):
 
 	df.columns = colnames
 	df = df[~isna(df['CREDOR_NOME'])]
-
-	for i in range(len(df)):
-		df['VALIDA_LIQUID'] = [valida_calculo(x=df['A LIQUIDAR'][i], y=df['EMPENHADO'][i]-df['LIQUIDADO'][i])]
-		df['VALIDA_PGO'] = [valida_calculo(x=df['A PAGAR'][i], y=df['LIQUIDADO'][i]-df['PAGO'][i])]
 
 	return df
 

@@ -82,5 +82,6 @@ if st.button('Visualizar planilha'):
 			mime='text/csv'
 		)
 else:	
-	st.write('')
+	st.warning('Insira um arquivo do excel...')
+	st.stop()
 

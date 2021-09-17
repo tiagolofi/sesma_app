@@ -61,6 +61,7 @@ try:
 	if st.button('Visualizar planilha'):
 		try:
 			tabela = create_data()
+			st.success('Limpeza feita com sucesso!')
 		except:
 			st.warning('Erro ao definir características da planilha!')
 			st.stop()
@@ -72,7 +73,6 @@ try:
 		try:
 			with st.spinner('Tratando informações...'):
 				st.write(tabela)
-				st.success('Limpeza feita com sucesso!')
 		except:
 			st.error('Não é possível exibir a planilha!')
 			st.stop()

@@ -268,6 +268,11 @@ def sigef3(file: str, skip: int, range_cols: str):
 	df.columns = colnames
 	df = df[~isna(df['CREDOR_NOME'])]
 
+	subacao = read_excel('subacao_complemento.xlsx')
+	df['SUBACAO'] = df['SUBACAO'].astype(int)
+
+	df = df.merge(subacao, how='left', on='SUBACAO')
+
 	return df
 
 def export_data(data):

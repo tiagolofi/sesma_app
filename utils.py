@@ -213,7 +213,7 @@ def sigef3(file: str, skip: int, range_cols: str):
 
 	colnames = [
 		'EMPENHADO', 'LIQUIDADO', 'RETIDO', 'A LIQUIDAR',
-		'PAGO', 'A PAGAR', 'N_EMPENHO', 'N_PAGAMENTO', 'GESTAO', 'SUBACAO', 
+		'PAGO', 'A PAGAR', 'N_EMPENHO', 'N_PRE_EMPENHO', 'GESTAO', 'SUBACAO', 
 		'FONTE', 'NATUREZA', 'CREDOR_CPFCNPJ', 'CREDOR_NOME',
 	]
 

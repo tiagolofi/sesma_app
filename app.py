@@ -20,7 +20,7 @@ c1, c2, c3, c4 = st.columns(4)
 with c1:
 	type_problem = st.selectbox(
 			label='Fonte de dados:',
-			options=['FNS' 'Extrato Bancário', 'SIGEF - Listar Ordem', 'SIGEF - PP', 'SIGEF - Execução Financeira']
+			options=['FNS', 'Extrato Bancário', 'SIGEF - Listar Ordem', 'SIGEF - PP', 'SIGEF - Execução Financeira']
 		)
 with c2:
 	info_skip = st.number_input(label = 'Linhas para pular:', value=0)

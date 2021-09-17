@@ -2,9 +2,9 @@
 import utils
 
 print(
-	utils.sigef3(
-		file='C:/Users/usuario/Documents/Ambientes/SES/sesma/Imprimir Nota Empenho Célula16092021104633.xls',
-		skip=19,
-		range_cols='C:L'
+	utils.fns(
+		file='C:/Users/usuario/Documents/Ambientes/SES/sesma/PlanilhaDetalhada4.xls',
+		skip=7,
+		range_cols='B:X'
 	)
 )

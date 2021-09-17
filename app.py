@@ -16,6 +16,11 @@ st.write('''
 # Tratamento das Fontes de Dados - SES/MA
 ''')
 
+st.write('''
+#### Aplicação para limpeza de dados das principais bases de dados usadas pelo Controle
+Financeiro da Secretaria de Estado da Saúde do Maranhão. 
+''')
+
 c1, c2, c3, c4 = st.columns(4)
 with c1:
 	type_problem = st.selectbox(
@@ -38,30 +43,45 @@ except:
 
 def create_data():
 	if type_problem == 'FNS - Investimento':
+		st.warning(
+			'Selecione uma linha antes do cabeçalho da planilha (onde ficam os nomes das colunas).'
+		)
 		tabela = utils.fns(
 			file = file,
 			skip = info_skip,
 			range_cols = info_range
 		)
 	elif type_problem == 'SIGEF - PP':
+		st.warning(
+			'Selecione a linha onde apareça o nome do primeiro credor.'
+		)
 		tabela = utils.sigef(
 			file=file,
 			skip=info_skip,
 			range_cols=info_range
 		)
 	elif type_problem == 'SIGEF - Listar Ordem':
+		st.warning(
+			'Selecione a linha onde apareça a primeira ordem bancária.'
+		)
 		tabela = utils.sigef2(
 			file=file,
 			skip=info_skip,
 			range_cols=info_range
 		)
 	elif type_problem == 'SIGEF - Execução Financeira':
+		st.warning(
+			'Selecione a primeira linha onde apareça o número do empenho e a partir da coluna C.'
+		)
 		tabela = utils.sigef3(
 			file=file,
 			skip=info_skip,
 			range_cols=info_range
 		)
 	elif type_problem == 'Extrato Bancário':
+		st.warning(
+			'Selecione uma linha antes do cabeçalho da planilha (onde ficam os nomes das colunas)'
+		)
 		tabela = utils.extrato(
 			file=file,
 			skip=info_skip,

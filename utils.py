@@ -64,7 +64,7 @@ def sigef(file: str, skip: int, range_cols: str):
 	try:
 		df = read_excel(
 			io=file,  
-			skiprows=skip-1,
+			skiprows=skip-2,
 			usecols = range_cols
 		)
 	except:

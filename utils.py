@@ -209,6 +209,66 @@ def sigef2(file: str, skip: int, range_cols: str):
 
 	return tabela
 
+def sigef3(file: str, skip: int, range_cols: str):
+
+	colnames = [
+		'EMPENHADO', 'LIQUIDADO', 'RETIDO', 'A LIQUIDAR',
+		'PAGO', 'A PAGAR', 'N_EMPENHO', 'N_PAGAMENTO', 'GESTAO', 'SUBACAO', 
+		'FONTE', 'NATUREZA', 'CREDOR_CPFCNPJ', 'CREDOR_NOME',
+	]
+
+	print('lendo arquivo...')
+	try:
+		df = read_excel(
+			io=file,  
+			skiprows=skip-2,
+			usecols=range_cols
+		)
+	except:
+		return print('erro ao ler arquivo...')
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+
+	df = df[:-1]
+
+	df['Unnamed: 2'] = [str(i).split(' / ') for i in df['Unnamed: 2']]
+	df['N_EMPENHO'] = [i[0] for i in df['Unnamed: 2']]
+	df['N_PRE_EMPENHO'] = [i[1] if len(i) == 2 else None for i in df['Unnamed: 2']]
+	df = df.drop(columns=['Unnamed: 2'])
+
+	df['Unnamed: 4'] = [str(i).split(' ') for i in df['Unnamed: 4']]
+	df['GESTAO'] = [i[0] for i in df['Unnamed: 4']]
+	df['SUBACAO'] = [i[1] if len(i) > 1 else None for i in df['Unnamed: 4']]
+	df['FONTE'] = [i[2] if len(i) > 2 else None for i in df['Unnamed: 4']]
+	df['NATUREZA'] = [i[3] if len(i) > 3 else None for i in df['Unnamed: 4']]
+	df = df.drop(columns=['Unnamed: 4'])
+
+	df['Unnamed: 5'] = [str(i).split(' ', 1) for i in df['Unnamed: 5']]
+	df['CREDOR_CPFCNPJ'] = [i[0] for i in df['Unnamed: 5']]
+	df['CREDOR_NOME'] = [i[1] if len(i) == 2 else None for i in df['Unnamed: 5']]
+	df = df.drop(columns=['Unnamed: 5'])
+
+	list_values = [
+		'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 
+		'Unnamed: 9', 'Unnamed: 10', 'Unnamed: 11'
+	]
+
+	for i in list_values:
+		df[i] = [''.join(findall('[0-9|,]+', n)) for n in df[i]]
+		df[i] = [sub(',', '.', n) for n in df[i]]
+		df[i] = [sub('', '0.00', n) if n == '' else n for n in df[i]]
+
+	df['Unnamed: 6'] = df['Unnamed: 6'].astype(float)
+	df['Unnamed: 7'] = df['Unnamed: 7'].astype(float)
+	df['Unnamed: 8'] = df['Unnamed: 8'].astype(float)
+	df['Unnamed: 9'] = df['Unnamed: 9'].astype(float)
+	df['Unnamed: 10'] = df['Unnamed: 10'].astype(float)
+	df['Unnamed: 11'] = df['Unnamed: 11'].astype(float)	
+
+	df.columns = colnames
+
+	return df
+
 def export_data(data):
 	print('exportando arquivo...')
 	try:

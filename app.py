@@ -25,7 +25,7 @@ with c1:
 with c2:
 	info_skip = st.number_input(label = 'Linhas iniciais para pular:', value=0)
 with c3:
-	info_range1 = st.text_input(label='Colunas Inicial:', help='ex: A ou a')
+	info_range1 = st.text_input(label='Coluna Inicial:', help='ex: A ou a')
 with c4:
 	info_range2 = st.text_input(label='Coluna Final:', help='ex: B ou b')
 

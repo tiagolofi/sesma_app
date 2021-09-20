@@ -217,6 +217,12 @@ def sigef3(file: str, skip: int, range_cols: str):
 		'FONTE', 'NATUREZA', 'CREDOR_CPFCNPJ', 'CREDOR_NOME',
 	]
 
+	reoder_colnames = [
+		'N_EMPENHO', 'N_PRE_EMPENHO', 'GESTAO', 'SUBACAO', 'Nome Subação',
+		'FONTE', 'NATUREZA', 'CREDOR_CPFCNPJ', 'CREDOR_NOME',
+		'EMPENHADO', 'LIQUIDADO', 'RETIDO', 'A LIQUIDAR'
+	]
+
 	print('lendo arquivo...')
 	try:
 		df = read_excel(
@@ -278,6 +284,8 @@ def sigef3(file: str, skip: int, range_cols: str):
 
 	df = df.merge(subacao, how='left', left_on='SUBACAO', right_on='Código')
 	df = df.drop(columns=['Código'])
+
+	df = df.reindex(reoder_colnames, axis=1)
 
 	return df
 

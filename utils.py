@@ -220,7 +220,7 @@ def sigef3(file: str, skip: int, range_cols: str):
 	reoder_colnames = [
 		'N_EMPENHO', 'N_PRE_EMPENHO', 'GESTAO', 'SUBACAO', 'Nome Subação',
 		'FONTE', 'NATUREZA', 'CREDOR_CPFCNPJ', 'CREDOR_NOME',
-		'EMPENHADO', 'LIQUIDADO', 'RETIDO', 'A LIQUIDAR'
+		'EMPENHADO', 'LIQUIDADO', 'RETIDO', 'A LIQUIDAR', 'PAGO', 'A PAGAR'
 	]
 
 	print('lendo arquivo...')

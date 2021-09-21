@@ -197,7 +197,6 @@ def sigef2(file: str, skip: int, range_cols: str):
 	tabela['Unnamed: 1'] = tabela['Unnamed: 1'].ffill()
 	tabela['Unnamed: 2'] = tabela['Unnamed: 2'].ffill()
 	tabela['Unnamed: 7'] = tabela['Unnamed: 7'].ffill()
-	tabela = tabela.dropna()
 
 	tabela.columns = colnames
 

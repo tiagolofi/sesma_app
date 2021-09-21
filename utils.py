@@ -188,17 +188,18 @@ def sigef2(file: str, skip: int, range_cols: str):
 	
 	info_ob = df[df['Unnamed: 0'].str.contains('OB', na=False)]
 	info_ob = info_ob.drop(['Unnamed: 3', 'Unnamed: 5', 'Unnamed: 6'], axis=1)
-
+	
 	desc = df[df['Unnamed: 1'].str.contains('PP', na=False)]
-	desc = desc.drop(['Unnamed: 0', 'Unnamed: 7'], axis=1)
-
-	tabela = concat([info_ob, desc], axis='columns')
-	tabela['Unnamed: 0'] = tabela['Unnamed: 0'].ffill()
-	tabela['Unnamed: 1'] = tabela['Unnamed: 1'].ffill()
-	tabela['Unnamed: 2'] = tabela['Unnamed: 2'].ffill()
-	tabela['Unnamed: 7'] = tabela['Unnamed: 7'].ffill()
-	tabela = tabela.dropna(axis='columns')
-
+	desc = desc.drop(['Unnamed: 0'], axis=1)
+	
+	tabela = concat([info_ob, desc], ignore_index=True, axis='columns')
+	tabela[0] = tabela[0].ffill()
+	tabela[1] = tabela[1].ffill()
+	tabela[2] = tabela[2].ffill()
+	tabela[3] = tabela[3].ffill()
+	
+	tabela = tabela.dropna(axis='index', thresh=5)
+	tabela = tabela.dropna(how='all', axis='columns')
 	tabela.columns = colnames
 
 	tabela['FAVORECIDO'] = [i.split(' ', 1) for i in tabela['FAVORECIDO']]

@@ -48,7 +48,9 @@ with c6:
 	
 	Listar Ordem - Varia entre 19 e 26 linhas para pular, começa em A e termina em H;
 	
-	Execução Financeira - Em média pula 19 linhas, começa sempre em C e termina em L.
+	Execução Financeira - Em média pula 19 linhas, começa sempre em C e termina em L;
+
+	NL - Em média pula 13 linhas, começa em B e termina em P.
 	''')
 
 try:

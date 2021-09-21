@@ -95,7 +95,7 @@ def create_data():
 			skip=info_skip,
 			range_cols=info_range
 		)
-	elif type_problem == 'SIGEF - Execução Financeira':
+	elif type_problem == 'SIGEF - NL':
 		st.warning(
 			'Selecione a linha do cabeçalho da planilha (onde ficam os nomes das colunas).'
 		)

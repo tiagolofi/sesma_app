@@ -33,6 +33,7 @@ c5, c6 = st.columns(2)
 
 with c5:
 	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
+	st.image('logo_ses.png')
 with c6:
 	st.write('''
 	### Descrição do App

@@ -39,9 +39,10 @@ with c6:
 	Aplicação para limpeza de dados das principais bases de dados usadas 
 	pelo Controle Financeiro da Secretaria de Estado da Saúde do Maranhão. 
 	Esta aplicação possui diretrizes de segurança e recebe manutenção constante.
-	Você pode consultar as planilhas disponíveis para limpeza na opção fonte de dados.
-	Sugestões apareceção na tela caso a planilha não seja renderizada corretamente.
-	Em 'Settings' no canto superior direito é possível configurar o Tema (Light ou Dark) e o tamanho da tela.
+	### Sugestões de Consulta
+	PP - Em média pula 21 linhas, começa em B e termina em M;
+	Listar Ordem - Varia entre 19 e 26 linhas para pular, começa em A e termina em H;
+	Execução Financeira - Em média pula 19 linhas, começa sempre em C e termina em L.
 	''')
 
 try:

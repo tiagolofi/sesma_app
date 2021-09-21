@@ -174,12 +174,6 @@ def sigef2(file: str, skip: int, range_cols: str):
 		'FAVORECIDO', 'DOM_BANC_DEST', 'VALOR' 
 	]
 
-	colnames2 = [
-		'NUMERO', 'DATA', 'DOM_BANC_ORIGEM', 
-		'PREP_PAG', 'FONTE',
-		'FAVORECIDO', 'DOM_BANC_DEST', 'VALOR' 
-	]
-
 	print('lendo arquivo...')
 	try:
 		df = read_excel(
@@ -203,7 +197,7 @@ def sigef2(file: str, skip: int, range_cols: str):
 	tabela['Unnamed: 1'] = tabela['Unnamed: 1'].ffill()
 	tabela['Unnamed: 2'] = tabela['Unnamed: 2'].ffill()
 	tabela['Unnamed: 7'] = tabela['Unnamed: 7'].ffill()
-	tabela = tabela.dropna(subset=colnames2)
+	tabela = tabela.dropna(axis='columns')
 
 	tabela.columns = colnames
 

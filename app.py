@@ -41,7 +41,9 @@ with c6:
 	Esta aplicação possui diretrizes de segurança e recebe manutenção constante.
 	### Sugestões de Consulta
 	PP - Em média pula 21 linhas, começa em B e termina em M;
+	
 	Listar Ordem - Varia entre 19 e 26 linhas para pular, começa em A e termina em H;
+	
 	Execução Financeira - Em média pula 19 linhas, começa sempre em C e termina em L.
 	''')
 

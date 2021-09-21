@@ -20,7 +20,10 @@ c1, c2, c3, c4 = st.columns(4)
 with c1:
 	type_problem = st.selectbox(
 			label='Fonte de dados:',
-			options=['FNS', 'Extrato Bancário', 'SIGEF - Listar Ordem', 'SIGEF - PP', 'SIGEF - Execução Financeira']
+			options=[
+				'FNS', 'Extrato Bancário', 'SIGEF - Listar Ordem',
+				'SIGEF - PP', 'SIGEF - Execução Financeira', 'SIGEF - NL'
+			]
 		)
 with c2:
 	info_skip = st.number_input(label = 'Linhas para pular:', value=0)
@@ -86,6 +89,15 @@ def create_data():
 			'Selecione a primeira linha onde apareça o número do empenho e a partir da coluna C.'
 		)
 		tabela = utils.sigef3(
+			file=file,
+			skip=info_skip,
+			range_cols=info_range
+		)
+	elif type_problem == 'SIGEF - Execução Financeira':
+		st.warning(
+			'Selecione a linha do cabeçalho da planilha (onde ficam os nomes das colunas).'
+		)
+		tabela = utils.sigef4(
 			file=file,
 			skip=info_skip,
 			range_cols=info_range

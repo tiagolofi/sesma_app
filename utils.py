@@ -23,8 +23,8 @@ def fns(file: str, skip: int, range_cols: str):
 	df = df.dropna(how='all', axis='index') # exclui linhas e colunas a mais
 	exclude_line = [df[i].count() for i in df.columns] 
 	value_max = max(exclude_line)
-	value_min = mode(exclude_line)
-	exclude_values = list(range(value_min+1, value_max+1))
+	value_min = mode(exclude_line) # a maioria das colunas tem x linhas
+	exclude_values = list(range(value_min+1, value_max+1)) # recorto nessas x linhas
 	print('removendo '+str(len(exclude_values))+' linhas.')
 	if value_max == 2:
 		exclude_values = [1]
@@ -196,9 +196,9 @@ def sigef2(file: str, skip: int, range_cols: str):
 	tabela[0] = tabela[0].ffill()
 	tabela[1] = tabela[1].ffill()
 	tabela[2] = tabela[2].ffill()
-	tabela[3] = tabela[3].ffill()
+	tabela[3] = tabela[3].ffill() # completa informações
 	
-	tabela = tabela.dropna(axis='index', thresh=5)
+	tabela = tabela.dropna(axis='index', thresh=5) # remove informações até 5 não nas
 	tabela = tabela.dropna(how='all', axis='columns')
 	tabela.columns = colnames
 
@@ -287,6 +287,32 @@ def sigef3(file: str, skip: int, range_cols: str):
 	df = df.drop(columns=['Código'])
 
 	df = df.reindex(reoder_colnames, axis=1)
+
+	return df
+
+def sigef4(file: str, skip: int, range_cols: str):
+
+	print('lendo arquivo...')
+	try:
+		df = read_excel(
+			io=file,  
+			skiprows=skip-1,
+			usecols=range_cols
+		)
+	except:
+		return print('erro ao ler arquivo...')
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+	df = df.dropna(thresh=3, axis='index')
+	
+	df['Saldo'] = [abs(i) for i in df['Saldo']]
+	df = df.dropna(how='all', axis='columns')
+
+	df.columns = [
+		'DATA', 'UNIDADE GESTORA', 
+		'GESTAO', 'DOCUMENTO', 'EVENTO',
+		'MOVIMENTO', 'TIPO_MOVIMENTO', 'SALDO', 'TIPO_MOVIMENTO_SALDO'
+	]
 
 	return df
 

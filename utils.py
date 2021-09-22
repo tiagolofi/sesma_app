@@ -270,7 +270,7 @@ def sigef3(file: str, skip: int, range_cols: str):
 	df['Unnamed: 8'] = df['Unnamed: 8'].astype(float)
 	df['Unnamed: 9'] = df['Unnamed: 9'].astype(float)
 	df['Unnamed: 10'] = df['Unnamed: 10'].astype(float)
-	df['Unnamed: 11'] = df['Unnamed: 11'].astype(float)	
+	df['Unnamed: 11'] = df['Unnamed: 11'].astype(float) 
 
 	df.columns = colnames
 	df = df[~isna(df['CREDOR_NOME'])]

@@ -39,6 +39,9 @@ with c5:
 	st.image('logo_ses.png')
 with c6:
 	st.write('''
+	### Documentação
+	Dúvidas sobre as informações apresentadas? Leia a [Documentação](Documentação de Dados Fornecidos pelo SESMA.pdf)
+
 	### Descrição do App
 	Aplicação para limpeza de dados das principais bases de dados usadas 
 	pelo Controle Financeiro da Secretaria de Estado da Saúde do Maranhão. 

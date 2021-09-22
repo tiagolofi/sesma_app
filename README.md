@@ -7,6 +7,10 @@ Limpeza de Bases de Dados usadas pelo Controle Financeiro da Secretaria de Estad
 Layout:
 ![](front.png)
 
+## Documentação
+
+Leia a [Documentação](Documentação de Dados Fornecidos pelo SESMA.pdf)
+
 ## Updates
 
 1. Adicionar FNS Custeio (Feito)

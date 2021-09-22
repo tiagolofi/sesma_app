@@ -17,14 +17,6 @@ Layout:
 6. Adicionar HELP (Feito)
 7. Adicionar NL (Feito)
 
-## OKR 6
-
-- KR1: Mapear os procedimentos e atividades desenvolvidas pelo setor;
-
-- KR2: Revisar a base de dados dos controles utilizados atualmente, a partir da consolidação das planilhas;
-
-- KR3: Estabelecer rotina de acompanhamento das atividades desempenhadas no setor. 
-
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

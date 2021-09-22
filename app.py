@@ -50,6 +50,8 @@ with c6:
 	
 	Execução Financeira - Em média pula 19 linhas, começa sempre em C e termina em L;
 
+	Extrato Bancário - Pula duas linhas, começa em A e termina em J;
+
 	NL - Em média pula 13 linhas, começa em B e termina em P.
 	''')
 

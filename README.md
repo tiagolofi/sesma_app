@@ -9,7 +9,7 @@ Layout:
 
 ## Documentação
 
-Leia a [Documentação](Documentação de Dados Fornecidos pelo SESMA.pdf)
+Leia a [Documentação](https://github.com/tiagolofi/sesma_app/raw/main/Documenta%C3%A7%C3%A3o%20de%20Dados%20Fornecidos%20pelo%20SESMA.pdf)
 
 ## Updates
 

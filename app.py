@@ -40,7 +40,7 @@ with c5:
 with c6:
 	st.write('''
 	### Documentação
-	Dúvidas sobre as informações apresentadas? Leia a [Documentação](Documentação de Dados Fornecidos pelo SESMA.pdf)
+	Dúvidas sobre as informações apresentadas? Leia a [Documentação](https://github.com/tiagolofi/sesma_app/raw/main/Documenta%C3%A7%C3%A3o%20de%20Dados%20Fornecidos%20pelo%20SESMA.pdf)
 
 	### Descrição do App
 	Aplicação para limpeza de dados das principais bases de dados usadas 

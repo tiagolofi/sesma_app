@@ -422,7 +422,7 @@ def sigef6(file: str, skip: int, range_cols: str):
 
 	df['SUBACAO'] = [i.split(' ')[1] for i in df['CELULA_ORCAMENTARIA']]
 	df['FONTE'] = [i.split(' ')[2] for i in df['CELULA_ORCAMENTARIA']]
-	df['FONTE'] = [i.split(' ')[3] for i in df['CELULA_ORCAMENTARIA']]
+	df['NATUREZA'] = [i.split(' ')[3] for i in df['CELULA_ORCAMENTARIA']]
 
 	df['VALOR_EMPENHO'] = [i.split(' ')[0] for i in df['EMPENHO']]
 	df['VALOR_EMPENHO'] = [sub('\.', '', i) for i in df['VALOR_EMPENHO']]
@@ -440,10 +440,10 @@ def sigef6(file: str, skip: int, range_cols: str):
 
 	df = df.merge(subacao, how='left', left_on='SUBACAO', right_on='Código')
 
-	df['CREDOR_NOME'] = [i.split(' ')[0] for i in df['CREDOR']]
-	df['CREDOR_CPFCNPJ'] = [' '.join(i.split(' ')[1:]) for i in df['CREDOR']]
+	df['CREDOR_CPFCNPJ'] = [i.split(' ')[0] for i in df['CREDOR']]
+	df['CREDOR_NOME'] = [' '.join(i.split(' ')[1:]) for i in df['CREDOR']]
 
-	df = df.drop(columns=['CELULA_ORCAMENTARIA', 'EMPENHO', 'CREDOR'])
+	df = df.drop(columns=['CELULA_ORCAMENTARIA', 'Código', 'EMPENHO', 'CREDOR'])
 
 	return df
 

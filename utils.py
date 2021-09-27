@@ -470,7 +470,7 @@ def sigef7(file: str, skip: int, range_cols: str):
 
 	tabela = concat([numero, obs], axis=1)
 
-	df.columns = ['NUMERO', 'OBSERVACAO']
+	tabela.columns = ['NUMERO', 'OBSERVACAO']
 
 	return tabela
 

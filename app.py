@@ -23,7 +23,8 @@ with c1:
 			options=[
 				'FNS', 'Extrato Bancário', 'SIGEF - Listar Ordem',
 				'SIGEF - PP', 'SIGEF - Execução Financeira', 'SIGEF - NL',
-				'SIGEF - Execução Orçamentária', 'SIGEF - Empenho'
+				'SIGEF - Execução Orçamentária', 'SIGEF - Empenho',
+				'SIGEF - Observação'
 			]
 		)
 with c2:
@@ -61,6 +62,8 @@ with c6:
 	Execução Orçamentária - pula 17 linhas, começa em B e termina em Z.
 
 	Empenho - pula 15 linhas, começa em C e termina em M.
+
+	Observação - pula 8 linhas, começa em C e termina em J.
 	''')
 
 try:
@@ -128,6 +131,15 @@ def create_data():
 			'Selecione a linha onde apareça o valor total empenhado.'
 		)
 		tabela = utils.sigef6(
+			file=file,
+			skip=info_skip,
+			range_cols=info_range
+		)
+	elif type_problem == 'SIGEF - Observação':
+		st.warning(
+			'Selecione a linha onde apareça o primeiro número de ordem bancária.'
+		)
+		tabela = utils.sigef7(
 			file=file,
 			skip=info_skip,
 			range_cols=info_range

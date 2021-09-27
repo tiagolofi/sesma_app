@@ -447,6 +447,30 @@ def sigef6(file: str, skip: int, range_cols: str):
 
 	return df
 
+def sigef7(file: str, skip: int, range_cols: str):
+
+	print('lendo arquivo...')
+	try:
+		df = read_excel(
+			io=file,  
+			skiprows=skip-2,
+			usecols = range_cols
+		)
+	except:
+		return print('erro ao ler arquivo...')
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+
+	df = df[df['Unnamed: 2'].isin(['Número', 'Observação'])]
+	df = df.filter(items=['Unnamed: 2', 'Unnamed: 9'])
+	df = df.pivot(columns='Unnamed: 2', values='Unnamed: 9')
+
+	numero = df['Número'].dropna().reset_index(drop=True)
+	ob = df['Ordem Bancária'].dropna().reset_index(drop=True)
+
+	tabela = concat([numero, obs], axis=1)
+	return tabela
+
 def export_data(data):
 	print('exportando arquivo...')
 	try:

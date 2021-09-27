@@ -398,6 +398,55 @@ def sigef5(file: str, skip: int, range_cols: str):
 
 	return df
 
+def sigef6(file: str, skip: int, range_cols: str):
+
+	colnames = [
+		'DOCUMENTO', 'DATA', 'DATA_LANCAMENTO', 
+		'CELULA_ORCAMENTARIA', 'CREDOR', 'EMPENHO' 
+	]
+
+	print('lendo arquivo...')
+	try:
+		df = read_excel(
+			io=file,  
+			skiprows=skip,
+			usecols = range_cols
+		)
+	except:
+		return print('erro ao ler arquivo...')
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+	df = df.dropna(thresh=2, axis='index')
+	
+	df.columns = colnames
+
+	df['SUBACAO'] = [i.split(' ')[1] for i in df['CELULA_ORCAMENTARIA']]
+	df['FONTE'] = [i.split(' ')[2] for i in df['CELULA_ORCAMENTARIA']]
+	df['FONTE'] = [i.split(' ')[3] for i in df['CELULA_ORCAMENTARIA']]
+
+	df['VALOR_EMPENHO'] = [i.split(' ')[0] for i in df['EMPENHO']]
+	df['VALOR_EMPENHO'] = [sub('\.', '', i) for i in df['VALOR_EMPENHO']]
+	df['VALOR_EMPENHO'] = [sub('\,', '.', i) for i in df['VALOR_EMPENHO']]
+	df['VALOR_EMPENHO'] = df['VALOR_EMPENHO'].astype(float)
+	df['MOV_EMPENHO'] = [i.split(' ')[1] for i in df['EMPENHO']]
+
+	subacao = read_excel('subacao_complemento.xls', skiprows=12, usecols='B:D')
+	subacao = subacao.dropna(how='all', axis='columns')
+	subacao = subacao.dropna(how='all', axis='index')
+	subacao = subacao[:-2]
+	subacao['Código'] = subacao['Código'].astype(int)
+
+	df['SUBACAO'] = df['SUBACAO'].astype(int)
+
+	df = df.merge(subacao, how='left', left_on='SUBACAO', right_on='Código')
+
+	df['CREDOR_NOME'] = [i.split(' ')[0] for i in df['CREDOR']]
+	df['CREDOR_CPFCNPJ'] = [' '.join(i.split(' ')[1:]) for i in df['CREDOR']]
+
+	df = df.drop(columns=['CELULA_ORCAMENTARIA', 'EMPENHO', 'CREDOR'])
+
+	return df
+
 def export_data(data):
 	print('exportando arquivo...')
 	try:

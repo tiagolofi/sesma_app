@@ -22,7 +22,8 @@ with c1:
 			label='Fonte de dados:',
 			options=[
 				'FNS', 'Extrato Bancário', 'SIGEF - Listar Ordem',
-				'SIGEF - PP', 'SIGEF - Execução Financeira', 'SIGEF - NL'
+				'SIGEF - PP', 'SIGEF - Execução Financeira', 'SIGEF - NL',
+				'SIGEF - Execução Orçamentária'
 			]
 		)
 with c2:
@@ -56,6 +57,8 @@ with c6:
 	Extrato Bancário - Pula duas linhas, começa em A e termina em J;
 
 	NL - Em média pula 13 linhas, começa em B e termina em P.
+
+	Execução Orçamentária - pula 17 linhas, começa em B e termina em Z.
 	''')
 
 try:
@@ -109,9 +112,18 @@ def create_data():
 			skip=info_skip,
 			range_cols=info_range
 		)
+	elif type_problem == 'SIGEF - Execução Orçamentária':
+		st.warning(
+			'Selecione a linha do cabeçalho da planilha (onde ficam os nomes das colunas).'
+		)
+		tabela = utils.sigef5(
+			file=file,
+			skip=info_skip,
+			range_cols=info_range
+		)
 	elif type_problem == 'Extrato Bancário':
 		st.warning(
-			'Selecione uma linha antes do cabeçalho da planilha (onde ficam os nomes das colunas)'
+			'Selecione uma linha antes do primeiro valor de Fonte de Recurso.'
 		)
 		tabela = utils.extrato(
 			file=file,

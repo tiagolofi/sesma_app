@@ -3,6 +3,7 @@ from pandas import read_excel
 from statistics import mode
 from re import sub, findall
 from pandas import concat, isna
+from numpy import nan
 import warnings
 import base64
 
@@ -313,6 +314,70 @@ def sigef4(file: str, skip: int, range_cols: str):
 		'GESTAO', 'DOCUMENTO', 'EVENTO',
 		'MOVIMENTO', 'TIPO_MOVIMENTO', 'SALDO', 'TIPO_MOVIMENTO_SALDO'
 	]
+
+	return df
+
+def sigef5(file: str, skip: int, range_cols: str):
+
+	print('lendo arquivo...')
+	try:
+		df = read_excel(
+			io=file,  
+			skiprows=skip-1,
+			usecols=range_cols
+		)
+	except:
+		return print('erro ao ler arquivo...')
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+	df['Unnamed: 1'] = df['Unnamed: 1'].ffill()
+	df['FONTE'] = [i if i[0:2] == '0.' else float('nan') for i in df['Unnamed: 1']]
+	df['CATEGORIA'] = [i if i[0:2] != '0.' else 'NaN' for i in df['Unnamed: 1']]
+	df['FONTE'] = df['FONTE'].ffill()
+	df = df[~df['Unnamed: 2'].isna()]
+	df['ATUALIZADO'] = df['Unnamed: 7'].astype(str) + df['Unnamed: 8'].astype(str)
+	df['INDISPONIVEL'] = df['Unnamed: 9'].astype(str) + df['Unnamed: 10'].astype(str)
+	df['PRE_EMPENHADO'] = df['Unnamed: 11'].astype(str) + df['Unnamed: 12'].astype(str)
+	df['EMPENHADO'] = df['Unnamed: 13'].astype(str) + df['Unnamed: 14'].astype(str)
+	df['DISPONIVEL'] = df['Unnamed: 15'].astype(str) + df['Unnamed: 16'].astype(str)
+	df['LIQUIDADO'] = df['Unnamed: 17'].astype(str) + df['Unnamed: 18'].astype(str)
+	df['PAGO'] = df['Unnamed: 19'].astype(str) + df['Unnamed: 20'].astype(str)
+	df['A_LIQUIDAR'] = df['Unnamed: 21'].astype(str) + df['Unnamed: 22'].astype(str)
+	df['A_PAGAR'] = df['Unnamed: 23'].astype(str) + df['Unnamed: 24'].astype(str)
+
+	df['COD_FONTE'] = [i.split(' ', 1)[0] for i in df['FONTE']]
+	df['DESC_FONTE'] = [i.split(' ', 1)[1] for i in df['FONTE']]
+
+	# print(df.iloc[1])
+	df = df.drop(columns=[
+		'Unnamed: 1', 'Unnamed: 7', 
+		'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10',
+		'Unnamed: 11', 'Unnamed: 12', 
+		'Unnamed: 13', 'Unnamed: 14',
+		'Unnamed: 15', 'Unnamed: 16', 
+		'Unnamed: 17', 'Unnamed: 18',
+		'Unnamed: 19', 'Unnamed: 20', 
+		'Unnamed: 21', 'Unnamed: 22',
+		'Unnamed: 23', 'Unnamed: 24', 'FONTE'
+	])
+
+	df.columns = [
+	 	'SUBCATEGORIA', 'DOTACAO_INICIAL', 'CATEGORIA', 'ATUALIZADO', 'INDISPONIBILIDADES',
+	 	'PRE_EMPENHADO', 'EMPENHADO', 'DISPONIVEL', 'LIQUIDADO', 'PAGO',
+	 	'A LIQUIDAR', 'A PAGAR', 'COD_FONTE', 'DESC_FONTE'
+	]
+
+	reoder_colnames = [
+		'COD_FONTE', 'DESC_FONTE', 'CATEGORIA', 'SUBCATEGORIA', 'DOTACAO_INICIAL', 
+		'ATUALIZADO', 'INDISPONIBILIDADES', 
+	 	'PRE_EMPENHADO', 'EMPENHADO', 'DISPONIVEL', 'LIQUIDADO', 'PAGO',
+	 	'A LIQUIDAR', 'A PAGAR'
+	]
+
+	df = df.reindex(reoder_colnames, axis=1)
+
+	for i in df.columns:
+		df[i] = [sub('nan','', i) for i in df[i].astype(str)]
 
 	return df
 

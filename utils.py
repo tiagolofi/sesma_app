@@ -453,7 +453,7 @@ def sigef7(file: str, skip: int, range_cols: str):
 	try:
 		df = read_excel(
 			io=file,  
-			skiprows=skip-2,
+			skiprows=skip,
 			usecols = range_cols
 		)
 	except:
@@ -466,9 +466,12 @@ def sigef7(file: str, skip: int, range_cols: str):
 	df = df.pivot(columns='Unnamed: 2', values='Unnamed: 9')
 
 	numero = df['Número'].dropna().reset_index(drop=True)
-	ob = df['Ordem Bancária'].dropna().reset_index(drop=True)
+	obs = df['Observação'].dropna().reset_index(drop=True)
 
 	tabela = concat([numero, obs], axis=1)
+
+	df.columns = ['NUMERO', 'OBSERVACAO']
+
 	return tabela
 
 def export_data(data):

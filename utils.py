@@ -348,6 +348,9 @@ def sigef5(file: str, skip: int, range_cols: str):
 	df['COD_FONTE'] = [i.split(' ', 1)[0] for i in df['FONTE']]
 	df['DESC_FONTE'] = [i.split(' ', 1)[1] for i in df['FONTE']]
 
+	df['COD_CATEGORIA_CONTA'] = [i.split(' ', 1)[0] for i in df['Unnamed: 2']]
+	df['DESC_CATEGORIA_CONTA'] = [i.split(' ', 1)[1] for i in df['Unnamed: 2']]
+
 	# print(df.iloc[1])
 	df = df.drop(columns=[
 		'Unnamed: 1', 'Unnamed: 7', 
@@ -358,17 +361,19 @@ def sigef5(file: str, skip: int, range_cols: str):
 		'Unnamed: 17', 'Unnamed: 18',
 		'Unnamed: 19', 'Unnamed: 20', 
 		'Unnamed: 21', 'Unnamed: 22',
-		'Unnamed: 23', 'Unnamed: 24', 'FONTE'
+		'Unnamed: 23', 'Unnamed: 24', 
+		'FONTE', 'Unnamed: 2'
 	])
 
 	df.columns = [
-	 	'SUBCATEGORIA', 'DOTACAO_INICIAL', 'CATEGORIA', 'ATUALIZADO', 'INDISPONIBILIDADES',
+	 	'DOTACAO_INICIAL', 'CATEGORIA', 'ATUALIZADO', 'INDISPONIBILIDADES',
 	 	'PRE_EMPENHADO', 'EMPENHADO', 'DISPONIVEL', 'LIQUIDADO', 'PAGO',
-	 	'A LIQUIDAR', 'A PAGAR', 'COD_FONTE', 'DESC_FONTE'
+	 	'A LIQUIDAR', 'A PAGAR', 'COD_FONTE', 'DESC_FONTE', 'COD_CATEGORIA_CONTA', 'DESC_CATEGORIA_CONTA'
 	]
 
 	reoder_colnames = [
-		'COD_FONTE', 'DESC_FONTE', 'CATEGORIA', 'SUBCATEGORIA', 'DOTACAO_INICIAL', 
+		'COD_FONTE', 'DESC_FONTE', 'CATEGORIA','COD_CATEGORIA_CONTA', 
+		'DESC_CATEGORIA_CONTA', 'DOTACAO_INICIAL', 
 		'ATUALIZADO', 'INDISPONIBILIDADES', 
 	 	'PRE_EMPENHADO', 'EMPENHADO', 'DISPONIVEL', 'LIQUIDADO', 'PAGO',
 	 	'A LIQUIDAR', 'A PAGAR'
@@ -378,6 +383,18 @@ def sigef5(file: str, skip: int, range_cols: str):
 
 	for i in df.columns:
 		df[i] = [sub('nan','', i) for i in df[i].astype(str)]
+		df[i] = df[i].replace('', '0.00')
+
+	values = [
+		'DOTACAO_INICIAL', 'ATUALIZADO', 'INDISPONIBILIDADES', 
+		'PRE_EMPENHADO', 'EMPENHADO', 'DISPONIVEL', 'LIQUIDADO', 
+		'PAGO', 'A LIQUIDAR', 'A PAGAR'
+	]
+
+	for i in values:
+		df[i] = [sub('\.', '', i) for i in df[i]]
+		df[i] = [sub('\,', '.', i) for i in df[i]]
+		df[i] = df[i].astype(float)
 
 	return df
 

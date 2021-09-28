@@ -350,7 +350,7 @@ def sigef5(file: str, skip: int, range_cols: str):
 
 	# df2 = df[df['COD_FONTE'] == '0.1.14.000000']
 	# print(df2)
-	df = df[df['COD_FONTE'] != '0.1.14.000000']
+	# df = df[df['COD_FONTE'] != '0.1.14.000000']
 
 	df['COD_CATEGORIA_CONTA'] = [i.split(' ', 1)[0] for i in df['Unnamed: 2']]
 	df['DESC_CATEGORIA_CONTA'] = [i.split(' ', 1)[1] for i in df['Unnamed: 2']]

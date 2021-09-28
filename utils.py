@@ -396,7 +396,7 @@ def sigef5(file: str, skip: int, range_cols: str):
 		df[i] = df[i].replace('', '0.00')
 		df[i] = df[i].astype(float)
 
-	return df.filter(items=values)
+	return df
 
 def sigef6(file: str, skip: int, range_cols: str):
 

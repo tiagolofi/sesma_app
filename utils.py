@@ -338,15 +338,19 @@ def sigef5(file: str, skip: int, range_cols: str):
 	df['ATUALIZADO'] = df['Unnamed: 7'].astype(str) + df['Unnamed: 8'].astype(str)
 	df['INDISPONIVEL'] = df['Unnamed: 9'].astype(str) + df['Unnamed: 10'].astype(str)
 	df['PRE_EMPENHADO'] = df['Unnamed: 11'].astype(str) + df['Unnamed: 12'].astype(str)
-	df['EMPENHADO'] = df['Unnamed: 13'].astype(str) 
-	df['DISPONIVEL'] =  df['Unnamed: 14'].astype(str) + df['Unnamed: 15'].astype(str)
-	df['LIQUIDADO'] = df['Unnamed: 16'].astype(str) + df['Unnamed: 17'].astype(str)
-	df['PAGO'] = df['Unnamed: 18'].astype(str) + df['Unnamed: 19'].astype(str) 
-	df['A_LIQUIDAR'] =  df['Unnamed: 20'].astype(str) + df['Unnamed: 21'].astype(str) 
-	df['A_PAGAR'] =  df['Unnamed: 22'].astype(str) + df['Unnamed: 23'].astype(str) # + df['Unnamed: 24'].astype(str)
+	df['EMPENHADO'] = df['Unnamed: 13'].astype(str) + df['Unnamed: 14'].astype(str)
+	df['DISPONIVEL'] = df['Unnamed: 15'].astype(str) + df['Unnamed: 16'].astype(str)
+	df['LIQUIDADO'] = df['Unnamed: 17'].astype(str) + df['Unnamed: 18'].astype(str)
+	df['PAGO'] = df['Unnamed: 19'].astype(str) + df['Unnamed: 20'].astype(str) 
+	df['A_LIQUIDAR'] =  df['Unnamed: 21'].astype(str) + df['Unnamed: 22'].astype(str) 
+	df['A_PAGAR'] =  df['Unnamed: 23'].astype(str) + df['Unnamed: 24'].astype(str)
 
 	df['COD_FONTE'] = [i.split(' ', 1)[0] for i in df['FONTE']]
 	df['DESC_FONTE'] = [i.split(' ', 1)[1] for i in df['FONTE']]
+
+	# df2 = df[df['COD_FONTE'] == '0.1.14.000000']
+	# print(df2)
+	df = df[df['COD_FONTE'] != '0.1.14.000000']
 
 	df['COD_CATEGORIA_CONTA'] = [i.split(' ', 1)[0] for i in df['Unnamed: 2']]
 	df['DESC_CATEGORIA_CONTA'] = [i.split(' ', 1)[1] for i in df['Unnamed: 2']]

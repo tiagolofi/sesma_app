@@ -461,16 +461,27 @@ def sigef7(file: str, skip: int, range_cols: str):
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 
-	df = df[df['Unnamed: 2'].isin(['Número', 'Observação'])]
+	print(df)
+
+	df = df[df['Unnamed: 2'].isin(['Número', 'Ordem Bancária', 'Observação'])]
 	df = df.filter(items=['Unnamed: 2', 'Unnamed: 9'])
 	df = df.pivot(columns='Unnamed: 2', values='Unnamed: 9')
 
 	numero = df['Número'].dropna().reset_index(drop=True)
+	ob = df['Ordem Bancária'].dropna().reset_index(drop=True)
 	obs = df['Observação'].dropna().reset_index(drop=True)
 
-	tabela = concat([numero, obs], axis=1)
-
-	tabela.columns = ['NUMERO', 'OBSERVACAO']
+	if len(numero) == len(obs):
+		tabela = concat([numero, obs], axis=1)
+		tabela.columns = ['NUMERO', 'OBSERVACAO']
+	elif len(ob) == len(obs): 
+		tabela = concat([ob, obs], axis=1)
+		tabela.columns = ['OB', 'OBSERVACAO']
+	elif len(ob) == len(numero):
+		tabela = concat([numero, ob, obs], axis=1)
+		tabela.columns = ['NUMERO', 'OB', 'OBSERVACAO']
+	else:
+		return None
 
 	return tabela
 

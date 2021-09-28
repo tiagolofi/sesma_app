@@ -2,9 +2,9 @@
 import utils
 
 print(
-	utils.sigef7(
-		file='Relatorio_27092021145310.xls',
-		skip=8,
-		range_cols='C:J'
+	utils.sigef5(
+		file='Imprimir Execução Orçamentária27092021094650.xls',
+		skip=17,
+		range_cols='B:Z'
 	)
 )

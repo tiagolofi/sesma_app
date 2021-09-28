@@ -338,6 +338,7 @@ def sigef5(file: str, skip: int, range_cols: str):
 	df['ATUALIZADO'] = df['Unnamed: 7'].astype(str) + df['Unnamed: 8'].astype(str)
 	df['INDISPONIVEL'] = df['Unnamed: 9'].astype(str) + df['Unnamed: 10'].astype(str)
 	df['PRE_EMPENHADO'] = df['Unnamed: 11'].astype(str) + df['Unnamed: 12'].astype(str)
+	print(list(df['Unnamed: 10']))
 	df['EMPENHADO'] = df['Unnamed: 13'].astype(str) + df['Unnamed: 14'].astype(str)
 	df['DISPONIVEL'] = df['Unnamed: 15'].astype(str) + df['Unnamed: 16'].astype(str)
 	df['LIQUIDADO'] = df['Unnamed: 17'].astype(str) + df['Unnamed: 18'].astype(str)
@@ -383,7 +384,6 @@ def sigef5(file: str, skip: int, range_cols: str):
 
 	for i in df.columns:
 		df[i] = [sub('nan','', i) for i in df[i].astype(str)]
-		df[i] = df[i].replace('', '0.00')
 
 	values = [
 		'DOTACAO_INICIAL', 'ATUALIZADO', 'INDISPONIBILIDADES', 
@@ -394,9 +394,12 @@ def sigef5(file: str, skip: int, range_cols: str):
 	for i in values:
 		df[i] = [sub('\.', '', i) for i in df[i]]
 		df[i] = [sub('\,', '.', i) for i in df[i]]
+		df[i] = df[i].replace('', '0.00')
 		df[i] = df[i].astype(float)
 
-	return df
+	return df.filter(items=['DOTACAO_INICIAL', 'ATUALIZADO', 'INDISPONIBILIDADES', 
+		'PRE_EMPENHADO', 'EMPENHADO', 'DISPONIVEL', 'LIQUIDADO', 
+		'PAGO', 'A LIQUIDAR', 'A PAGAR'])
 
 def sigef6(file: str, skip: int, range_cols: str):
 

@@ -3,7 +3,7 @@ from pandas import read_excel
 from statistics import mode
 from re import sub, findall
 from pandas import concat, isna
-from numpy import nan
+from numpy import nan, where
 import warnings
 import base64
 
@@ -328,7 +328,7 @@ def sigef5(file: str, skip: int, range_cols: str):
 		)
 	except:
 		return print('erro ao ler arquivo...')
-	df = df.dropna(how='all', axis='columns')
+	# df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 	df['Unnamed: 1'] = df['Unnamed: 1'].ffill()
 	df['FONTE'] = [i if i[0:2] == '0.' else float('nan') for i in df['Unnamed: 1']]
@@ -338,27 +338,37 @@ def sigef5(file: str, skip: int, range_cols: str):
 	df['ATUALIZADO'] = df['Unnamed: 7'].astype(str) + df['Unnamed: 8'].astype(str)
 	df['INDISPONIVEL'] = df['Unnamed: 9'].astype(str) + df['Unnamed: 10'].astype(str)
 	df['PRE_EMPENHADO'] = df['Unnamed: 11'].astype(str) + df['Unnamed: 12'].astype(str)
-	df['EMPENHADO'] = df['Unnamed: 13'].astype(str) + df['Unnamed: 14'].astype(str)
+	df['EMPENHADO'] = df['Unnamed: 13'].astype(str)
+	df['INDEFINIDO'] = df['Unnamed: 14'].astype(str) + df['Unnamed: 15'].astype(str)
 	df['DISPONIVEL'] = df['Unnamed: 15'].astype(str) + df['Unnamed: 16'].astype(str)
 	df['LIQUIDADO'] = df['Unnamed: 17'].astype(str) + df['Unnamed: 18'].astype(str)
 	df['PAGO'] = df['Unnamed: 19'].astype(str) + df['Unnamed: 20'].astype(str) 
 	df['A_LIQUIDAR'] =  df['Unnamed: 21'].astype(str) + df['Unnamed: 22'].astype(str) 
 	df['A_PAGAR'] =  df['Unnamed: 23'].astype(str) + df['Unnamed: 24'].astype(str)
 
+	arr = where(df['DISPONIVEL'] == 'nannan')[0]
+	arr2 = where((df['DISPONIVEL'] != 'nannan') & (df['EMPENHADO'] == 'nan'))[0]
+
+	for i in arr.tolist():
+		df['DISPONIVEL'].iloc[i] = df['INDEFINIDO'].iloc[i]
+
+	for i in arr2.tolist():
+		df['EMPENHADO'].iloc[i] = df['INDEFINIDO'].iloc[i]
+
+	df = df.drop(columns=['INDEFINIDO'])
+
 	df['COD_FONTE'] = [i.split(' ', 1)[0] for i in df['FONTE']]
-	df['DESC_FONTE'] = [i.split(' ', 1)[1] for i in df['FONTE']]
-
-	# df2 = df[df['COD_FONTE'] == '0.1.14.000000']
-	# print(df2)
-	# df = df[df['COD_FONTE'] != '0.1.14.000000']
-
+	df['DESC_FONTE'] = [i.split(' ', 1)[1] for i in df['FONTE']]	
+	
 	df['COD_CATEGORIA_CONTA'] = [i.split(' ', 1)[0] for i in df['Unnamed: 2']]
 	df['DESC_CATEGORIA_CONTA'] = [i.split(' ', 1)[1] for i in df['Unnamed: 2']]
-
+	
 	# print(df.iloc[1])
 	df = df.drop(columns=[
-		'Unnamed: 1', 'Unnamed: 7', 
-		'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10',
+		'Unnamed: 1', 'Unnamed: 3',
+		'Unnamed: 4', 'Unnamed: 5',
+		'Unnamed: 7', 'Unnamed: 8', 
+		'Unnamed: 9', 'Unnamed: 10',
 		'Unnamed: 11', 'Unnamed: 12', 
 		'Unnamed: 13', 'Unnamed: 14',
 		'Unnamed: 15', 'Unnamed: 16', 
@@ -368,13 +378,13 @@ def sigef5(file: str, skip: int, range_cols: str):
 		'Unnamed: 23', 'Unnamed: 24', 
 		'FONTE', 'Unnamed: 2'
 	])
-
+	
 	df.columns = [
 	 	'DOTACAO_INICIAL', 'CATEGORIA', 'ATUALIZADO', 'INDISPONIBILIDADES',
 	 	'PRE_EMPENHADO', 'EMPENHADO', 'DISPONIVEL', 'LIQUIDADO', 'PAGO',
 	 	'A LIQUIDAR', 'A PAGAR', 'COD_FONTE', 'DESC_FONTE', 'COD_CATEGORIA_CONTA', 'DESC_CATEGORIA_CONTA'
 	]
-
+	
 	reoder_colnames = [
 		'COD_FONTE', 'DESC_FONTE', 'CATEGORIA','COD_CATEGORIA_CONTA', 
 		'DESC_CATEGORIA_CONTA', 'DOTACAO_INICIAL', 
@@ -382,24 +392,25 @@ def sigef5(file: str, skip: int, range_cols: str):
 	 	'PRE_EMPENHADO', 'EMPENHADO', 'DISPONIVEL', 'LIQUIDADO', 'PAGO',
 	 	'A LIQUIDAR', 'A PAGAR'
 	]
-
+	
 	df = df.reindex(reoder_colnames, axis=1)
-
+	
 	for i in df.columns:
 		df[i] = [sub('nan','', i) for i in df[i].astype(str)]
-
+	
 	values = [
 		'DOTACAO_INICIAL', 'ATUALIZADO', 'INDISPONIBILIDADES', 
 		'PRE_EMPENHADO', 'EMPENHADO', 'DISPONIVEL', 'LIQUIDADO', 
 		'PAGO', 'A LIQUIDAR', 'A PAGAR'
 	]
-
+	
 	for i in values:
 		df[i] = [sub('\.', '', i) for i in df[i]]
 		df[i] = [sub('\,', '.', i) for i in df[i]]
 		df[i] = df[i].replace('', '0.00')
 		df[i] = df[i].astype(float)
 
+	df.to_excel('teste2.xlsx', index=False)
 	return df
 
 def sigef6(file: str, skip: int, range_cols: str):

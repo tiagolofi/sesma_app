@@ -54,6 +54,7 @@ with c6:
 	Listar Ordem - Varia entre 19 e 26 linhas para pular, começa em A e termina em H;
 	
 	Execução Financeira - Em média pula 19 linhas, começa sempre em C e termina em L;
+	(Obs: é possível tratar o relatório 'Nota Empenho Célula' imprimindo apenas a nível de poder.)
 
 	Extrato Bancário - Pula duas linhas, começa em A e termina em J;
 

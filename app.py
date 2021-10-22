@@ -24,7 +24,7 @@ with c1:
 				'FNS', 'Extrato Bancário', 'SIGEF - Listar Ordem',
 				'SIGEF - PP', 'SIGEF - Execução Financeira', 'SIGEF - NL',
 				'SIGEF - Execução Orçamentária', 'SIGEF - Empenho',
-				'SIGEF - Observação'
+				'SIGEF - Observação', 'SIGEF - Detalhar Conta (Saldo)'
 			]
 		)
 with c2:
@@ -65,6 +65,8 @@ with c6:
 	Empenho - pula 15 linhas, começa em C e termina em M.
 
 	Observação - pula 8 linhas, começa em C e termina em J.
+
+	Detalhar Conta - pula 20, começa com B e termina com G.
 	''')
 
 try:
@@ -145,6 +147,15 @@ def create_data():
 			skip=info_skip,
 			range_cols=info_range
 		)
+	elif type_problem == 'SIGEF - Detalhar Conta (Saldo)':
+		st.warning(
+			'Selecione a linha onde apareça o primeiro número de conta'
+		)
+		tabela = utils.sigef8(
+			file=file,
+			skip=info_skip,
+			range_cols=info_range
+		)
 	elif type_problem == 'Extrato Bancário':
 		st.warning(
 			'Selecione uma linha antes do primeiro valor de Fonte de Recurso.'
@@ -185,4 +196,3 @@ try:
 		st.stop()	
 except:
 	st.stop()
-

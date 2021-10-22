@@ -500,6 +500,34 @@ def sigef7(file: str, skip: int, range_cols: str):
 
 	return tabela
 
+def sigef8(file: str, skip: int, range_cols: str):
+
+	print('lendo arquivo...')
+	try:
+		df = read_excel(
+			io=file,  
+			skiprows=skip-2,
+			usecols = range_cols
+		)
+	except:
+		return print('erro ao ler arquivo...')
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+	df = df.dropna(thresh=4, axis='index')
+
+	df.columns = ['CONTA', 'mov1', 'mov2', 'SALDO', 'desc']
+
+	df['MATRIZ'] = [i.split(' ')[0] for i in df['CONTA']]
+	df['AGENCIA'] = [i.split(' ')[1] for i in df['CONTA']]
+	df['FONTE'] = [i.split(' ')[3] for i in df['CONTA']]
+	df['CONTA'] = [i.split(' ')[2] for i in df['CONTA']]
+
+	df = df.drop(columns=['mov1', 'mov2', 'desc'])
+
+	df = df.reindex(['MATRIZ', 'AGENCIA', 'CONTA', 'FONTE', 'SALDO'], axis=1)
+
+	return df
+
 def export_data(data):
 	print('exportando arquivo...')
 	try:

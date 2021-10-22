@@ -2,9 +2,9 @@
 import utils
 
 print(
-	utils.sige8(
-		file='Imprimir Nota Empenho Célula15102021151946.xls',
-		skip=17,
-		range_cols='B:Z'
+	utils.sigef8(
+		file='Relatorio_22102021153717.xls',
+		skip=20,
+		range_cols='B:G'
 	)
 )

@@ -448,7 +448,6 @@ def sigef6(file: str, skip: int, range_cols: str):
 	subacao = read_excel('subacao_complemento.xls', skiprows=12, usecols='B:D')
 	subacao = subacao.dropna(how='all', axis='columns')
 	subacao = subacao.dropna(how='all', axis='index')
-	subacao = subacao[:-2]
 	subacao['Código'] = subacao['Código'].astype(int)
 
 	df['SUBACAO'] = df['SUBACAO'].astype(int)

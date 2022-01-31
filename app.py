@@ -69,7 +69,7 @@ st.sidebar.write(
 	Imprimir Pagamento Efetuado - primeiro nome de credor;\n
 	Imprimir Preparação Pagamento - primeira ordem bancária;\n
 	Listar Preparação Pagamento - primeiro número de preparação de pagamento;\n
-	Imprimir Nota Empenho Célula - primeiro nome de subfunção.
+	Imprimir Nota Empenho Célula - primeiro nome de subfunção (Agrupamento Nível 1 deve ser "Subfunção".
 	'''
 )
 

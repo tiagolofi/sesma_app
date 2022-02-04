@@ -127,7 +127,8 @@ def extrato(file: str, skip: int):
 
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index') 
-
+	df = df.dropna(thresh=5, axis='index')
+		
 	df.columns = [
 		'Data', 'Observacao', 'DataBalancete', 'AgenciaOrigem',
 		'Lote', 'NumeroDocumento', 'CodigoHistorico', 'Historico',

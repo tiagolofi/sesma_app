@@ -147,6 +147,8 @@ def extrato(file: str, skip: int):
 
 	return df.reset_index(drop=True)
 
+print(extrato(file = 'Extrato3846660666 (18).xlsx', skip = 2))
+
 def listar_ordem(file: str, skip: int):
 
 	df = read_excel(

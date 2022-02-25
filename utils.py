@@ -135,7 +135,7 @@ def extrato(file: str, skip: int):
 		'Valor', 'TipoMovimento'
 	]
 
-	df['NumeroDocumento'] = [valida_numero_obpp(number = str(i)) for i in df['NumeroDocumento']]
+	df['NumeroDocumento'] = [valida_numero_obpp(number = str(int(i))) for i in df['NumeroDocumento']]
 
 	df = df.drop(columns = ['Observacao', 'DataBalancete'])
 
@@ -146,8 +146,6 @@ def extrato(file: str, skip: int):
 	df['Valor'] = [float(sub('\,', '.', sub('\.|\*|\ ', '', i))) for i in df['Valor']]
 
 	return df.reset_index(drop=True)
-
-print(extrato(file = 'Extrato3846660666 (18).xlsx', skip = 2))
 
 def listar_ordem(file: str, skip: int):
 

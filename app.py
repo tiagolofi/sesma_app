@@ -71,7 +71,7 @@ st.sidebar.write(
 	Imprimir Preparação Pagamento - primeira ordem bancária;\n
 	Listar Preparação Pagamento - primeiro número de preparação de pagamento;\n
 	Imprimir Nota Empenho Célula - primeiro nome de subfunção (Agrupamento Nível 1 deve ser "Subfunção");\n
-	Imprimir Execução Orçamentária - Vai testando aí pq eu me esqueci qual era a linha
+	Imprimir Execução Orçamentária - primeio código de subação (19)
 	'''
 )
 
@@ -251,21 +251,21 @@ elif type_problem == 'Imprimir Execução Orçamentária' and file != None:
 
 	if visualizar:
 
-		# try:
+		try:
 	
-		data = orc(file = file, skip = info_skip)
-
-		st.dataframe(data)
-
-		st.success('Arquivo lido com sucesso!')
-		
-		st.download_button(
-			label = 'Baixar Planilha',
-			data = export_excel(data = data),
-			file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
-		)
+			data = orc(file = file, skip = info_skip)
 	
-		# except:
+			st.dataframe(data)
 	
-			# st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 

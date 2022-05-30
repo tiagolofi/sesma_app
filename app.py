@@ -47,7 +47,8 @@ with c3:
 			options=[
 				'FNS', 'Extrato Bancário', 'Listar Ordem Bancária',
 				'Imprimir Pagamento Efetuado', 'Imprimir Preparação Pagamento',
-				'Listar Preparação Pagamento', 'Imprimir Nota Empenho Célula'
+				'Listar Preparação Pagamento', 'Imprimir Nota Empenho Célula',
+				'Imprimir Execução Orçamentária'
 			]
 		)
 
@@ -69,7 +70,8 @@ st.sidebar.write(
 	Imprimir Pagamento Efetuado - primeiro nome de credor;\n
 	Imprimir Preparação Pagamento - primeira ordem bancária;\n
 	Listar Preparação Pagamento - primeiro número de preparação de pagamento;\n
-	Imprimir Nota Empenho Célula - primeiro nome de subfunção (Agrupamento Nível 1 deve ser "Subfunção").
+	Imprimir Nota Empenho Célula - primeiro nome de subfunção (Agrupamento Nível 1 deve ser "Subfunção");\n
+	Imprimir Execução Orçamentária - Vai testando aí pq eu me esqueci qual era a linha
 	'''
 )
 

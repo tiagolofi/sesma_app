@@ -86,7 +86,7 @@ def pagamento(file: str, skip: int):
 	tabela['CredorNome'] = [i.split(' ', 1)[1] for i in tabela['Credor']]
 
 	tabela = tabela.drop(columns=['Credor'])
-	
+
 	## melhorando para cálculos
 
 	tabela = tabela.reindex([
@@ -262,6 +262,30 @@ def nota_empenho_celula(file: str, skip: int):
 
 	return df
 
+def competencia(text):
+
+	try:
+
+		comp = findall('[A-Za-zÇç]{3,9}/\d{2,4}', text)[0]
+
+		return comp.upper()
+
+	except:
+
+		return 'Competência não identificada'
+
+def processo(text):
+
+	try:
+
+		proc = findall('\d{4,8}/\d{2,4}', text)[0]
+
+		return proc.upper()
+
+	except:
+
+		return 'Processo não identificado'
+
 def observacoes(file: str, skip: int):
 
 	df = read_excel(
@@ -287,6 +311,10 @@ def observacoes(file: str, skip: int):
 	df['OrdemBancaria'] = df['OrdemBancaria'].ffill(limit = 2)
 
 	df = df[~isna(df['Observacao'])]
+
+	df['Processo'] = df['Observacao'].apply(processo)
+
+	df['Competencia'] = df['Observacao'].apply(competencia)
 
 	return df
 

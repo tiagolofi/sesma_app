@@ -37,6 +37,18 @@ def valida_cnpj(cnpj):
 		
 		return cnpj
 
+def processo(text):
+
+	try:
+
+		proc = findall('\d{4,8}/\d{2,4}', text)[0]
+
+		return proc.upper()
+
+	except:
+
+		return 'Processo não identificado'
+
 def pagamento(file: str, skip: int):
 	
 	df = read_excel(
@@ -62,13 +74,7 @@ def pagamento(file: str, skip: int):
 
 	## padronização número de processo
 
-	df['Processo'] = [sub('\D', '/', i) for i in df['Processo']]
-	df['Processo'] = [findall('[\d]+', i) for i in df['Processo']]
-	df['Processo'] = ['/'.join(i) for i in df['Processo']]
-	df['Processo'] = [sub('/22$', '/2022', i) for i in df['Processo']]
-	df['Processo'] = [sub('/21$', '/2021', i) for i in df['Processo']]
-	df['Processo'] = [sub('/20$', '/2020', i) for i in df['Processo']]
-	df['Processo'] = [sub('/19$', '/2019', i) for i in df['Processo']]
+	df['Processo'] = df['Processo'].apply(processo)
 	df['Valor'] = df['Valor'].astype(float)
 	df['Processo'] = df['Processo'].astype(str)
 
@@ -273,18 +279,6 @@ def competencia(text):
 	except:
 
 		return 'Competência não identificada'
-
-def processo(text):
-
-	try:
-
-		proc = findall('\d{4,8}/\d{2,4}', text)[0]
-
-		return proc.upper()
-
-	except:
-
-		return 'Processo não identificado'
 
 def observacoes(file: str, skip: int):
 

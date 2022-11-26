@@ -8,7 +8,8 @@ icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-f
 st.set_page_config(
 	page_title='Tratamento das Fontes de Dados',
 	layout = 'wide',
-	page_icon=icon,
+	page_icon = icon,
+	initial_sidebar_state = 'collapsed' 
 )
 
 css = """

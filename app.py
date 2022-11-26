@@ -42,7 +42,7 @@ with c1:
 
 	st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-	st.write('''##### Versão 1.4.1''')
+	st.write('''##### Versão 1.4.3''')
 
 with c2:
 

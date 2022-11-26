@@ -258,13 +258,13 @@ def nota_empenho_celula(file: str, skip: int):
 		'CpfCnpj', 'Credor'
 	]
 
-	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:D')
+	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
 	
 	subacao = subacao.dropna(how='all', axis='columns')
 	
 	subacao = subacao.dropna(how='all', axis='index')
 	
-	subacao.columns = ['Codigo', 'SubacaoNome']
+	subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
 
 	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
 	
@@ -272,7 +272,7 @@ def nota_empenho_celula(file: str, skip: int):
 	
 	df = df.reindex(
 		[
-			'Subfuncao', 'NotaEmpenho', 'NotaPreEmpenho', 'Subacao', 'SubacaoNome', 'Fonte', 
+			'Subfuncao', 'NotaEmpenho', 'NotaPreEmpenho', 'Acao', 'Subacao', 'SubacaoNome', 'Fonte', 
 			'Natureza', 'CpfCnpj', 'Credor', 'Empenhado',
 			'Liquidado', 'Retido', 'ALiquidar', 'Pago', 'APagar'
 		], axis = 'columns'

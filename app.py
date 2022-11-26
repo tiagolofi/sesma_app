@@ -1,9 +1,6 @@
 
 import streamlit as st
-from utils import (
-	fns, pagamento, extrato, listar_ordem, nota_empenho_celula, 
-	observacoes, situacao_pp, orc, listar_pre_empenho, export_excel
-)
+from utils import fns, pagamento, extrato, listar_ordem, nota_empenho_celula, observacoes, situacao_pp, orc, listar_pre_empenho, export_excel
 from datetime import datetime
 
 icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-financeiro.png'

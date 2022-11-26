@@ -46,7 +46,7 @@ with c1:
 
 with c2:
 
-	st.image('logo_ses.png')
+	st.image('img/logo_ses.png')
 
 c3, c4, c5 = st.columns(3)
 

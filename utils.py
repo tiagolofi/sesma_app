@@ -206,6 +206,16 @@ def listar_ordem(file: str, skip: int):
 
 	return tabela.reset_index(drop=True)
 
+def check_pre_empenho(x):
+
+	if len(x) > 1:
+
+		return x[1]
+
+	else:
+
+		return None
+
 def nota_empenho_celula(file: str, skip: int):
 
 	df = read_excel(
@@ -229,7 +239,9 @@ def nota_empenho_celula(file: str, skip: int):
 		df[j] = [float(sub(' ', '0', sub('\,', '.', sub('[A-Z]|\.', '', i)))) for i in df[j]]
 	
 	df['NotaEmpenho'] = [i.split(' / ')[0] for i in df[2]]
-	
+
+	df['NotaPreEmpenho'] = [check_pre_empenho(i.split(' / ')) for i in df[2]]
+
 	df['Subacao'] = [i.split(' ')[1] for i in df[4]]
 	df['Fonte'] = [i.split(' ')[2] for i in df[4]]
 	df['Natureza'] = [i.split(' ')[3] for i in df[4]]
@@ -242,7 +254,7 @@ def nota_empenho_celula(file: str, skip: int):
 	df.columns = [
 		'Subfuncao', 'Empenhado', 'Liquidado', 
 		'Retido', 'ALiquidar', 'Pago', 'APagar', 
-		'NotaEmpenho', 'Subacao', 'Fonte', 'Natureza',
+		'NotaEmpenho', 'NotaPreEmpenho', 'Subacao', 'Fonte', 'Natureza',
 		'CpfCnpj', 'Credor'
 	]
 
@@ -260,7 +272,7 @@ def nota_empenho_celula(file: str, skip: int):
 	
 	df = df.reindex(
 		[
-			'Subfuncao', 'NotaEmpenho', 'Subacao', 'SubacaoNome', 'Fonte', 
+			'Subfuncao', 'NotaEmpenho', 'NotaPreEmpenho', 'Subacao', 'SubacaoNome', 'Fonte', 
 			'Natureza', 'CpfCnpj', 'Credor', 'Empenhado',
 			'Liquidado', 'Retido', 'ALiquidar', 'Pago', 'APagar'
 		], axis = 'columns'
@@ -274,11 +286,31 @@ def competencia(text):
 
 		comp = findall('[A-Za-zÇç]{3,9}/\d{2,4}', text)[0]
 
-		return comp.upper()
+		return comp.lower()
 
 	except:
 
-		return 'Competência não identificada'
+		if any(i in text.split(' ') for i in ['Única', 'UNICA', 'Unica', 'Única', 'Única;', 'UNICA;', 'Unica;', 'Única;']):
+
+			return 'Parcela Única'
+
+		else:
+
+			return 'Competência não identificada'
+
+def contrato(text):
+
+	text = [i for i in text.split(' ') if i not in ['', ' ']]
+
+	filter_list_text = [i for i in text if 'CT' in i]
+
+	if len(filter_list_text) > 0:
+
+		return ' '.join(['CT', str(text[text.index(filter_list_text[0]) + 1]).replace(';', '')])
+
+	else:
+
+		return 'Contrato não identificado'
 
 def observacoes(file: str, skip: int):
 
@@ -306,9 +338,11 @@ def observacoes(file: str, skip: int):
 
 	df = df[~isna(df['Observacao'])]
 
-	df['Processo'] = df['Observacao'].apply(processo)
+	df['Contrato'] = df['Observacao'].apply(contrato)
 
 	df['Competencia'] = df['Observacao'].apply(competencia)
+
+	df['Processo'] = df['Observacao'].apply(processo)
 
 	return df
 
@@ -429,6 +463,46 @@ def orc(file: str, skip: int):
 	df['Atualizado'] = df['Atualizado'].apply(money)
 	df['Indisponivel'] = df['Indisponivel'].apply(money)
 	df['PreEmpenhado'] = df['PreEmpenhado'].apply(money)
+
+	return df
+
+def simplifica_evento(x):
+
+	eventos = {
+		'RC08-Emissão de Pré-Empenho da Despesa': 'Emissão',
+		'RC08-Anulação de Pré-Empenho da Despesa': 'Anulação',
+		'RC08-Reforço de Pré-Empenho da Despesa': 'Reforço',
+		'RC24 - Anulação de Pré-Empenho de Emenda Parlamentar': 'Anulação (EP)',
+		'RC24 - Liberação da Emenda por Pré-Empenho.': 'Liberação (EP)'
+	}
+
+	return eventos.get(x)
+
+def listar_pre_empenho(file, skip):
+
+	df = read_excel(
+		io = file,  
+		skiprows = skip - 1,
+		usecols = 'B:K',
+		header = None
+	)
+
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+
+	df = df[~isna(df[3])]
+
+	df['Eventos'] = [simplifica_evento(i) for i in df[6]]
+
+	df = df.drop(columns = [5, 6, 7])
+	
+	df.columns = ['NotaPreEmpenho', 'Data', 'Processo', 'Valor', 'Eventos']
+
+	df = df.reindex(
+		[
+			'NotaPreEmpenho', 'Data', 'Eventos', 'Processo', 'Valor' 
+		], axis = 'columns'
+	)
 
 	return df
 

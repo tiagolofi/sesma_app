@@ -5,7 +5,7 @@ Limpeza de Bases de Dados usadas pelo Controle Financeiro da Secretaria de Estad
 [Tratamento das Fontes de Dados da SES](https://tiagolofi-sesma-app-app-hdegvk.streamlit.app/)
 
 Layout:
-![](front.png)
+![](img/front.png)
 
 ## Updates
 

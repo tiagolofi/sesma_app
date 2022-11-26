@@ -2,24 +2,41 @@
 
 Limpeza de Bases de Dados usadas pelo Controle Financeiro da Secretaria de Estado da Saúde do Maranhão.
 
-[Tratamento das Fontes de Dados da SES](https://share.streamlit.io/tiagolofi/sesma_app/main/app.py)
+[Tratamento das Fontes de Dados da SES](https://tiagolofi-sesma-app-app-hdegvk.streamlit.app/)
 
 Layout:
 ![](front.png)
 
-## Documentação
-
-Leia a [Documentação](https://github.com/tiagolofi/sesma_app/raw/main/Documenta%C3%A7%C3%A3o%20de%20Dados%20Fornecidos%20pelo%20SESMA.pdf)
-
 ## Updates
 
-1. Adicionar FNS Custeio (Feito)
+#### Versão 1.0.0
+
+1. Adicionar FNS (Feito)
 2. Adicionar tabela auxiliar Subação e Complemento (Feito)
 3. Adicionar SIGEF Execução Orçamentária (Feito)
-4. Relacionamentos entre planilhas (Feito)
-5. Adicionar SIGEF Ordem Bancária (Feito)
-6. Adicionar HELP (Feito)
-7. Adicionar NL (Feito)
+4. Adicionar SIGEF Ordem Bancária (Feito)
+5. Adicionar HELP (Feito)
+
+#### Versão 1.1.1
+
+6. Relacionamentos entre planilhas (Removido)
+7. Adicionar NL (Removido)
+8. Testes para anos anteriores (Feito)
+
+#### Versão 1.2.1
+
+9. Observações das PPs
+10. Número dos Processos e Competência
+
+#### Versão 1.3.1
+
+11. Orçamento
+
+#### Versão 1.4.1
+
+12. Pré-Empenho
+13. Pré-Empenho no Empenho
+14. Contratos
 
 ## Conquistas
 
@@ -28,8 +45,10 @@ Leia a [Documentação](https://github.com/tiagolofi/sesma_app/raw/main/Document
 
 ## Comentários
 
-**Lilian**: "A aplicação trouxe celeridade à rotina de tratamento das informações que precisam ser atualizadas em tempo real."
+**Lilian (RIP)**: "A aplicação trouxe celeridade à rotina de tratamento das informações que precisam ser atualizadas em tempo real."
 
 **Adriana**: "A aplicação agilizou as tarefas rotineiras e otimizou o tempo para realizar tarefas mais complexas e desafiadoras."
 
 **Guilherme**: "A aplicação otimizou meu tempo de trabalho que antes era dedicado a resolução de tarefas que poderiam ser automatizadas."
+
+**Vinicius**: "Não altera nada nesse código não siô, esse negócio salva meu fluxo todo dia..."

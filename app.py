@@ -1,6 +1,9 @@
 
 import streamlit as st
-from utils import fns, pagamento, extrato, listar_ordem, nota_empenho_celula, observacoes, situacao_pp, orc, export_excel
+from utils import (
+	fns, pagamento, extrato, listar_ordem, nota_empenho_celula, 
+	observacoes, situacao_pp, orc, listar_pre_empenho, export_excel
+)
 from datetime import datetime
 
 icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-financeiro.png'
@@ -14,13 +17,21 @@ st.set_page_config(
 css = """
 
 <style>
+	
 	@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+	
 	@font-face{
 		font-family: 'Poppins', sans-serif;
 	}
+
 	html, body, [class*="css"] {
-	font-family: 'Poppins', sans-serif;
+		font-family: 'Poppins', sans-serif;
 	}
+
+	.block-container {
+		background-image: linear-gradient(to left, white, whitesmoke);
+	}
+
 </style>
 
 """
@@ -48,7 +59,7 @@ with c3:
 				'FNS', 'Extrato Bancário', 'Listar Ordem Bancária',
 				'Imprimir Pagamento Efetuado', 'Imprimir Preparação Pagamento',
 				'Listar Preparação Pagamento', 'Imprimir Nota Empenho Célula',
-				'Imprimir Execução Orçamentária'
+				'Imprimir Execução Orçamentária', 'Listar Pré-Empenho'
 			]
 		)
 
@@ -71,7 +82,8 @@ st.sidebar.write(
 	Imprimir Preparação Pagamento - primeira ordem bancária;\n
 	Listar Preparação Pagamento - primeiro número de preparação de pagamento;\n
 	Imprimir Nota Empenho Célula - primeiro nome de subfunção (Agrupamento Nível 1 deve ser "Subfunção");\n
-	Imprimir Execução Orçamentária - primeio código de subação (19)
+	Imprimir Execução Orçamentária - primeio código de subação (19);\n
+	Listar Pré Empenho - primeira nota de pré-empenho
 	'''
 )
 
@@ -269,3 +281,26 @@ elif type_problem == 'Imprimir Execução Orçamentária' and file != None:
 	
 			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
+elif type_problem == 'Listar Pré-Empenho' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = listar_pre_empenho(file = file, skip = info_skip)
+	
+			st.dataframe(data)
+	
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')

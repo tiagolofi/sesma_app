@@ -23,20 +23,21 @@ Layout:
 7. Adicionar NL (Removido)
 8. Testes para anos anteriores (Feito)
 
-#### Versão 1.2.1
+#### Versão 1.2.2
 
 9. Observações das PPs
 10. Número dos Processos e Competência
 
-#### Versão 1.3.1
+#### Versão 1.3.2
 
 11. Orçamento
 
-#### Versão 1.4.1
+#### Versão 1.4.3
 
 12. Pré-Empenho
 13. Pré-Empenho no Empenho
 14. Contratos
+15. Ação
 
 ## Conquistas
 

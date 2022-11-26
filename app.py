@@ -45,6 +45,8 @@ with c1:
 
 	st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
+	st.write('''##### Versão 1.4.1'')
+
 with c2:
 
 	st.image('logo_ses.png')

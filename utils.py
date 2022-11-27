@@ -300,17 +300,23 @@ def competencia(text):
 
 def contrato(text):
 
-	text = [i for i in text.split(' ') if i not in ['', ' ']]
+	try:
 
-	filter_list_text = [i for i in text if 'CT' in i]
+		text = [i for i in text.split(' ') if i not in ['', ' ']]
+	
+		filter_list_text = [i for i in text if 'CT' in i]
+	
+		if len(filter_list_text) > 0:
+	
+			return ' '.join(['CT', str(text[text.index(filter_list_text[0]) + 1]).replace(';', '')])
+	
+		else:
+	
+			return 'Contrato não identificado'
 
-	if len(filter_list_text) > 0:
+	except:
 
-		return ' '.join(['CT', str(text[text.index(filter_list_text[0]) + 1]).replace(';', '')])
-
-	else:
-
-		return 'Contrato não identificado'
+		return 'Sem observação'
 
 def observacoes(file: str, skip: int):
 

@@ -39,6 +39,10 @@ Layout:
 14. Contratos
 15. Ação
 
+#### Versão 1.5.3
+
+16. Execução dos Pré-Empenhos
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

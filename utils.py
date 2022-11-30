@@ -512,6 +512,64 @@ def listar_pre_empenho(file, skip):
 
 	return df
 
+def nota_pre_empenho_celula(file: str, skip: int):
+
+	df = read_excel(
+		io = file,  
+		skiprows = skip - 1,
+		usecols = 'B:N',
+		header = None
+	)
+
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+
+	df = df[~df[1].astype(str).str.contains('2022NE')]
+
+	df = df.dropna(thresh=7, axis='index')
+
+	df['Subacao'] = [i.split(' ')[1] for i in df[4]]
+	df['Fonte'] = [i.split(' ')[2] for i in df[4]]
+	df['Natureza'] = [i.split(' ')[3] for i in df[4]]
+
+	for j in [6, 7, 8, 10, 12]:
+	
+		df[j] = [float(sub(' ', '0', sub('\,', '.', sub('[A-Z]|\.', '', i)))) for i in df[j]]
+
+	df['Liquidado'] = df[8] - df[12]
+
+	df = df.dropna(how='all', axis='columns')
+
+	df = df.drop(columns = [4])
+
+	df.columns = [
+		'DataEmissao', 'NotaPreEmpenho',
+		'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'AEmpenhar', 'ALiquidar', 
+		'Subacao', 'Fonte', 'Natureza', 'Liquidado'
+	]
+
+	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
+	
+	subacao = subacao.dropna(how='all', axis='columns')
+	
+	subacao = subacao.dropna(how='all', axis='index')
+	
+	subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
+
+	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
+	
+	df = df.drop(columns=['Codigo'])
+	
+	df = df.reindex(
+		[
+			'DataEmissao', 'NotaPreEmpenho', 
+			'Acao', 'Subacao', 'SubacaoNome', 'Fonte', 'Natureza', 
+			'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'AEmpenhar', 'ALiquidar'
+		], axis = 'columns'
+	)
+
+	return df
+
 def export_excel(data):
 
 	output = BytesIO()

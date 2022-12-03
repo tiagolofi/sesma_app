@@ -9,7 +9,7 @@ Layout:
 
 ## Updates
 
-#### Versão 1.0.0
+#### Versão 0.0.0
 
 1. Adicionar FNS (Feito)
 2. Adicionar tabela auxiliar Subação e Complemento (Feito)
@@ -17,7 +17,7 @@ Layout:
 4. Adicionar SIGEF Ordem Bancária (Feito)
 5. Adicionar HELP (Feito)
 
-#### Versão 1.1.1
+#### Versão 0.1.1
 
 6. Relacionamentos entre planilhas (Removido)
 7. Adicionar NL (Removido)
@@ -42,6 +42,10 @@ Layout:
 #### Versão 1.5.3
 
 16. Execução dos Pré-Empenhos
+
+#### Versão 1.6.3
+
+17. Detahar Conta 8.2.1.7.2.01
 
 ## Conquistas
 

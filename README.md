@@ -2,7 +2,7 @@
 
 Limpeza de Bases de Dados usadas pelo Controle Financeiro da Secretaria de Estado da Saúde do Maranhão.
 
-[Tratamento das Fontes de Dados da SES](https://tiagolofi-sesma-app-app-hdegvk.streamlit.app/)
+[Tratamento das Fontes de Dados da SES](https://sigef-sesma-tratamento.streamlit.app/)
 
 Layout:
 ![](img/front.png)

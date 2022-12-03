@@ -1,6 +1,6 @@
 
 import streamlit as st
-from utils import fns, pagamento, extrato, listar_ordem, nota_empenho_celula, observacoes, situacao_pp, orc, listar_pre_empenho, nota_pre_empenho_celula, deta_conta_8217201, export_excel
+from utils import fns, pagamento, extrato, listar_ordem, nota_empenho_celula, observacoes, situacao_pp, orc, listar_pre_empenho, nota_pre_empenho_celula, deta_conta, export_excel
 from datetime import datetime
 
 icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-financeiro.png'
@@ -340,7 +340,7 @@ elif type_problem == 'Detalhar Conta 8.2.1.7.2.01' and file != None:
 
 		try:
 	
-			data = deta_conta_8217201(file = file, skip = info_skip)
+			data = deta_conta(file = file, skip = info_skip)
 	
 			st.dataframe(data)
 	

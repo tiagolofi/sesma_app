@@ -603,7 +603,7 @@ def classifica_fonte(x):
 
 		return 'Obrigações e Consignações'
 
-def deta_conta_8217201(file: str, skip: int):
+def deta_conta(file: str, skip: int):
 
 	df = pandas.read_excel(file, skiprows = skip, usecols = 'B:F', header = None)
 	

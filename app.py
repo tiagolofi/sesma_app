@@ -1,6 +1,6 @@
 
 import streamlit as st
-from utils import fns, pagamento, extrato, listar_ordem, nota_empenho_celula, observacoes, situacao_pp, orc, listar_pre_empenho, nota_pre_empenho_celula, export_excel
+from utils import fns, pagamento, extrato, listar_ordem, nota_empenho_celula, observacoes, situacao_pp, orc, listar_pre_empenho, nota_pre_empenho_celula, deta_conta_8217201, export_excel
 from datetime import datetime
 
 icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-financeiro.png'
@@ -43,7 +43,7 @@ with c1:
 
 	st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-	st.write('''##### Versão 1.5.3''')
+	st.write('''##### Versão 1.6.3''')
 
 with c2:
 
@@ -60,7 +60,7 @@ with c3:
 				'Imprimir Pagamento Efetuado', 'Imprimir Preparação Pagamento',
 				'Listar Preparação Pagamento', 'Imprimir Nota Empenho Célula',
 				'Imprimir Execução Orçamentária', 'Listar Pré-Empenho',
-				'Imprimir Nota Pré-Empenho Célula'
+				'Imprimir Nota Pré-Empenho Célula', 'Detalhar Conta 8.2.1.7.2.01'
 			]
 		)
 
@@ -85,7 +85,8 @@ st.sidebar.write(
 	Imprimir Nota Empenho Célula - primeiro nome de subfunção (Agrupamento Nível 1 deve ser "Subfunção");\n
 	Imprimir Execução Orçamentária - primeio código de subação (19);\n
 	Listar Pré Empenho - primeira nota de pré-empenho;\n
-	Imprimir Nota Pré-Empenho Célula - primeira linha da UG
+	Imprimir Nota Pré-Empenho Célula - primeira linha da UG;\n
+	Detalhar Conta 8.2.1.7.2.01 - primeiro número de conta/fonte
 	'''
 )
 
@@ -316,6 +317,30 @@ elif type_problem == 'Imprimir Nota Pré-Empenho Célula' and file != None:
 		try:
 	
 			data = nota_pre_empenho_celula(file = file, skip = info_skip)
+	
+			st.dataframe(data)
+	
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+elif type_problem == 'Detalhar Conta 8.2.1.7.2.01' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = deta_conta_8217201(file = file, skip = info_skip)
 	
 			st.dataframe(data)
 	

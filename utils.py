@@ -605,7 +605,7 @@ def classifica_fonte(x):
 
 def deta_conta(file: str, skip: int):
 
-	df = pandas.read_excel(io = file, skiprows = skip - 1, usecols = 'B:F', header = None)
+	df = read_excel(io = file, skiprows = skip - 1, usecols = 'B:F', header = None)
 	
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
@@ -622,7 +622,7 @@ def deta_conta(file: str, skip: int):
 		axis = 'columns'
 	)
 	
-	df = df[~pandas.isna(df[5])]
+	df = df[~isna(df[5])]
 	
 	df.columns = ['Conta', 'Fonte', 'TipoRecurso', 'Saldo em Conta']
 

@@ -353,5 +353,5 @@ elif type_problem == 'Detalhar Conta 8.2.1.7.2.01' and file != None:
 			)
 	
 		except:
-	
+
 			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')

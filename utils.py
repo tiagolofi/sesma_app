@@ -570,6 +570,64 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	return df
 
+def classifica_fonte(x):
+
+	if x[0:6] in ['0.1.11', '0.3.11']:
+
+		return 'Convênio Federal'
+
+	elif x[0:6] in ['5.1.21', '5.3.21']:
+
+		return 'Contrapartida de Convênio Federal'
+
+	elif x[0:6] in ['0.3.08']:
+
+		return 'Superávit Federal'
+
+	elif x[0:6] in ['0.1.08']:
+
+		return 'Corrente Federal'
+
+	elif x[0:6] in [
+		'0.1.21', '0.1.39', '0.1.14', '0.1.22', '0.1.36', '0.1.33',
+		'0.3.21', '0.3.39', '0.3.14', '0.3.22', '0.3.36', '0.3.33'
+	]:
+
+		return 'Tesouro Estadual'
+
+	elif x[0:6] in ['0.1.16', '0.1.34', '0.3.16', '0.3.34']:
+
+		return 'Doações'
+
+	elif x[0:6] in ['9.9.99']:
+
+		return 'Obrigações e Consignações'
+
+def deta_conta_8217201(file: str, skip: int):
+
+	df = pandas.read_excel(file, skiprows = skip, usecols = 'B:F', header = None)
+	
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+	
+	df['Conta'] = [i.split(' ')[2] for i in df[1]]
+	df['Fonte'] = [i.split(' ')[3] for i in df[1]]
+	
+	df = df.drop(columns = [1, 2, 4])
+	
+	df['TipoRecurso'] = df['Fonte'].apply(classifica_fonte)
+	
+	df = df.reindex(
+		['Conta', 'Fonte', 'TipoRecurso', 5],
+		axis = 'columns'
+	)
+	
+	df = df[~pandas.isna(df[5])]
+	
+	df.columns = ['Conta', 'Fonte', 'TipoRecurso', 'Saldo em Conta']
+
+	return df
+
 def export_excel(data):
 
 	output = BytesIO()

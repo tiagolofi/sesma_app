@@ -605,7 +605,7 @@ def classifica_fonte(x):
 
 def deta_conta(file: str, skip: int):
 
-	df = pandas.read_excel(file, skiprows = skip - 1, usecols = 'B:F', header = None)
+	df = pandas.read_excel(io = file, skiprows = skip - 1, usecols = 'B:F', header = None)
 	
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')

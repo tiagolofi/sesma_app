@@ -47,6 +47,10 @@ Layout:
 
 17. Detahar Conta 8.2.1.7.2.01
 
+#### Versão 1.6.4
+
+17. Patch de Notas Empenhos Células - Anos anteriores a 2021
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

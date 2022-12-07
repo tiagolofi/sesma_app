@@ -43,7 +43,7 @@ with c1:
 
 	st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-	st.write('''##### Versão 1.6.3''')
+	st.write('''##### Versão 1.6.4''')
 
 with c2:
 
@@ -58,7 +58,8 @@ with c3:
 			options=[
 				'FNS', 'Extrato Bancário', 'Listar Ordem Bancária',
 				'Imprimir Pagamento Efetuado', 'Imprimir Preparação Pagamento',
-				'Listar Preparação Pagamento', 'Imprimir Nota Empenho Célula',
+				'Listar Preparação Pagamento', 
+				'Imprimir Nota Empenho Célula', 'Imprimir Nota Empenho Célula (2019)', 'Imprimir Nota Empenho Célula (2020)',
 				'Imprimir Execução Orçamentária', 'Listar Pré-Empenho',
 				'Imprimir Nota Pré-Empenho Célula', 'Detalhar Conta 8.2.1.7.2.01'
 			]
@@ -245,6 +246,54 @@ elif type_problem == 'Imprimir Nota Empenho Célula' and file != None:
 		try:
 	
 			data = nota_empenho_celula(file = file, skip = info_skip)
+	
+			st.dataframe(data)
+	
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+elif type_problem == 'Imprimir Nota Empenho Célula (2019)' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = nota_empenho_celula2(file = file, skip = info_skip)
+	
+			st.dataframe(data)
+	
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+elif type_problem == 'Imprimir Nota Empenho Célula (2020)' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = nota_empenho_celula3(file = file, skip = info_skip)
 	
 			st.dataframe(data)
 	

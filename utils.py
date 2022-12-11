@@ -316,25 +316,25 @@ def nota_empenho_celula2(file: str, skip: int):
 	df.columns = [
 		'Subfuncao', 'Empenhado', 'Liquidado', 
 		'Retido', 'ALiquidar', 'Pago', 'APagar', 
-		'NotaEmpenho', 'PiCodigo', 'Fonte', 'Natureza',
+		'NotaEmpenho', 'Subacao', 'Fonte', 'Natureza',
 		'CpfCnpj', 'Credor'
 	]
 
-	# subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
-	# 
-	# subacao = subacao.dropna(how='all', axis='columns')
-	# 
-	# subacao = subacao.dropna(how='all', axis='index')
-	# 
-	# subacao.columns = ['Codigo', 'PiNome', 'Acao']
-# 
-	# df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
-	# 
-	# df = df.drop(columns=['Codigo', 'Acao'])
+	subacao = read_excel('files/Relatorio_07122022152748.xls', skiprows=12, usecols='B:F', dtype=str)
+	
+	subacao = subacao.dropna(how='all', axis='columns')
+	
+	subacao = subacao.dropna(how='all', axis='index')
+	
+	subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
+
+	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
+	
+	df = df.drop(columns=['Codigo'])
 	
 	df = df.reindex(
 		[
-			'Subfuncao', 'NotaEmpenho', 'PiCodigo', 'Fonte', 
+			'Subfuncao', 'NotaEmpenho', 'Acao', 'Subacao', 'SubacaoNome', 'Fonte', 
 			'Natureza', 'CpfCnpj', 'Credor', 'Empenhado',
 			'Liquidado', 'Retido', 'ALiquidar', 'Pago', 'APagar'
 		], axis = 'columns'

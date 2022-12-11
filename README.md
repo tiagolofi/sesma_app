@@ -51,6 +51,10 @@ Layout:
 
 17. Patch de Notas Empenhos Células - Anos anteriores a 2021
 
+#### Versão 1.6.5
+
+18. Patch de Subações para 2019
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

@@ -55,6 +55,11 @@ Layout:
 
 18. Patch de Subações para 2019
 
+#### Versão 1.7.5
+
+19. Imprimir Despesa Certificada Situação (NLs e Processos)
+20. Imprimir Liquidação Credor (NLs e NEs)
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

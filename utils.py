@@ -752,6 +752,68 @@ def deta_conta(file: str, skip: int):
 
 	return df
 
+def filter_NL(x):
+
+	if str(x)[4:6] == 'NL':
+
+		return True
+
+	else:
+
+		return False
+
+def liquidacao_credor(file, skip):
+
+	df = read_excel(
+		io = file,
+		skiprows = skip - 1,
+		usecols = 'A:I',
+		header = None
+	)
+
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+	
+	df[0] = df[0].ffill()
+
+	df[6] = df[1].apply(filter_NL)
+
+	df = df[df[6] == True]
+
+	df = df.dropna(how='all', axis='columns')
+
+	df = df.drop(columns = [6])
+
+	df.columns = ['NotaEmpenho', 'NotaLiquidacao', 'DataLiquidacao', 'Valor']
+	
+	return df
+
+def despesa_certificada_situacao(file, skip): # processo
+
+	df = read_excel(
+		io = file,
+		skiprows = skip - 1,
+		usecols = 'E:J',
+		header = None
+	)
+
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+
+	df[0] = df[9].apply(filter_NL)
+
+	df = df[df[0] == True]
+	
+	df = df.drop(columns = [6, 8, 0])
+
+	df.columns = ['Processo', 'NotaLiquidacao']
+
+	df['Processo'] = df['Processo'].apply(processo)
+
+	df = df.reindex(['NotaLiquidacao', 'Processo'], axis = 'columns')
+	
+	return df
+
 def export_excel(data):
 
 	output = BytesIO()

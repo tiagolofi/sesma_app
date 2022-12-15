@@ -43,7 +43,7 @@ with c1:
 
 	st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-	st.write('''##### Versão 1.6.5''')
+	st.write('''##### Versão 1.7.5''')
 
 with c2:
 
@@ -61,7 +61,8 @@ with c3:
 				'Listar Preparação Pagamento', 
 				'Imprimir Nota Empenho Célula', 'Imprimir Nota Empenho Célula (2019)', 'Imprimir Nota Empenho Célula (2020)',
 				'Imprimir Execução Orçamentária', 'Listar Pré-Empenho',
-				'Imprimir Nota Pré-Empenho Célula', 'Detalhar Conta 8.2.1.7.2.01'
+				'Imprimir Nota Pré-Empenho Célula', 'Detalhar Conta 8.2.1.7.2.01',
+				'Imprimir Liquidação Credor', 'Imprimir Despesa Certificada Situação'
 			]
 		)
 
@@ -87,7 +88,9 @@ st.sidebar.write(
 	Imprimir Execução Orçamentária - primeio código de subação (19);\n
 	Listar Pré Empenho - primeira nota de pré-empenho;\n
 	Imprimir Nota Pré-Empenho Célula - primeira linha da UG;\n
-	Detalhar Conta 8.2.1.7.2.01 - primeiro número de conta/fonte
+	Detalhar Conta 8.2.1.7.2.01 - primeiro número de conta/fonte;\n
+	Imprimir Liquidação Credor (NLs) - primeira nota de empenho;\n
+	Imprimir Despesa Certificada Situação (Processos) - primeira linha da certificação
 	'''
 )
 
@@ -390,6 +393,54 @@ elif type_problem == 'Detalhar Conta 8.2.1.7.2.01' and file != None:
 		try:
 	
 			data = deta_conta(file = file, skip = info_skip)
+	
+			st.dataframe(data)
+	
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+elif type_problem == 'Imprimir Liquidação Credor' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = liquidacao_credor(file = file, skip = info_skip)
+	
+			st.dataframe(data)
+	
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+elif type_problem == 'Imprimir Despesa Certificada Situação' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = despesa_certificada_situacao(file = file, skip = info_skip)
 	
 			st.dataframe(data)
 	

@@ -477,11 +477,11 @@ def aplicar_padrao(df):
 		
 		df['TipoDespesa'] = df['Observacao_Valida'].split(';')[0].strip()
 		
-		df['Processo'] = sub('[A-Za-z.]', '', df['Observacao_Valida'].split(';')[3]).strip()
+		df['Processo'] = sub(' ', '', sub('[A-Za-z.]', '', df['Observacao_Valida'].split(';')[3]).strip())
 		
 		df['Competencia'] = df['Observacao_Valida'].split(';')[2].lower().replace(' a ', ' - ').strip()
 		
-		df['Descricao'] = df['Observacao_Valida'].split(';')[1].strip()
+		df['Descricao'] = df['Observacao_Valida'].split(';')[1].strip().title()
 
 	else:
 

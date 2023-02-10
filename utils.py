@@ -1,7 +1,6 @@
 
-from pandas import read_excel, ExcelWriter
 from re import sub, findall, match
-from pandas import concat, isna
+from pandas import concat, isna, read_excel, ExcelWriter, DataFrame
 from numpy import nan
 from io import BytesIO
 import warnings
@@ -108,11 +107,11 @@ def pagamento(file: str, skip: int):
 
 def valida_numero_obpp(number: str):
 	
-	if number[0:4] in ['2022', '2021', '2020', '2019'] and len(number) == 10:
+	if number[0:4] in ['2023', '2022', '2021', '2020', '2019'] and len(number) == 10:
 		
 		return sub(number[0:4], number[0:4] + 'OB', number)
 	
-	elif number[0:4] in ['2022', '2021', '2020', '2019'] and len(number) == 14:
+	elif number[0:4] in ['2023', '2022', '2021', '2020', '2019'] and len(number) == 14:
 		
 		return sub(number, number[0:4] + 'PP0' + number[5:10], number)
 
@@ -404,6 +403,26 @@ def nota_empenho_celula3(file: str, skip: int):
 
 	return df
 
+def ajuste_obs(text):
+
+	try:
+
+		return text.split(']')[-1]
+
+	except:
+
+		return 'Erro ao recortar'
+
+def fora_padrao(text):
+
+	if len(text.split(';')) != 4:
+
+		return 'NOK'
+
+	else:
+
+		return 'OK'
+
 def competencia(text):
 
 	try:
@@ -414,33 +433,67 @@ def competencia(text):
 
 	except:
 
-		if any(i in text.split(' ') for i in ['Única', 'UNICA', 'Unica', 'Única', 'Única;', 'UNICA;', 'Unica;', 'Única;']):
+		try:
+	
+			start = findall(' \d{1,2}\/\d{1,2}', text)[0].strip()
 
-			return 'Parcela Única'
-
-		else:
-
-			return 'Competência não identificada'
+			end = findall('\d{1,2}\/\d{1,2}\/', text)[0].strip()
+	
+			return ' a '.join([start, end]).lower()
+	
+		except:
+	
+			if any(i in text.split(' ') for i in ['Única', 'UNICA', 'Unica', 'Única', 'Única;', 'UNICA;', 'Unica;', 'Única;']):
+	
+				return 'Parcela Única'
+	
+			else:
+	
+				return 'Competência não identificada'
 
 def contrato(text):
 
 	try:
-
-		text = [i for i in text.split(' ') if i not in ['', ' ']]
+		
+		if match('CT', text):
 	
-		filter_list_text = [i for i in text if 'CT' in i]
-	
-		if len(filter_list_text) > 0:
-	
-			return ' '.join(['CT', str(text[text.index(filter_list_text[0]) + 1]).replace(';', '')])
+			return text[0:text.index('CT') + 8].strip()
 	
 		else:
 	
-			return 'Contrato não identificado'
+			return text.split(' ')[0].strip()
 
 	except:
 
-		return 'Sem observação'
+		return 'Sem identificação'
+
+	else:
+
+		return 'Erro ao identificar tipo de despesa'
+
+def aplicar_padrao(df):
+
+	if df['Padrao'] == 'OK':
+		
+		df['TipoDespesa'] = df['Observacao_Valida'].split(';')[0].strip()
+		
+		df['Processo'] = sub('[A-Za-z.]', '', df['Observacao_Valida'].split(';')[3].strip())
+		
+		df['Competencia'] = df['Observacao_Valida'].split(';')[2].lower().replace(' a ', ' - ').strip()
+		
+		df['Descricao'] = df['Observacao_Valida'].split(';')[1].strip()
+
+	else:
+
+		df['TipoDespesa'] = contrato(df['Observacao_Valida'])
+	
+		df['Processo'] = processo(df['Observacao_Valida'])
+		
+		df['Competencia'] = competencia(df['Observacao_Valida'])
+		
+		df['Descricao'] = 'Descrição não identificada'
+
+	return df
 
 def observacoes(file: str, skip: int):
 
@@ -468,11 +521,13 @@ def observacoes(file: str, skip: int):
 
 	df = df[~isna(df['Observacao'])]
 
-	df['Contrato'] = df['Observacao'].apply(contrato)
+	df['Observacao_Valida'] = df['Observacao'].apply(ajuste_obs)
 
-	df['Competencia'] = df['Observacao'].apply(competencia)
+	df['Padrao'] = df['Observacao_Valida'].apply(fora_padrao)
 
-	df['Processo'] = df['Observacao'].apply(processo)
+	df = df.apply(aplicar_padrao, axis = 1)
+
+	df = df.drop(columns = ['Observacao_Valida'])
 
 	return df
 
@@ -723,6 +778,10 @@ def classifica_fonte(x):
 
 		return 'Doações'
 
+	elif x[0:6] in ['0.1.20']:
+
+		return 'Teto da Epidemiologia'
+
 	elif x[0:6] in ['9.9.99']:
 
 		return 'Obrigações e Consignações'
@@ -827,3 +886,9 @@ def export_excel(data):
 	processed_data = output.getvalue()
 	
 	return processed_data
+
+df = observacoes(file = 'Relatorio_09022023183526.xls', skip = 9)
+
+df.to_excel('teste.xlsx', index = False)
+
+print(df)

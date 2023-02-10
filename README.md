@@ -60,6 +60,16 @@ Layout:
 19. Imprimir Despesa Certificada Situação (NLs e Processos)
 20. Imprimir Liquidação Credor (NLs e NEs)
 
+#### Versão 1.7.6
+
+21. Patch Subação 2023
+22. Ordens Bancárias 2023
+23. Preparações de Pagamento 2023
+
+#### Versão 1.7.7
+
+24. Detalhar Conta 2023
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

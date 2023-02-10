@@ -886,9 +886,3 @@ def export_excel(data):
 	processed_data = output.getvalue()
 	
 	return processed_data
-
-df = observacoes(file = 'Relatorio_09022023183526.xls', skip = 9)
-
-df.to_excel('teste.xlsx', index = False)
-
-print(df)

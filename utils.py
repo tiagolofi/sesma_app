@@ -6,6 +6,8 @@ from io import BytesIO
 import warnings
 import base64
 
+# teste de deploy
+
 def fns(file: str, skip: int):
 	
 	# Função trata o arquivo retornado pelo sistema do FNS

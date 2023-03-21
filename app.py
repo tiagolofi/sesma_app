@@ -100,23 +100,23 @@ if type_problem == 'FNS' and file != None:
 
 	if visualizar:
 
-		try:
+		# try:
 	
-			data = fns(file = file, skip = info_skip)
+		data = fns(file = file, skip = info_skip)
 	
-			st.dataframe(data)
+		st.dataframe(data)
 	
-			st.success('Arquivo lido com sucesso!')
+		st.success('Arquivo lido com sucesso!')
 	
-			st.download_button(
-				label = 'Baixar Planilha',
-				data = export_excel(data = data),
-				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
-			)
+		st.download_button(
+			label = 'Baixar Planilha',
+			data = export_excel(data = data),
+			file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+		)
 	
-		except:
+		# except:
 	
-			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+			# st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
 elif type_problem == 'Extrato Bancário' and file != None:
 

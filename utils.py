@@ -183,7 +183,7 @@ def listar_ordem(file: str, skip: int):
 	tabela[2] = tabela[2].ffill()
 	tabela[3] = tabela[3].ffill() # completa informações
 	
-	tabela = tabela.dropna(thresh=5, how = 'index')
+	tabela = tabela.dropna(thresh=5) # how = 'index'
 
 	tabela.columns = [
 		'OrdemBancaria', 'DataOrdem', 'Conta', 'SituacaoOB',

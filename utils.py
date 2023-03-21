@@ -168,7 +168,7 @@ def listar_ordem(file: str, skip: int):
 	
 	info_ob = df[df['Unnamed: 0'].str.contains('OB', na=False)]
 
-	info_ob = info_ob.drop(['Unnamed: 3', 'Unnamed: 5', 'Unnamed: 6'], axis=1)
+	info_ob = info_ob.drop(['Unnamed: 3', 'Unnamed: 5'], axis=1) # 'Unnamed: 6'
 	
 	info_ob['Unnamed: 2'] = [i[-7:] for i in info_ob['Unnamed: 2']]
 

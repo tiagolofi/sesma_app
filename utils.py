@@ -883,7 +883,7 @@ def export_excel(data):
 	
 	data.to_excel(writer, index=False, sheet_name='Plan1')
 	
-	writer.save()
+	writer.close()
 	
 	processed_data = output.getvalue()
 	

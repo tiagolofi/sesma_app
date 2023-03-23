@@ -61,10 +61,14 @@ def pagamento(file: str, skip: int):
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 
+	print(df)
+	
 	## separando credores
 
 	credores = df[(df.count(axis=1).isin([2])) & (df['Unnamed: 1'] != '210901 FES/Unidade Central - 21901 FES - Unidade Central')].filter(items=['Unnamed: 3'])
 
+	print(credores)
+	
 	df = df.dropna(thresh = 11, axis = 'index')
 
 	df.columns = [

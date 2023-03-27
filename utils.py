@@ -179,7 +179,7 @@ def listar_ordem(file: str, skip: int):
 	info_pp = df[df['Unnamed: 1'].str.contains('PP', na=False)]
 
 	info_pp = info_pp.drop(['Unnamed: 0'], axis=1)
-	
+
 	tabela = concat([info_ob, info_pp], ignore_index=True, axis='columns')
 
 	tabela[0] = tabela[0].ffill()
@@ -187,7 +187,9 @@ def listar_ordem(file: str, skip: int):
 	tabela[2] = tabela[2].ffill()
 	tabela[3] = tabela[3].ffill() # completa informações
 	
-	tabela = tabela.dropna(thresh=5) # how = 'index'
+	tabela = tabela.dropna(thresh = 5) # how = 'index'
+
+	print(tabela)
 
 	tabela.columns = [
 		'OrdemBancaria', 'DataOrdem', 'Conta', 'SituacaoOB',

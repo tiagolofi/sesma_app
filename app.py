@@ -149,23 +149,23 @@ elif type_problem == 'Listar Ordem Bancária' and file != None:
 
 	if visualizar:
 
-		# try:
+		try:
 	
-		data = listar_ordem(file = file, skip = info_skip)
+			data = listar_ordem(file = file, skip = info_skip)
+		
+			st.dataframe(data)
+		
+			st.success('Arquivo lido com sucesso!')
+				
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
 	
-		st.dataframe(data)
+		except:
 	
-		st.success('Arquivo lido com sucesso!')
-			
-		st.download_button(
-			label = 'Baixar Planilha',
-			data = export_excel(data = data),
-			file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
-		)
-
-		# except:
-	
-			# st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
 elif type_problem == 'Imprimir Pagamento Efetuado' and file != None:
 
@@ -173,24 +173,24 @@ elif type_problem == 'Imprimir Pagamento Efetuado' and file != None:
 
 	if visualizar:
 
-		# try:
+		try:
 	
-		data = pagamento(file = file, skip = info_skip)
+			data = pagamento(file = file, skip = info_skip)
+		
+		
+			st.dataframe(data)
+		
+			st.success('Arquivo lido com sucesso!')
+				
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
 	
+		except:
 	
-		st.dataframe(data)
-	
-		st.success('Arquivo lido com sucesso!')
-			
-		st.download_button(
-			label = 'Baixar Planilha',
-			data = export_excel(data = data),
-			file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
-		)
-	
-		# except:
-	
-			# st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
 elif type_problem == 'Imprimir Preparação Pagamento' and file != None:
 
@@ -222,23 +222,23 @@ elif type_problem == 'Listar Preparação Pagamento' and file != None:
 
 	if visualizar:
 
-		# try:
+		try:
 	
-		data = situacao_pp(file = file, skip = info_skip)
-
-		st.dataframe(data)
-
-		st.success('Arquivo lido com sucesso!')
-		
-		st.download_button(
-			label = 'Baixar Planilha',
-			data = export_excel(data = data),
-			file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
-		)
+			data = situacao_pp(file = file, skip = info_skip)
 	
-		# except:
+			st.dataframe(data)
 	
-			# st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
 elif type_problem == 'Imprimir Nota Empenho Célula' and file != None:
 

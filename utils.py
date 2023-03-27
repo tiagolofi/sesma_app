@@ -60,14 +60,10 @@ def pagamento(file: str, skip: int):
 
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
-
-	print(df.columns)
 	
 	## separando credores
 
 	credores = df[(df.count(axis=1).isin([2])) & (df['Unnamed: 1'] != '210901 FES/Unidade Central - 21901 FES - Unidade Central')].filter(items=['Unnamed: 3'])
-
-	print(credores)
 	
 	df = df.dropna(thresh = 11, axis = 'index')
 
@@ -188,8 +184,6 @@ def listar_ordem(file: str, skip: int):
 	tabela[3] = tabela[3].ffill() # completa informações
 	
 	tabela = tabela.dropna(thresh = 5) # how = 'index'
-
-	print(tabela)
 
 	tabela.columns = [
 		'OrdemBancaria', 'DataOrdem', 'Conta', 'SituacaoOB',

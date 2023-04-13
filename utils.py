@@ -556,7 +556,7 @@ def situacao_pp(file: str, skip: int):
 	data = read_excel(
 		io = file,  
 		skiprows = skip - 1,
-		usecols = 'B:N',
+		usecols = 'B:S',
 		header = None
 	)
 

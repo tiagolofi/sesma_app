@@ -8,6 +8,24 @@ import base64
 
 # teste de deploy
 
+def diarias(file: str):
+
+	data = read_excel(io = file)
+
+	data = data.dropna(how = 'all', axis = 'index')
+
+	lista_fun = [
+		'TIAGO JOSÉ MENDES FERNANDES', 'LILIANE NEVES CARVALHO', 'ALINE RIBEIRO DUAILIBE BARROS', 
+		'VALONNI FERNANDES ARTHURO', 'HUGO LEONARDO ARAÚJO FERRO', 'DEBORAH FERNANDA CAMPOS DA SILVA BARBOSA',
+		'KÁTIA CRISTINA DE CASTRO VEIGA TROVÃO'
+	]
+
+	data_sum = data[data['Funcionário'].isin(lista_fun)].groupby(['Funcionário', 'Data inicio', 'Data fim']).agg({'Valor (R$)': 'sum'}).reset_index()
+
+	del data_sum['Valor (R$)']
+
+	return data_sum, data
+
 def fns(file: str, skip: int):
 	
 	# Função trata o arquivo retornado pelo sistema do FNS
@@ -887,4 +905,20 @@ def export_excel(data):
 	
 	processed_data = output.getvalue()
 	
+	return processed_data
+
+def export_excel2(data1, data2):
+
+	output = BytesIO()
+
+	writer = ExcelWriter(output)
+
+	data1.to_excel(writer, index = False, sheet_name = 'Ordenadores')
+
+	data2.to_excel(writer, index = False, sheet_name = 'Todos os Funcionários')
+
+	writer.close()
+
+	processed_data = output.getvalue()
+
 	return processed_data

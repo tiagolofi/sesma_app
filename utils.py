@@ -566,9 +566,9 @@ def situacao_pp(file: str, skip: int):
 
 	data = data.dropna(how='all', axis='index')
 	data = data.dropna(how='all', axis='columns')
-	# data = data.dropna(thresh=2, axis='index')
+	data = data.dropna(thresh=2, axis='index')
 
-	data.columns = ['PreparacaoPagamento', 'OrdemBancaria', 'Favorecido', 'NotaEmpenho', 'DetalheNE', 'Valor', 'SituacaoPP']
+	# data.columns = ['PreparacaoPagamento', 'OrdemBancaria', 'Favorecido', 'NotaEmpenho', 'DetalheNE', 'Valor', 'SituacaoPP']
 
 	return data
 

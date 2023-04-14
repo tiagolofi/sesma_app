@@ -36,14 +36,13 @@ css = """
 
 st.markdown(css, unsafe_allow_html=True)
 
-
 c1, c2 = st.columns([3, 1])
 
 with c1:
 
 	st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-	st.write('''##### Versão 1.7.6''')
+	st.write('''##### Versão 1.7.7''')
 
 with c2:
 

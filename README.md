@@ -69,6 +69,13 @@ Layout:
 #### Versão 1.7.7
 
 24. Detalhar Conta 2023
+25. Correção Listar Preparação
+
+#### Versão 1.8.8
+
+26. Relatório de Diárias
+27. Novo Patch de Subações
+28. Função de Download Multíplas Planilhas
 
 ## Conquistas
 

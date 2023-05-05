@@ -491,6 +491,20 @@ def contrato(text):
 
 		return 'Erro ao identificar tipo de despesa'
 
+def contrato2(text):
+
+	text = [i for i in text.split(' ') if i not in ['', ' ']]
+
+	filter_list_text = [i for i in text if 'CT' in i]
+
+	if len(filter_list_text) > 0:
+
+		return ' '.join(['CT', str(text[text.index(filter_list_text[0]) + 1]).replace(';', '')])
+
+	else:
+
+		return 'Contrato não identificado'
+	
 def aplicar_padrao(df):
 
 	if df['Padrao'] == 'OK':
@@ -512,6 +526,8 @@ def aplicar_padrao(df):
 		df['Competencia'] = competencia(df['Observacao_Valida'])
 		
 		df['Descricao'] = 'Descrição não identificada'
+		
+	df['Contrato'] = df['TipoDespesa'].apply(contrato2)
 
 	return df
 

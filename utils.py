@@ -527,7 +527,7 @@ def aplicar_padrao(df):
 		
 		df['Descricao'] = 'Descrição não identificada'
 		
-	df['Contrato'] = df['TipoDespesa'].apply(contrato2)
+	df['Contrato'] = df['Observacao_Valida'].apply(contrato2)
 
 	return df
 

@@ -493,11 +493,15 @@ def contrato(text):
 
 def contrato2(text):
 
-	try:
+	text = [i for i in text.split(' ') if i not in ['', ' ']]
 
-		return findall('CT \d{1,3}\/\d{2,4}')[0].strip()
+	filter_list_text = [i for i in text if 'CT' in i]
 
-	except:
+	if len(filter_list_text) > 0:
+
+		return ' '.join(['CT', str(text[text.index(filter_list_text[0]) + 1]).replace(';', '')])
+
+	else:
 
 		return 'Contrato não identificado'
 	

@@ -495,7 +495,7 @@ def contrato2(text):
 
 	try:
 
-		return findall('CT \d{1,3}/\d{2,4}')[0].strip()
+		return findall('CT \d{1,3}\/\d{2,4}')[0].strip()
 
 	except:
 

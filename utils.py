@@ -493,15 +493,11 @@ def contrato(text):
 
 def contrato2(text):
 
-	text = [i for i in text.split(' ') if i not in ['', ' ']]
+	try:
 
-	filter_list_text = [i for i in text if 'CT' in i]
+		return findall('CT \d{1,3}/\d{2,4}')[0].strip()
 
-	if len(filter_list_text) > 0:
-
-		return ' '.join(['CT', str(text[text.index(filter_list_text[0]) + 1]).replace(';', '')])
-
-	else:
+	except:
 
 		return 'Contrato não identificado'
 	
@@ -527,7 +523,7 @@ def aplicar_padrao(df):
 		
 		df['Descricao'] = 'Descrição não identificada'
 		
-	df['Contrato'] = df['Observacao_Valida'].apply(contrato2)
+	df['Contrato'] = df['TipoDespesa'].apply(contrato2)
 
 	return df
 
@@ -787,38 +783,31 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 def classifica_fonte(x):
 
-	if x[0:6] in ['0.1.11', '0.3.11']:
+	if x[0:6] in ['1.6.31', '2.6.31']:
 
 		return 'Convênio Federal'
 
-	elif x[0:6] in ['5.1.21', '5.3.21']:
+	elif x[0:6] in ['5.5.00', '6.5.00']:
 
 		return 'Contrapartida de Convênio Federal'
 
-	elif x[0:6] in ['0.3.08']:
+	elif x[0:6] in ['2.6.00', '2.6.01', '2.6.02', '2.6.03']:
 
 		return 'Superávit Federal'
 
-	elif x[0:6] in ['0.1.08']:
+	elif x[0:6] in ['1.6.00', '1.6.01', '1.6.02', '1.6.03']:
 
 		return 'Corrente Federal'
 
-	elif x[0:6] in [
-		'0.1.21', '0.1.39', '0.1.14', '0.1.22', '0.1.36', '0.1.33',
-		'0.3.21', '0.3.39', '0.3.14', '0.3.22', '0.3.36', '0.3.33'
-	]:
+	elif x[0:6] in ['1.5.00']:
 
-		return 'Tesouro Estadual'
+		return 'Tesouro Estadual e Outras Fontes'
 
-	elif x[0:6] in ['0.1.16', '0.1.34', '0.3.16', '0.3.34']:
-
-		return 'Doações'
-
-	elif x[0:6] in ['0.1.20']:
-
-		return 'Teto da Epidemiologia'
-
-	elif x[0:6] in ['9.9.99']:
+	elif x[0:6] in ['1.7.07', '1.6.34', '1.6.59', '1.7.06']:
+		
+		return 'Outras Fontes'
+	
+	elif x[0:6] in ['1.8.69']:
 
 		return 'Obrigações e Consignações'
 

@@ -522,8 +522,6 @@ def aplicar_padrao(df):
 		df['Competencia'] = competencia(df['Observacao_Valida'])
 		
 		df['Descricao'] = 'Descrição não identificada'
-		
-	df['Contrato'] = df['TipoDespesa'].apply(contrato2)
 
 	return df
 
@@ -560,6 +558,8 @@ def observacoes(file: str, skip: int):
 	df = df.apply(aplicar_padrao, axis = 1)
 
 	df = df.drop(columns = ['Observacao_Valida'])
+	
+	df['Contrato'] = df['TipoDespesa'].apply(contrato2)
 
 	return df
 

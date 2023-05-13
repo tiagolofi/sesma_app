@@ -42,7 +42,7 @@ with c1:
 
 	st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-	st.write('''##### Versão 1.8.8''')
+	st.write('''##### Versão 1.9''')
 
 with c2:
 
@@ -62,7 +62,7 @@ with c3:
 				'Imprimir Execução Orçamentária', 'Listar Pré-Empenho',
 				'Imprimir Nota Pré-Empenho Célula', 'Detalhar Conta 8.2.1.7.2.01',
 				'Imprimir Liquidação Credor', 'Imprimir Despesa Certificada Situação',
-				'Listar Nota Empenho'
+				'Listar Nota Empenho', 'Cota Execução Financeira'
 			]
 		)
 
@@ -91,7 +91,8 @@ st.sidebar.write(
 	Detalhar Conta 8.2.1.7.2.01 - primeiro número de conta/fonte;\n
 	Imprimir Liquidação Credor (NLs) - primeira nota de empenho;\n
 	Imprimir Despesa Certificada Situação (Processos) - primeira linha da certificação;\n
-	Listar Nota Empenho - primeira nota de empenho
+	Listar Nota Empenho - primeira nota de empenho;\n
+	Cota Execução Financeira - primeira linha do grupo
 	'''
 )
 
@@ -152,6 +153,30 @@ elif type_problem == 'Listar Nota Empenho' and file != None:
 		try:
 	
 			data = listar_empenho(file = file, skip = info_skip)
+	
+			st.dataframe(data)
+	
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+elif type_problem == 'Cota Execução Financeira' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = cota_execucao_financeira(file = file, skip = info_skip)
 	
 			st.dataframe(data)
 	

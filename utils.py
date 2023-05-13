@@ -918,6 +918,31 @@ def listar_empenho(file, skip):
 
 	return df
 
+def cota_execucao_financeira(file, skip):
+
+	df = read_excel(
+		io = file,
+		skiprows = skip - 1,
+		usecols = 'C:N',
+		header = None
+	)
+
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+	
+	df[2] = df[2].ffill()
+	df[3] = df[3].ffill()
+	df[7] = df[7].ffill()
+	df[9] = df[9].ffill()
+	
+	df = df.drop(columns = [12])
+	
+	df = df[~isna(df[13])]
+	
+	df.columns = ['CodigoGrupo', 'Grupo', 'Fonte', 'NomeFonte', 'CotaAutorizada']
+
+	return df
+
 def export_excel(data):
 
 	output = BytesIO()

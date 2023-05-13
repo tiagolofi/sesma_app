@@ -77,6 +77,11 @@ Layout:
 27. Novo Patch de Subações
 28. Função de Download Multíplas Planilhas
 
+#### Versão 1.9
+
+29. Listar Nota Empenho (Datas)
+30. Cota a Empenhar (Execução Financeira)
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

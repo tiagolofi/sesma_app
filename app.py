@@ -151,7 +151,7 @@ elif type_problem == 'Listar Nota Empenho' and file != None:
 
 		try:
 	
-			data = listar_empenho(file = file)
+			data = listar_empenho(file = file, skip = info_skip)
 	
 			st.dataframe(data)
 	

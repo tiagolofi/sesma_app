@@ -151,15 +151,15 @@ elif type_problem == 'Listar Nota Empenho' and file != None:
 
 		try:
 	
-			data_sum, data_comp = listar_empenho(file = file)
+			data = listar_empenho(file = file)
 	
-			st.dataframe(data_comp)
+			st.dataframe(data)
 	
 			st.success('Arquivo lido com sucesso!')
 			
 			st.download_button(
 				label = 'Baixar Planilha',
-				data = export_excel2(data1 = data_sum, data2 = data_comp),
+				data = export_excel(data = data),
 				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
 			)
 	

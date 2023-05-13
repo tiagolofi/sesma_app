@@ -61,7 +61,8 @@ with c3:
 				'Imprimir Nota Empenho Célula', 'Imprimir Nota Empenho Célula (2019)', 'Imprimir Nota Empenho Célula (2020)',
 				'Imprimir Execução Orçamentária', 'Listar Pré-Empenho',
 				'Imprimir Nota Pré-Empenho Célula', 'Detalhar Conta 8.2.1.7.2.01',
-				'Imprimir Liquidação Credor', 'Imprimir Despesa Certificada Situação'
+				'Imprimir Liquidação Credor', 'Imprimir Despesa Certificada Situação',
+				'Listar Nota Empenho'
 			]
 		)
 
@@ -89,7 +90,8 @@ st.sidebar.write(
 	Imprimir Nota Pré-Empenho Célula - primeira linha da UG;\n
 	Detalhar Conta 8.2.1.7.2.01 - primeiro número de conta/fonte;\n
 	Imprimir Liquidação Credor (NLs) - primeira nota de empenho;\n
-	Imprimir Despesa Certificada Situação (Processos) - primeira linha da certificação
+	Imprimir Despesa Certificada Situação (Processos) - primeira linha da certificação;\n
+	Listar Nota Empenho - primeira nota de empenho
 	'''
 )
 
@@ -126,6 +128,30 @@ elif type_problem == 'Relatório de Diárias' and file != None:
 		try:
 	
 			data_sum, data_comp = diarias(file = file)
+	
+			st.dataframe(data_comp)
+	
+			st.success('Arquivo lido com sucesso!')
+			
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel2(data1 = data_sum, data2 = data_comp),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+elif type_problem == 'Listar Nota Empenho' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data_sum, data_comp = listar_empenho(file = file)
 	
 			st.dataframe(data_comp)
 	

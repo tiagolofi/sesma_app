@@ -902,6 +902,22 @@ def despesa_certificada_situacao(file, skip): # processo
 	
 	return df
 
+def listar_empenho(file, skip):
+
+	df = read_excel(
+		io = file,
+		skiprows = skip - 1, # 14
+		usecols = 'B:G',
+		header = None
+	)
+
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+
+	df.columns = ['NotaEmpenho', 'Evento', 'Data', 'CnpjCpfCredor', 'Valor']
+
+	return df
+
 def export_excel(data):
 
 	output = BytesIO()

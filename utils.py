@@ -17,7 +17,7 @@ def diarias(file: str):
 	lista_fun = [
 		'TIAGO JOSÉ MENDES FERNANDES', 'LILIANE NEVES CARVALHO', 'ALINE RIBEIRO DUAILIBE BARROS', 
 		'VALONNI FERNANDES ARTHURO', 'HUGO LEONARDO ARAUJO FERRO', 'DEBORAH FERNANDA CAMPOS DA SILVA',
-		'KÁTIA CRISTINA DE CASTRO VEIGA TROVÃO'
+		'KATIA CRISTINA DE CASTRO VIEGA TROVAO'
 	]
 
 	data_sum = data[data['Funcionário'].isin(lista_fun)].groupby(['Funcionário', 'Data inicio', 'Data fim']).agg({'Valor (R$)': 'sum'}).reset_index()

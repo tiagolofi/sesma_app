@@ -498,12 +498,14 @@ def contrato2(text):
 	filter_list_text = [i for i in text if 'CT' in i]
 
 	if len(filter_list_text) > 0:
+		
+		try:
 
-		return ' '.join(['CT', str(text[text.index(filter_list_text[0]) + 1]).replace(';', '')])
+			return ' '.join(['CT', str(text[text.index(filter_list_text[0]) + 1]).replace(';', '')])
 
-	else:
+		except:
 
-		return 'Contrato não identificado'
+			return 'Contrato não identificado'
 	
 def aplicar_padrao(df):
 

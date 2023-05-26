@@ -94,7 +94,7 @@ def balancete(file: str, skip: int):
 	
 	df['Nível'] = df['Conta'].apply(nivel_detalhe)
 
-	pcasp = read_excel('PCASP FEDERAÇÃO 2023 - Errata - 21.10.xlsx').filter(['Conta', 'Função', 'Natureza de Saldo'])
+	pcasp = read_excel('files/PCASP FEDERAÇÃO 2023 - Errata - 21.10.xlsx').filter(['Conta', 'Função', 'Natureza de Saldo'])
 	
 	df = df.merge(pcasp, how = 'left', left_on = 'CodigoConta', right_on = 'Conta')
 	

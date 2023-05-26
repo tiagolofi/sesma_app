@@ -55,7 +55,7 @@ with c3:
 	type_problem = st.selectbox(
 			label='Fonte de Informação',
 			options=[
-				'FNS', 'Relatório de Diárias', 'Extrato Bancário', 'Listar Ordem Bancária',
+				'Balancete Contábil', 'FNS', 'Relatório de Diárias', 'Extrato Bancário', 'Listar Ordem Bancária',
 				'Imprimir Pagamento Efetuado', 'Imprimir Preparação Pagamento',
 				'Listar Preparação Pagamento', 
 				'Imprimir Nota Empenho Célula', 'Imprimir Nota Empenho Célula (2019)', 'Imprimir Nota Empenho Célula (2020)',
@@ -78,6 +78,7 @@ st.sidebar.write('''**Instruções de Linhas**''')
 
 st.sidebar.write(
 	'''
+	Balancete Contábil - Primeira linha do nome da conta;\n
 	FNS - 8 Linhas;\n
 	Extrato Bancário - 2 Linhas;\n
 	Listar Ordem Bancária - primeira ordem bancária;\n
@@ -95,6 +96,30 @@ st.sidebar.write(
 	Cota Execução Financeira - primeira linha do grupo
 	'''
 )
+
+if type_problem == 'Balancete Contábil' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = balancete(file = file, skip = info_skip)
+	
+			st.dataframe(data)
+	
+			st.success('Arquivo lido com sucesso!')
+	
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
 if type_problem == 'FNS' and file != None:
 

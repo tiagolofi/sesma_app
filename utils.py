@@ -53,7 +53,6 @@ def balancete(file: str, skip: int):
 	df = read_excel(
 		io = file, 
 		skiprows = skip - 1,
-		usecols = 'C:W',
 		header = None
 	)
 	
@@ -103,7 +102,78 @@ def balancete(file: str, skip: int):
 	df = df.drop(columns = ['Movimento', 'Conta2'])
 	
 	return df
-		
+
+def balancete_mensal(file: str, skip: int):
+	
+	df = read_excel(
+		io = file, 
+		skiprows = skip - 1,
+		header = None
+	)
+	
+	df = df.filter([2, 20, 21])
+	
+	df = df.filter([2, 20, 21])
+	
+	for i in range(len(df)):
+	
+		if isna(df[21][i]):
+	
+			df[21][i] = df[20][i] 
+	
+	for i in range(len(df)):
+	
+		if isna(df[21][i]):
+	
+			df[21][i] = df[2][i] 
+	
+	df = df.filter([21])
+	
+	df = df.dropna().reset_index(drop = True)
+	
+	df['Class'] = [remainder(i) for i in df.index]
+
+	df = df[:-2]
+	
+	df.index = [adjust_index(i) for i in df.index]
+
+	df = df.pivot(columns = 'Class', values = 21)
+	
+	df['CodigoConta'] = [findall('[\d.]+', i)[0] for i in df['Conta']]
+	
+	sizes = {
+		1: '.0.0.0.0.00.00.00',
+		3: '.0.0.0.00.00.00',
+		5: '.0.0.00.00.00',
+		7: '.0.00.00.00',
+		9: '.00.00.00',
+		12: '.00.00',
+		15: '.00',
+		18: ''
+	}
+	
+	df['CodigoConta'] = [i + str(sizes.get(len(i))) for i in df['CodigoConta']]
+	
+	df['CodigoConta'] = [i[:-3] for i in df['CodigoConta']]
+	
+	df['Movimento'] = [-1 if i[-1] == 'D' else 1 for i in df['Saldo']]
+	
+	df['Saldo'] = [round(float(sub('\,', '.', sub('\.', '', sub('\s[A-Z]', '', i)))), 2) for i in df['Saldo']]
+	
+	df['Saldo'] = df['Saldo'] * df['Movimento']
+	
+	df['Nível'] = df['Conta'].apply(nivel_detalhe)
+
+	pcasp = read_excel('files/PCASP FEDERAÇÃO 2023 - Errata - 21.10.xlsx').filter(['Conta', 'Função', 'Natureza de Saldo'])
+	
+	df = df.merge(pcasp, how = 'left', left_on = 'CodigoConta', right_on = 'Conta')
+	
+	df.columns = ['Conta', 'Saldo', 'Codificacao', 'Movimento', 'Detalhamento', 'Conta2', 'Funcao', 'NaturezaSaldo']
+	
+	df = df.drop(columns = ['Movimento', 'Conta2'])
+	
+	return df
+
 def diarias(file: str):
 
 	data = read_excel(io = file)

@@ -82,6 +82,10 @@ Layout:
 29. Listar Nota Empenho (Datas)
 30. Cota a Empenhar (Execução Financeira)
 
+#### Versão 1.10
+
+31. Balancete Contábil
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

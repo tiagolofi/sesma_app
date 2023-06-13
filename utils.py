@@ -982,7 +982,7 @@ def classifica_fonte(x):
 		
 		return 'Outras Fontes'
 	
-	elif x[0:6] in ['1.8.69']:
+	elif x[0:6] in ['1.8.69', '3.8.69']:
 
 		return 'Obrigações e Consignações'
 
@@ -1008,6 +1008,30 @@ def deta_conta(file: str, skip: int):
 	df = df[~isna(df[5])]
 	
 	df.columns = ['Conta', 'Fonte', 'TipoRecurso', 'Saldo em Conta']
+
+	return df
+
+def credito(file: str, skip: int):
+
+	df = read_excel(io = file, skiprows = skip - 1, usecols = 'B:G', header = None)
+	
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+	
+	df['Subacao'] = [i.split(' ')[2] for i in df[1]]
+	df['Fonte'] = [i.split(' ')[3][0:6] for i in df[1]]
+	df['Natureza'] = [i.split(' ')[4] for i in df[1]]
+	
+	# df = df.drop(columns = [1, 2, 4])
+	
+	# df = df.reindex(
+	# 	['Conta', 'Fonte', 'TipoRecurso', 5],
+	# 	axis = 'columns'
+	# )
+	
+	# df = df[~isna(df[5])]
+	
+	# df.columns = ['Conta', 'Fonte', 'TipoRecurso', 'Saldo em Conta']
 
 	return df
 

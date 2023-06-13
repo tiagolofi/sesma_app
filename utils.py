@@ -1018,9 +1018,9 @@ def credito(file: str, skip: int):
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 	
-	df['Subacao'] = [i.split(' ')[2] for i in df[1]]
-	df['Fonte'] = [i.split(' ')[3][0:6] for i in df[1]]
-	df['Natureza'] = [i.split(' ')[4] for i in df[1]]
+	df['Subacao'] = [i.split(' ')[1] for i in df[1]]
+	df['Fonte'] = [i.split(' ')[2][0:6] for i in df[1]]
+	df['Natureza'] = [i.split(' ')[3] for i in df[1]]
 	
 	# df = df.drop(columns = [1, 2, 4])
 	

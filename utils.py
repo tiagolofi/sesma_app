@@ -1030,6 +1030,8 @@ def credito(file: str, skip: int):
 	 	['Subacao', 'Fonte', 'Natureza', 'Disponivel', 'InvSaldo'],
 		axis = 'columns'
 	)
+	
+	df = df.dropna(thresh = 5, axis = 'index')
 
 	return df
 

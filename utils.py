@@ -1024,7 +1024,7 @@ def credito(file: str, skip: int):
 	
 	df = df.drop(columns = [1, 2, 4])
 	
-	df.columns = ['Disponível', 'InvSaldo', 'Subacao', 'Fonte', 'Natureza']
+	df.columns = ['Disponivel', 'InvSaldo', 'Subacao', 'Fonte', 'Natureza']
 	
 	df = df.reindex(
 	 	['Subacao', 'Fonte', 'Natureza', 'Disponivel', 'InvSaldo'],

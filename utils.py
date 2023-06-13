@@ -1022,16 +1022,14 @@ def credito(file: str, skip: int):
 	df['Fonte'] = [i.split(' ')[2][0:6] for i in df[1]]
 	df['Natureza'] = [i.split(' ')[3] for i in df[1]]
 	
-	# df = df.drop(columns = [1, 2, 4])
+	df = df.drop(columns = [1, 2, 4])
 	
-	# df = df.reindex(
-	# 	['Conta', 'Fonte', 'TipoRecurso', 5],
-	# 	axis = 'columns'
-	# )
+	df.columns = ['Disponível', 'InvSaldo', 'Subacao', 'Fonte', 'Natureza']
 	
-	# df = df[~isna(df[5])]
-	
-	# df.columns = ['Conta', 'Fonte', 'TipoRecurso', 'Saldo em Conta']
+	df = df.reindex(
+	 	['Subacao', 'Fonte', 'Natureza', 'Disponivel', 'InvSaldo'],
+		axis = 'columns'
+	)
 
 	return df
 

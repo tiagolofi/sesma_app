@@ -57,7 +57,7 @@ with c3:
 			options=[
 				'Balancete Contábil', 'Balancete Contábil Mensal', 'FNS', 'Relatório de Diárias', 'Extrato Bancário', 'Listar Ordem Bancária',
 				'Imprimir Pagamento Efetuado', 'Imprimir Preparação Pagamento',
-				'Listar Preparação Pagamento', 
+				'Listar Preparação Pagamento', 'Crédito Disponível',
 				'Imprimir Nota Empenho Célula', 'Imprimir Nota Empenho Célula (2019)', 'Imprimir Nota Empenho Célula (2020)',
 				'Imprimir Execução Orçamentária', 'Listar Pré-Empenho',
 				'Imprimir Nota Pré-Empenho Célula', 'Detalhar Conta 8.2.1.7.2.01',
@@ -94,7 +94,8 @@ st.sidebar.write(
 	Imprimir Liquidação Credor (NLs) - primeira nota de empenho;\n
 	Imprimir Despesa Certificada Situação (Processos) - primeira linha da certificação;\n
 	Listar Nota Empenho - primeira nota de empenho;\n
-	Cota Execução Financeira - primeira linha do grupo
+	Cota Execução Financeira - primeira linha do grupo;\n
+	Crédito Disponível - Igual ao detalhar conta
 	'''
 )
 
@@ -146,6 +147,30 @@ if type_problem == 'Balancete Contábil' and file != None:
 	
 			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
+if type_problem == 'Crédito Disponível' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = credito(file = file, skip = info_skip)
+	
+			st.dataframe(data)
+	
+			st.success('Arquivo lido com sucesso!')
+	
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+		
 if type_problem == 'FNS' and file != None:
 
 	visualizar = st.button('Visualizar Planilha')

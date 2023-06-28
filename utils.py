@@ -249,7 +249,7 @@ def pagamento(file: str, skip: int):
 
 	credores = df[(df.count(axis=1).isin([2])) & (df['Unnamed: 1'] != '210901 FES/Unidade Central - 21901 FES - Unidade Central')].filter(items=['Unnamed: 3'])
 	
-	df = df.dropna(thresh = 11, axis = 'index')
+	df = df.dropna(thresh = 4, axis = 'index')
 
 	df.columns = [
 		'PreparacaoPagamento', 'Tipo', 'OrdemBancaria', 'Fonte', 'DataPagamento', 
@@ -257,6 +257,8 @@ def pagamento(file: str, skip: int):
 		'DespesaCertificada', 'Processo', 'Valor'
 	]
 
+	df = df[df['PreparacaoPagamento'] != 'PP']
+	
 	## padronização número de processo
 
 	df['Processo'] = df['Processo'].apply(processo)
@@ -265,7 +267,7 @@ def pagamento(file: str, skip: int):
 
 	## unindo credores ao valores
 
-	tabela = concat([df, credores], axis=1)
+	tabela = concat([df, credores], axis=1).reindex(range(0, max(df.index) + 1))
 
 	tabela['Unnamed: 3'] = tabela['Unnamed: 3'].ffill()
 
@@ -288,6 +290,8 @@ def pagamento(file: str, skip: int):
 		'DataNotaLiquidacao', 'DataPagamento',
 		'Valor'
 	], axis = 'columns')
+
+	tabela = tabela.dropna(thresh = 3, axis = 'index')
 
 	return tabela.reset_index(drop=True)
 

@@ -236,7 +236,7 @@ def processo(text):
 
 def pagamento(file: str, skip: int):
 
-	# funciona mizera
+	print('bora ve')
 	
 	df = read_excel(
 		io = file,

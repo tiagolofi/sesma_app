@@ -235,6 +235,8 @@ def processo(text):
 		return 'Processo não identificado'
 
 def pagamento(file: str, skip: int):
+
+	# funciona mizera
 	
 	df = read_excel(
 		io = file,

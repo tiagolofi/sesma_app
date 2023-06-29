@@ -269,7 +269,7 @@ def pagamento(file: str, skip: int):
 
 	## unindo credores ao valores
 
-	tabela = concat([df, credores], axis=1).reindex(range(0, max(df.index) + 1))
+	tabela = concat([df, credores], axis=1) # .reindex(range(0, max(df.index) + 1))
 
 	tabela['Unnamed: 3'] = tabela['Unnamed: 3'].ffill()
 

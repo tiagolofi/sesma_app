@@ -273,8 +273,6 @@ def pagamento(file: str, skip: int):
 
 	tabela['Unnamed: 3'] = tabela['Unnamed: 3'].ffill()
 
-	tabela = tabela.dropna(axis='index')
-
 	tabela = tabela.rename(columns={'Unnamed: 3': 'Credor'})
 
 	tabela['CredorCpfCnpj'] = [i.split(' ', 1)[0] for i in tabela['Credor']]
@@ -293,7 +291,7 @@ def pagamento(file: str, skip: int):
 		'Valor'
 	], axis = 'columns')
 
-	# tabela = tabela.dropna(thresh = 3, axis = 'index')
+	tabela = tabela.dropna(thresh = 3, axis = 'index')
 
 	return tabela.reset_index(drop=True)
 

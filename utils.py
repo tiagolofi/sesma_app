@@ -322,12 +322,7 @@ def extrato(file: str, skip: int):
 		)
 
 	df = df.dropna(how='all', axis='columns')
-	df = df.dropna(how='all', axis='index') 
-
-	conta = df[4][0]
-
-	print(conta)
-	
+	df = df.dropna(how='all', axis='index')
 	df = df.dropna(thresh=5, axis='index')
 		
 	df.columns = [

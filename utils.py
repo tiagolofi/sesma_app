@@ -232,7 +232,7 @@ def processo(text):
 
 	except:
 
-		return 'Processo não identificado'
+		return proc.upper()
 
 def tratar_processo(x):
 

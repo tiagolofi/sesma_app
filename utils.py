@@ -232,7 +232,19 @@ def processo(text):
 
 	except:
 
-		return text
+		try:
+		
+			if text.contains('/'):
+
+				return text
+
+			else:
+
+				return '~' + findall('\d{3,7}', text)[0] + f'/{text[-2:]}'
+
+		except:
+
+			text
 
 def tratar_processo(x):
 
@@ -242,13 +254,7 @@ def tratar_processo(x):
 	
 		y = str(int(findall('(.*?)/', x)[0]))
 	
-		if len(y) > 7:
-	
-			return 'Número Inválido'
-	
-		else:
-	
-			return y + x[-5:]
+		return y + x[-5:]
 
 	except:
 

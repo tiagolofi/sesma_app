@@ -234,6 +234,26 @@ def processo(text):
 
 		return 'Processo não identificado'
 
+def tratar_processo(x):
+
+	try:
+
+		x = sub('/\d+', f'/20{x[-2:]}', x)
+	
+		y = str(int(findall('(.*?)/', x)[0]))
+	
+		if len(y) > 7:
+	
+			return 'Número Inválido'
+	
+		else:
+	
+			return y + x[-5:]
+
+	except:
+
+		return 'Não Identificável'
+
 def pagamento(file: str, skip: int):
 
 	print('funfa')
@@ -266,6 +286,7 @@ def pagamento(file: str, skip: int):
 	df['Processo'] = df['Processo'].apply(processo)
 	df['Valor'] = df['Valor'].astype(float)
 	df['Processo'] = df['Processo'].astype(str)
+	df['Processo'] = df['Processo'].apply(tratar_processo)
 
 	## unindo credores ao valores
 
@@ -684,6 +705,7 @@ def aplicar_padrao(df):
 		df['TipoDespesa'] = df['Observacao_Valida'].split(';')[0].strip()
 		
 		df['Processo'] = sub(' ', '', sub('[A-Za-z.]', '', df['Observacao_Valida'].split(';')[3])).strip()
+		df['Processo'] = df['Processo'].apply(tratar_processo)
 		
 		df['Competencia'] = df['Observacao_Valida'].split(';')[2].lower().replace(' a ', ' - ').strip()
 		
@@ -694,6 +716,7 @@ def aplicar_padrao(df):
 		df['TipoDespesa'] = contrato(df['Observacao_Valida'])
 	
 		df['Processo'] = processo(df['Observacao_Valida'])
+		df['Processo'] = df['Processo'].apply(tratar_processo)
 		
 		df['Competencia'] = competencia(df['Observacao_Valida'])
 		

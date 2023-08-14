@@ -711,7 +711,7 @@ def aplicar_padrao(df):
 		df['TipoDespesa'] = df['Observacao_Valida'].split(';')[0].strip()
 		
 		df['Processo'] = sub(' ', '', sub('[A-Za-z.]', '', df['Observacao_Valida'].split(';')[3])).strip()
-		df['Processo'] = df['Processo'].apply(tratar_processo)
+		df['Processo'] = tratar_processo(df['Processo'])
 		
 		df['Competencia'] = df['Observacao_Valida'].split(';')[2].lower().replace(' a ', ' - ').strip()
 		
@@ -722,7 +722,7 @@ def aplicar_padrao(df):
 		df['TipoDespesa'] = contrato(df['Observacao_Valida'])
 	
 		df['Processo'] = processo(df['Observacao_Valida'])
-		df['Processo'] = df['Processo'].apply(tratar_processo)
+		df['Processo'] = tratar_processo(df['Processo'])
 		
 		df['Competencia'] = competencia(df['Observacao_Valida'])
 		

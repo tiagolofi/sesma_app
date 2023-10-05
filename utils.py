@@ -942,8 +942,6 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	empenhos = df[df[1].astype(str).str.contains('2023NE')]
 
-	empenhos = empenhos[~empenhos['5x'].str.contains('0,00')]
-
 	l = []
 
 	for i in empenhos.columns:
@@ -951,6 +949,8 @@ def nota_pre_empenho_celula(file: str, skip: int):
 		l.append(str(i) + 'x')
 
 	empenhos.columns = l
+
+	empenhos = empenhos[~empenhos['5x'].str.contains('0,00')]
 
 	empenhos.index = [i - 1 for i in empenhos.index]
 

@@ -963,6 +963,10 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	correcao = df[df[1] != None].filter(['1x', '3x', '5x', '7x'])
 
+	correcao.index = [i - 1 for i in correcao.index]
+
+	df = concat([df, correcao], axis = 1)
+
 	# df = df.dropna(thresh=8, axis='index')
 
 	# df['Subacao'] = [i.split(' ')[1] for i in df[4]]
@@ -1007,7 +1011,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	# print(sum(df['PreEmpenhoAtual']))
 
-	return correcao
+	return df
 
 def classifica_fonte(x):
 

@@ -956,7 +956,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	df = df[df[2].astype(str).str.contains('2023PE')]
 
-	df = df.ffill()
+	df = df.ffill(axis = 0)
 
 	df = concat([df, empenhos], axis = 1)
 

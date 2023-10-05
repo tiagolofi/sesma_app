@@ -950,9 +950,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	empenhos.columns = l
 
-	for i in empenhos.index:
-
-		i -= 1
+	empenhos.index = [i - 1 for i in empenhos.index)]
 
 	df = df[df[2].astype(str).str.contains('2023PE')]
 

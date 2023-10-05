@@ -955,7 +955,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	 
 	 	df[j] = [float(sub(' ', '0', sub('\,', '.', sub('[A-Z]|\.', '', i)))) for i in df[j]]
 
-	df['Liquidado'] = df[8] - df[12]
+	# df['Liquidado'] = df[8] - df[12]
 
 	# df = df.dropna(how='all', axis='columns')
 # 

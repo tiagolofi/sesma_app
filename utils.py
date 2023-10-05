@@ -940,32 +940,10 @@ def nota_pre_empenho_celula(file: str, skip: int):
 		header = None
 	)
 
-	# empenhos = df[df[1].astype(str).str.contains('2023NE')]
-# 
-	# l = []
-# 
-	# for i in empenhos.columns:
-# 
-	# 	l.append(str(i) + 'x')
-# 
-	# empenhos.columns = l
-# 
-	# empenhos = empenhos[empenhos['5x'] != '0,00   ']
-# 
-	# empenhos.index = [i - 1 for i in empenhos.index]
-
 	df = df[df[2].astype(str).str.contains('2023PE')]
-
-	# df = concat([df, empenhos], axis = 1)
 
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
-
-	# for i in [1, 2, 4, 6, 7, 8, 10, 12]:
-# 
-	# 	df[i] = df[i].ffill()
-# 
-	# df = df.drop_duplicates(2, keep = 'last')
 
 	df['Subacao'] = [i.split(' ')[1] for i in df[4]]
 	df['Fonte'] = [i.split(' ')[2] for i in df[4]]
@@ -975,21 +953,25 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	  
 	  	df[j] = [float(sub(' |nan', '0', sub('\,', '.', sub('[A-Z]|\.', '', str(i))))) for i in df[j]]
 
-	# df['5x'] = [str(i).replace('nan', '0') for i in df['5x']]
-	# df['7x'] = [str(i).replace('nan', '0') for i in df['7x']]
-# 
-	# df['Liquidado'] = df[8] - df[12]
-# 
-	# df['1x'] = [str(i).replace('nan', 'CANCELADO') for i in df['5x']]
-	# df['3x'] = [str(i).replace('nan', 'CANCELADO') for i in df['7x']]
-
 	df = df.drop(columns = [4, 8, 10, 12])
 
-	df.columns = [
-		'DataEmissao', 'NotaPreEmpenho',
-		'PreEmpenhoOriginal', 'PreEmpenhoAtual',
-		'Subacao', 'Fonte', 'Natureza'
-	]
+	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
+	
+	subacao = subacao.dropna(how='all', axis='columns')
+	
+	subacao = subacao.dropna(how='all', axis='index')
+	
+	subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
+
+	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
+	
+	df = df.drop(columns=['Codigo'])
+
+	# df.columns = [
+	# 	'DataEmissao', 'NotaPreEmpenho',
+	# 	'PreEmpenhoOriginal', 'PreEmpenhoAtual',
+	# 	'Subacao', 'Fonte', 'Natureza'
+	# ]
 
 	return df
 

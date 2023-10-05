@@ -961,22 +961,6 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 
-	 #correcao = df[df[1] != None].filter(['1x', '3x', '5x', '7x'])
- #
-	 #correcao.index = [i - 1 for i in correcao.index]
- #
-	 #l2 = []
- #
-	 #for i in correcao.columns:
- #
-	 #	l2.append(str(i) + 'x')
- #
-	 #correcao.columns = l2
- #
-	 #df = concat([df, correcao], axis = 1)
-
-	# df = df.dropna(thresh=8, axis='index')
-
 	# df['Subacao'] = [i.split(' ')[1] for i in df[4]]
 	# df['Fonte'] = [i.split(' ')[2] for i in df[4]]
 	# df['Natureza'] = [i.split(' ')[3] for i in df[4]]

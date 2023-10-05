@@ -943,7 +943,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 
-	df = df[df[2].astype(str).str.contains('2023PE')]
+	# df = df[df[2].astype(str).str.contains('2023PE')]
 
 	df = df.dropna(thresh=8, axis='index')
 
@@ -957,37 +957,37 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	df['Liquidado'] = df[8] - df[12]
 
-	df = df.dropna(how='all', axis='columns')
+	# df = df.dropna(how='all', axis='columns')
+# 
+	# df = df.drop(columns = [4])
+# 
+	# df.columns = [
+	# 	'DataEmissao', 'NotaPreEmpenho',
+	# 	'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'AEmpenhar', 'ALiquidar', 
+	# 	'Subacao', 'Fonte', 'Natureza', 'Liquidado'
+	# ]
+# 
+	# subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
+	# 
+	# subacao = subacao.dropna(how='all', axis='columns')
+	# 
+	# subacao = subacao.dropna(how='all', axis='index')
+	# 
+	# subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
+# 
+	# df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
+	# 
+	# df = df.drop(columns=['Codigo'])
+	# 
+	# df = df.reindex(
+	# 	[
+	# 		'DataEmissao', 'NotaPreEmpenho', 
+	# 		'Acao', 'Subacao', 'SubacaoNome', 'Fonte', 'Natureza', 
+	# 		'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'AEmpenhar', 'ALiquidar'
+	# 	], axis = 'columns'
+	# )
 
-	df = df.drop(columns = [4])
-
-	df.columns = [
-		'DataEmissao', 'NotaPreEmpenho',
-		'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'AEmpenhar', 'ALiquidar', 
-		'Subacao', 'Fonte', 'Natureza', 'Liquidado'
-	]
-
-	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
-	
-	subacao = subacao.dropna(how='all', axis='columns')
-	
-	subacao = subacao.dropna(how='all', axis='index')
-	
-	subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
-
-	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
-	
-	df = df.drop(columns=['Codigo'])
-	
-	df = df.reindex(
-		[
-			'DataEmissao', 'NotaPreEmpenho', 
-			'Acao', 'Subacao', 'SubacaoNome', 'Fonte', 'Natureza', 
-			'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'AEmpenhar', 'ALiquidar'
-		], axis = 'columns'
-	)
-
-	print(sum(df['PreEmpenhoAtual']))
+	# print(sum(df['PreEmpenhoAtual']))
 
 	return df
 

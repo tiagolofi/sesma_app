@@ -987,6 +987,8 @@ def nota_pre_empenho_celula(file: str, skip: int):
 		], axis = 'columns'
 	)
 
+	print(sum(df['PreEmpenhoAtual']))
+
 	return df
 
 def classifica_fonte(x):

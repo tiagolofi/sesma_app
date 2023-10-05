@@ -971,16 +971,16 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	df['Fonte'] = [i.split(' ')[2] for i in df[4]]
 	df['Natureza'] = [i.split(' ')[3] for i in df[4]]
 
-	for j in ['1x', '3x', '5x', '7x', 6, 7, 8, 10, 12]:
+	for j in ['5x', '7x', 6, 7, 8, 10, 12]:
 	  
 	  	df[j] = [float(sub(' |nan', '0', sub('\,', '.', sub('[A-Z]|\.', '', str(i))))) for i in df[j]]
 
 	df['Liquidado'] = df[8] - df[12]
 
-	df['1x'] = [str(i).replace('nan', 'CANCELADO') for i in df['5x']]
-	df['3x'] = [str(i).replace('nan', 'CANCELADO') for i in df['7x']]
+	# df['1x'] = [str(i).replace('nan', 'CANCELADO') for i in df['5x']]
+	# df['3x'] = [str(i).replace('nan', 'CANCELADO') for i in df['7x']]
 
-	df = df.drop(columns = [4])
+	# df = df.drop(columns = [4])
 
 	# df.columns = [
 	# 	'DataEmissao', 'NotaPreEmpenho',

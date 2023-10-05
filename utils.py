@@ -980,37 +980,16 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	df['Liquidado'] = df[8] - df[12]
 
-	# df = df.dropna(how='all', axis='columns')
-# 
-	# df = df.drop(columns = [4])
-# 
-	# df.columns = [
-	# 	'DataEmissao', 'NotaPreEmpenho',
-	# 	'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'AEmpenhar', 'ALiquidar', 
-	# 	'Subacao', 'Fonte', 'Natureza', 'Liquidado'
-	# ]
-# 
-	# subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
-	# 
-	# subacao = subacao.dropna(how='all', axis='columns')
-	# 
-	# subacao = subacao.dropna(how='all', axis='index')
-	# 
-	# subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
-# 
-	# df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
-	# 
-	# df = df.drop(columns=['Codigo'])
-	# 
-	# df = df.reindex(
-	# 	[
-	# 		'DataEmissao', 'NotaPreEmpenho', 
-	# 		'Acao', 'Subacao', 'SubacaoNome', 'Fonte', 'Natureza', 
-	# 		'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'AEmpenhar', 'ALiquidar'
-	# 	], axis = 'columns'
-	# )
+	df['1x'] = [str(i).replace('nan', 'CANCELADO') for i in df['5x']]
+	df['3x'] = [str(i).replace('nan', 'CANCELADO') for i in df['7x']]
 
-	# print(sum(df['PreEmpenhoAtual']))
+	df = df.drop(columns = [4, '7x'])
+
+	df.columns = [
+		'DataEmissao', 'NotaPreEmpenho',
+		'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'A Empenhar', 'A Liquidar', 
+		'NotaEmpenho', 'Credor', 'DetalheEmpenho', 'Subacao', 'Fonte', 'Natureza', 'Liquidado'
+	]
 
 	return df
 

@@ -985,10 +985,10 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	df = df.drop(columns = [4])
 
-	df.columns = [
-		'DataEmissao', 'NotaPreEmpenho',
-		'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'A Empenhar', 'A Liquidar', 
-	]
+	# df.columns = [
+	# 	'DataEmissao', 'NotaPreEmpenho',
+	# 	'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'A Empenhar', 'A Liquidar', 
+	# ]
 
 	return df
 

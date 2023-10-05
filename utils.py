@@ -943,9 +943,9 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 
-	# df = df[~df[1].astype(str).str.contains('2022NE')]
+	# df = df[df[1].astype(str).str.contains('2023PE')]
 
-	df = df.dropna(thresh=7, axis='index')
+	df = df.dropna(thresh=8, axis='index')
 
 	df['Subacao'] = [i.split(' ')[1] for i in df[4]]
 	df['Fonte'] = [i.split(' ')[2] for i in df[4]]

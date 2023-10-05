@@ -956,9 +956,9 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	df = df[df[2].astype(str).str.contains('2023PE')]
 
-	df.replace(to_replace = None, value = nan)
+	# df.replace(to_replace = None, value = nan)
 
-	df = df.ffill(limit = 1)
+	# df = df.ffill(limit = 1)
 
 	df = concat([df, empenhos], axis = 1)
 

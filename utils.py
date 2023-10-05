@@ -965,6 +965,14 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	correcao.index = [i - 1 for i in correcao.index]
 
+	l2 = []
+
+	for i in correcao.columns:
+
+		l2.append(str(i) + 'x')
+
+	correcao.columns = l2
+
 	df = concat([df, correcao], axis = 1)
 
 	# df = df.dropna(thresh=8, axis='index')

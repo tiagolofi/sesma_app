@@ -975,8 +975,8 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	  
 	  	df[j] = [float(sub(' ', '0', sub('\,', '.', sub('[A-Z]|\.', '', str(i))))) for i in df[j]]
 
-	df['5x'] = [str(i).replace('None', '0') for i in df['5x']]
-	df['7x'] = [str(i).replace('None', '0') for i in df['7x']]
+	df['5x'] = [str(i).replace('nan', '0') for i in df['5x']]
+	df['7x'] = [str(i).replace('nan', '0') for i in df['7x']]
 
 	df['Liquidado'] = df[8] - df[12]
 

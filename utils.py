@@ -943,9 +943,9 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	# df = df.dropna(how='all', axis='columns')
 	# df = df.dropna(how='all', axis='index')
 
-	df = df[~df[1].astype(str).str.contains('nan')]
-
 	empenhos = df[df[1].astype(str).str.contains('2023NE')]
+
+	df = df[df[2].astype(str).str.contains('2023PE')]
 
 	# df = df.dropna(thresh=8, axis='index')
 
@@ -991,7 +991,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	# print(sum(df['PreEmpenhoAtual']))
 
-	return empenhos
+	return df
 
 def classifica_fonte(x):
 

@@ -940,19 +940,19 @@ def nota_pre_empenho_celula(file: str, skip: int):
 		header = None
 	)
 
-	empenhos = df[df[1].astype(str).str.contains('2023NE')]
-
-	l = []
-
-	for i in empenhos.columns:
-
-		l.append(str(i) + 'x')
-
-	empenhos.columns = l
-
-	empenhos = empenhos[empenhos['5x'] != '0,00   ']
-
-	empenhos.index = [i - 1 for i in empenhos.index]
+	# empenhos = df[df[1].astype(str).str.contains('2023NE')]
+# 
+	# l = []
+# 
+	# for i in empenhos.columns:
+# 
+	# 	l.append(str(i) + 'x')
+# 
+	# empenhos.columns = l
+# 
+	# empenhos = empenhos[empenhos['5x'] != '0,00   ']
+# 
+	# empenhos.index = [i - 1 for i in empenhos.index]
 
 	df = df[df[2].astype(str).str.contains('2023PE')]
 
@@ -961,34 +961,33 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 
-	for i in [1, 2, 4, 6, 7, 8, 10, 12]:
-
-		df[i] = df[i].ffill()
-
-	df = df.drop_duplicates(2, keep = 'last')
+	# for i in [1, 2, 4, 6, 7, 8, 10, 12]:
+# 
+	# 	df[i] = df[i].ffill()
+# 
+	# df = df.drop_duplicates(2, keep = 'last')
 
 	df['Subacao'] = [i.split(' ')[1] for i in df[4]]
 	df['Fonte'] = [i.split(' ')[2] for i in df[4]]
 	df['Natureza'] = [i.split(' ')[3] for i in df[4]]
 
-	for j in ['5x', '7x', 6, 7, 8, 10, 12]:
+	for j in [6, 7, 8, 10, 12]:
 	  
 	  	df[j] = [float(sub(' ', '0', sub('\,', '.', sub('[A-Z]|\.', '', str(i))))) for i in df[j]]
 
-	df['5x'] = [str(i).replace('nan', '0') for i in df['5x']]
-	df['7x'] = [str(i).replace('nan', '0') for i in df['7x']]
+	# df['5x'] = [str(i).replace('nan', '0') for i in df['5x']]
+	# df['7x'] = [str(i).replace('nan', '0') for i in df['7x']]
+# 
+	# df['Liquidado'] = df[8] - df[12]
+# 
+	# df['1x'] = [str(i).replace('nan', 'CANCELADO') for i in df['5x']]
+	# df['3x'] = [str(i).replace('nan', 'CANCELADO') for i in df['7x']]
 
-	df['Liquidado'] = df[8] - df[12]
-
-	df['1x'] = [str(i).replace('nan', 'CANCELADO') for i in df['5x']]
-	df['3x'] = [str(i).replace('nan', 'CANCELADO') for i in df['7x']]
-
-	df = df.drop(columns = [4, '7x'])
+	df = df.drop(columns = [4])
 
 	df.columns = [
 		'DataEmissao', 'NotaPreEmpenho',
 		'PreEmpenhoOriginal', 'PreEmpenhoAtual', 'Empenhado', 'A Empenhar', 'A Liquidar', 
-		'NotaEmpenho', 'Credor', 'DetalheEmpenho', 'Subacao', 'Fonte', 'Natureza', 'Liquidado'
 	]
 
 	return df

@@ -951,9 +951,9 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	df['Fonte'] = [i.split(' ')[2] for i in df[4]]
 	df['Natureza'] = [i.split(' ')[3] for i in df[4]]
 
-	for j in [5, 6, 7, 8, 10, 12]:
-	 
-	 	df[j] = [float(sub(' ', '0', sub('\,', '.', sub('[A-Z]|\.', '', i)))) for i in df[j]]
+	# for j in [5, 6, 7, 8, 10, 12]:
+	#  
+	#  	df[j] = [float(sub(' ', '0', sub('\,', '.', sub('[A-Z]|\.', '', i)))) for i in df[j]]
 
 	# df['Liquidado'] = df[8] - df[12]
 

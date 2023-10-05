@@ -961,7 +961,9 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 
-	df = df.ffill()
+	for i in [1, 2, 4, 6, 7, 8, 10, 12]:
+
+		df[i] = df[i].ffill()
 
 	# df['Subacao'] = [i.split(' ')[1] for i in df[4]]
 	# df['Fonte'] = [i.split(' ')[2] for i in df[4]]

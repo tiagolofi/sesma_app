@@ -965,7 +965,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 		df[i] = df[i].ffill()
 
-	df = df[df['1x'] != None]
+	df = df.drop_duplicates(2, keep = 'last')
 
 	# df['Subacao'] = [i.split(' ')[1] for i in df[4]]
 	# df['Fonte'] = [i.split(' ')[2] for i in df[4]]

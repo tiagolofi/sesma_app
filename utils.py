@@ -950,7 +950,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	empenhos.columns = l
 
-	empenhos = empenhos[~empenhos['5x'].str.contains('0,00')]
+	empenhos = empenhos[~empenhos['5x'] == '0,00']
 
 	empenhos.index = [i - 1 for i in empenhos.index]
 

@@ -485,10 +485,12 @@ def nota_empenho_celula(file: str, skip: int):
 	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
 	
 	df = df.drop(columns=['Codigo'])
-	
+
+	df['Chave'] = df.apply(lambda a: create_key(a.Subacao, a.Fonte, a.Natureza), axis = 1)
+
 	df = df.reindex(
 		[
-			'Subfuncao', 'NotaEmpenho', 'NotaPreEmpenho', 'Acao', 'Subacao', 'SubacaoNome', 'Fonte', 
+			'Chave', 'Subfuncao', 'NotaEmpenho', 'NotaPreEmpenho', 'Acao', 'Subacao', 'SubacaoNome', 'Fonte', 
 			'Natureza', 'CpfCnpj', 'Credor', 'Empenhado',
 			'Liquidado', 'Retido', 'ALiquidar', 'Pago', 'APagar'
 		], axis = 'columns'

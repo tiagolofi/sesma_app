@@ -905,7 +905,7 @@ def orc(file: str, skip: int):
 	
 	df = df.drop(columns=['Codigo'])
 
-	df['Chave'] = df.apply(lambda a: create_key(a.Subacao, a.Fonte, a.Natureza), axis = 1)
+	# df['Chave'] = df.apply(lambda a: create_key(a.Subacao, a.Fonte, a.Natureza), axis = 1)
 
 	return df
 

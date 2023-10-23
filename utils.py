@@ -888,22 +888,22 @@ def orc(file: str, skip: int):
 	df['Indisponivel'] = df['Indisponivel'].apply(money)
 	df['PreEmpenhado'] = df['PreEmpenhado'].apply(money)
 
-	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
+	# subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
 	
-	subacao = subacao.dropna(how='all', axis='columns')
+	# subacao = subacao.dropna(how='all', axis='columns')
 	
-	subacao = subacao.dropna(how='all', axis='index')
+	# subacao = subacao.dropna(how='all', axis='index')
 	
-	subacao.columns = ['Codigo', 'Acao']
+	# subacao.columns = ['Codigo', 'Acao']
 
-	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
+	# df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
 	
-	df = df.drop(columns=['Codigo'])
+	# df = df.drop(columns=['Codigo'])
 
-	df = df.reindex(
-		['Fonte', 'Acao', 'Subacao', 'NomeSubacao', 'Natureza', 'NivelNatureza', 'Dotacao', 'Atualizado', 'Indisponivel', 'PreEmpenhado'], 
-		axis = 'columns'
-	)
+	# df = df.reindex(
+	# 	['Fonte', 'Acao', 'Subacao', 'NomeSubacao', 'Natureza', 'NivelNatureza', 'Dotacao', 'Atualizado', 'Indisponivel', 'PreEmpenhado'], 
+	# 	axis = 'columns'
+	# )
 
 	# df['Chave'] = df.apply(lambda a: create_key(a.Subacao, a.Fonte, a.Natureza), axis = 1)
 

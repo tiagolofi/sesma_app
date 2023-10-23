@@ -875,11 +875,6 @@ def orc(file: str, skip: int):
 
 	df.columns = ['Natureza', 'Dotacao', 'Atualizado', 'Indisponivel', 'PreEmpenhado', 'NivelNatureza', 'Subacao', 'NomeSubacao', 'Fonte']
 
-	df = df.reindex(
-		['Fonte', 'Subacao', 'NomeSubacao', 'Natureza', 'NivelNatureza', 'Dotacao', 'Atualizado', 'Indisponivel', 'PreEmpenhado'], 
-		axis = 'columns'
-	)
-
 	df['Dotacao'] = df['Dotacao'].replace([nan, ''], 0)
 
 	df['Atualizado'] = df['Atualizado'].replace([nan, ''], 0)
@@ -904,6 +899,11 @@ def orc(file: str, skip: int):
 	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
 	
 	df = df.drop(columns=['Codigo'])
+
+	df = df.reindex(
+		['Fonte', 'Acao', 'Subacao', 'NomeSubacao', 'Natureza', 'NivelNatureza', 'Dotacao', 'Atualizado', 'Indisponivel', 'PreEmpenhado'], 
+		axis = 'columns'
+	)
 
 	# df['Chave'] = df.apply(lambda a: create_key(a.Subacao, a.Fonte, a.Natureza), axis = 1)
 

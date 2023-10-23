@@ -1169,11 +1169,11 @@ def cota_execucao_financeira(file, skip):
 	df[7] = df[7].ffill()
 	df[9] = df[9].ffill()
 	
-	# df = df.drop(columns = [12])
+	df = df.drop(columns = [12, 15])
 	
-	# df = df[~isna(df[13])]
+	df = df[~isna(df[13])]
 	
-	# df.columns = ['CodigoGrupo', 'Grupo', 'Fonte', 'NomeFonte', 'CotaAutorizada']
+	df.columns = ['CodigoGrupo', 'Grupo', 'Fonte', 'NomeFonte', 'CotaAutorizada', 'Empenhado']
 
 	return df
 

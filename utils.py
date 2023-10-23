@@ -816,7 +816,7 @@ def money(text):
 
 def create_key(x, y, z):
 
-	return str(x) + str(y)[0:5] + str(z)[0:4]
+	return str(x) + '-' + str(y)[0:6] + '-' + str(z)[0:5]
 
 def orc(file: str, skip: int):
 	

@@ -1157,7 +1157,7 @@ def cota_execucao_financeira(file, skip):
 	df = read_excel(
 		io = file,
 		skiprows = skip - 1,
-		usecols = 'C:N',
+		usecols = 'C:R',
 		header = None
 	)
 

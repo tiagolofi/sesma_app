@@ -86,6 +86,11 @@ Layout:
 
 31. Balancete Contábil
 
+#### Versão 1.10.1
+
+32. Criação de Chaves Primárias;
+33. Correção de bugs no Pagamento Efetuado
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

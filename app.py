@@ -51,11 +51,15 @@ with c2:
 
 	st.image('img/logo_ses.png')
 
-	x = open('x.txt', 'r', encoding = 'utf-8').read()
+	sorte = st.button('Está com sorte hoje? clique aqui!')
+	
+	if sorte:
+	
+		x = open('x.txt', 'r', encoding = 'utf-8').read()
 
-	lista = re.split(r'\d{1,3}\. ', x)
+		lista = re.split(r'\d{1,3}\. ', x)
 
-	st.info(sample(lista, 1)[0])
+		st.info(sample(lista, 1)[0])
 
 c3, c4, c5 = st.columns(3)
 

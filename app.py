@@ -3,6 +3,9 @@ import streamlit as st
 from utils import * # fns, pagamento, extrato, listar_ordem, nota_empenho_celula, observacoes, situacao_pp, orc, listar_pre_empenho, nota_pre_empenho_celula, deta_conta, export_excel
 from datetime import datetime
 
+import re
+from random import sample
+
 icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-financeiro.png'
 
 st.set_page_config(
@@ -47,6 +50,12 @@ with c1:
 with c2:
 
 	st.image('img/logo_ses.png')
+
+	x = open('x.txt', 'r', encoding = 'utf-8').read()
+
+	lista = re.split(r'\d{1,3}\. ', x)
+
+	st.info(sample(lista, 1)[0])
 
 c3, c4, c5 = st.columns(3)
 

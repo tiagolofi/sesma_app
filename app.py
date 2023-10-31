@@ -88,6 +88,16 @@ with c5:
 
 	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
 
+st.markdown(
+'''
+<iframe 
+	style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator" 
+ 	width="100%" height="352" frameBorder="0" allowfullscreen="" 
+  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+</iframe>
+'''
+)
+
 st.sidebar.write('''**Instruções de Linhas**''')
 
 st.sidebar.write(

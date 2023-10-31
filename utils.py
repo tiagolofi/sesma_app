@@ -1155,7 +1155,7 @@ def listar_empenho(file, skip):
 def descentralizacao(file, skip):
 
 	df = pandas.read_excel(
-		io = path, 
+		io = file, 
 		skiprows = skip - 1,
 		header = None
 	)

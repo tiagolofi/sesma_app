@@ -120,21 +120,21 @@ if type_problem == 'Descentralização' and file != None:
 
 	if visualizar:
 
-		try:
+		# try:
 	
-			data1, data2, data3 = descentralizacao(file = file, skip = info_skip)
-		
-			st.success('Arquivo lido com sucesso!')
+		data1, data2, data3 = descentralizacao(file = file, skip = info_skip)
 	
-			st.download_button(
-				label = 'Baixar Planilha',
-				data = export_excel3(data1= data1, data2 = data2, data3 = data3),
-				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
-			)
+		st.success('Arquivo lido com sucesso!')
+
+		st.download_button(
+			label = 'Baixar Planilha',
+			data = export_excel3(data1= data1, data2 = data2, data3 = data3),
+			file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+		)
+	#
+		# except:
 	
-		except:
-	
-			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+			# st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
 elif type_problem == 'Balancete Contábil Mensal' and file != None:
 

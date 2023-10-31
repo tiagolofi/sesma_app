@@ -47,6 +47,16 @@ with c1:
 
 	st.write('''##### Versão 1.12''')
 
+	st.markdown(
+	'''
+	<iframe 
+		style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator&theme=0" 
+	 	width="100%" height="352" frameBorder="0" allowfullscreen="" 
+	  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+	</iframe>
+	''', unsafe_allow_html=True
+	)
+
 with c2:
 
 	st.image('img/logo_ses.png')
@@ -79,17 +89,7 @@ with c3:
 				'Listar Nota Empenho', 'Cota Execução Financeira'
 			]
 		)
-
-	st.markdown(
-	'''
-	<iframe 
-		style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator&theme=0" 
-	 	width="100%" height="352" frameBorder="0" allowfullscreen="" 
-	  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-	</iframe>
-	''', unsafe_allow_html=True
-	)
-
+	
 with c4:
 
 	info_skip = st.number_input(label = 'Linhas para pular:', min_value = 0)

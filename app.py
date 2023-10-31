@@ -80,6 +80,16 @@ with c3:
 			]
 		)
 
+	st.markdown(
+	'''
+	<iframe 
+		style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator" 
+	 	width="100%" height="352" frameBorder="0" allowfullscreen="" 
+	  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+	</iframe>
+	''', unsafe_allow_html=True
+	)
+
 with c4:
 
 	info_skip = st.number_input(label = 'Linhas para pular:', min_value = 0)
@@ -87,16 +97,6 @@ with c4:
 with c5:
 
 	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
-
-st.markdown(
-'''
-<iframe 
-	style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator" 
- 	width="100%" height="152" frameBorder="0" allowfullscreen="" 
-  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-</iframe>
-''', unsafe_allow_html=True
-)
 
 st.sidebar.write('''**Instruções de Linhas**''')
 

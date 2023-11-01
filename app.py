@@ -91,9 +91,7 @@ with c1:
 
 			st.markdown(
 			'''
-			<a href="https://canaisplay.com/categoria/times/vasco/">
-				<img src="vasco.png" alt="Vasco" style="width:100%;height:300px;">
-			</a>
+			![vasco.png](https://canaisplay.com/categoria/times/vasco/)
    			''', unsafe_allow_html=True
 			)
 

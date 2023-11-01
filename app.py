@@ -50,7 +50,7 @@ with c1:
 	
 	with st.expander('Estação de Entretenimento'):
 
-		tabs1, tabs2 = st.tabs(['Spotify', 'Youtube Music'])
+		tabs1, tabs2, tabs3 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes'])
 		
 		with tabs1:
 
@@ -75,17 +75,17 @@ with c1:
 			</iframe>
 			''', unsafe_allow_html=True
 			)
+			
+		with tabs3:
 
-with c2: 
-
-	st.markdown(
-	'''
- 	<iframe 
-  		width="100%" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=CaUHlx_d11n1P56V&amp;list=PL5Ofn03WIAXbsPazmkYwvV1YBwzurJNqA" 
-    		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-      	</iframe>
-  	''', unsafe_allow_html=True
-	)
+		st.markdown(
+		'''
+	 	<iframe 
+	  		width="100%" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=CaUHlx_d11n1P56V&amp;list=PL5Ofn03WIAXbsPazmkYwvV1YBwzurJNqA" 
+	    		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+	      	</iframe>
+	  	''', unsafe_allow_html=True
+		)
 
 with c3:
 

@@ -95,7 +95,7 @@ with c1:
       				width="100%" height="315"
       				src="https://canaisplay.com/categoria/futebol-ao-vivo/">
 	  		</iframe>
-    			'''
+    			''', unsafe_allow_html=True
 			)
 
 with c3:

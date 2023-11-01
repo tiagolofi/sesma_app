@@ -39,11 +39,11 @@ css = """
 
 st.markdown(css, unsafe_allow_html=True)
 
-c1, c2 = st.columns([3, 1])
+st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
+
+c1, c2, c3 = st.columns([2, 2, 1])
 
 with c1:
-
-	st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
 	st.write('''##### Versão 1.12''')
 
@@ -58,6 +58,18 @@ with c1:
 	)
 
 with c2:
+
+	st.markdown(
+	'''
+	<iframe 
+		style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator&theme=0" 
+	 	width="50%" height="370" frameBorder="0" allowfullscreen="" 
+	  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+	</iframe>
+	''', unsafe_allow_html=True
+	)
+
+with c3:
 
 	st.image('img/logo_ses.png')
 

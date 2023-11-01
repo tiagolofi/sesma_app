@@ -90,8 +90,8 @@ with c1:
 		with tabs4:
 
 			st.markdown(
-			'''
-			![vasco.png](https://canaisplay.com/categoria/times/vasco/)
+			f'''
+			![{st.image(Image.open('vasco.png'))}](https://canaisplay.com/categoria/times/vasco/)
    			''', unsafe_allow_html=True
 			)
 

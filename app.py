@@ -81,10 +81,9 @@ with c2:
 	st.markdown(
 	'''
  	<iframe 
-  		width="100%" height="315" src="https://www.youtube-nocookie.com/embed/tYzMYcUty6s?si=6mysQ7urBpKjRYv0" 
-  		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
-   		encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-	</iframe>
+  		width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=CaUHlx_d11n1P56V&amp;list=PL5Ofn03WIAXbsPazmkYwvV1YBwzurJNqA" 
+    		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+      	</iframe>
   	''', unsafe_allow_html=True
 	)
 

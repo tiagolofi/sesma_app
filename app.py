@@ -2,6 +2,7 @@
 import streamlit as st
 from utils import * # fns, pagamento, extrato, listar_ordem, nota_empenho_celula, observacoes, situacao_pp, orc, listar_pre_empenho, nota_pre_empenho_celula, deta_conta, export_excel
 from datetime import datetime
+from PIL import Image
 
 import re
 from random import sample
@@ -74,6 +75,10 @@ with c1:
 			</iframe>
 			''', unsafe_allow_html=True
 			)
+
+with c2: 
+
+	st.image(Image.open('betnacional.gif'))
 
 with c3:
 

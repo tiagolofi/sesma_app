@@ -53,7 +53,6 @@ with c1:
 		
 		with tabs1:
 
-			st.write('Spotify')
 			st.markdown(
 			'''
 			<iframe 
@@ -66,7 +65,6 @@ with c1:
 
 		with tabs2:
 
-			st.write('Youtube Music')
 			st.markdown(
 			'''
 			<iframe 

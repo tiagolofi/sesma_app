@@ -41,35 +41,43 @@ st.markdown(css, unsafe_allow_html=True)
 
 st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-c1, c2, c3 = st.columns([2, 2, 1])
+c1, c2 = st.columns([3, 1])
 
 with c1:
 
 	st.write('''##### Versão 1.12''')
 
-	st.markdown(
-	'''
-	<iframe 
-		style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator&theme=0" 
-	 	width="50%" height="370" frameBorder="0" allowfullscreen="" 
-	  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-	</iframe>
-	''', unsafe_allow_html=True
-	)
+	tabs1, tabs2 = st.tabs()
+	
+	with st.expander('Estação de Entretenimentos')
+
+		with tabs1:
+
+			st.write('Spotify')
+			st.markdown(
+			'''
+			<iframe 
+				style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator&theme=0" 
+			 	width="50%" height="370" frameBorder="0" allowfullscreen="" 
+			  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+			</iframe>
+			''', unsafe_allow_html=True
+			)
+
+		with tabs2:
+
+			st.write('Youtube Music')
+			st.markdown(
+			'''
+			<iframe 
+		 		width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=TSXW4Fk9I0N9Yxwf&amp;list=PL_SfgS4VS-cR9Q1DLsXgCDlNc9kh-wNRo" 
+		   		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+		     		gyroscope; picture-in-picture; web-share" allowfullscreen>
+			</iframe>
+			''', unsafe_allow_html=True
+			)
 
 with c2:
-
-	st.markdown(
-	'''
-	<iframe 
- 		width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=TSXW4Fk9I0N9Yxwf&amp;list=PL_SfgS4VS-cR9Q1DLsXgCDlNc9kh-wNRo" 
-   		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-     		gyroscope; picture-in-picture; web-share" allowfullscreen>
-	</iframe>
-	''', unsafe_allow_html=True
-	)
-
-with c3:
 
 	st.image('img/logo_ses.png')
 

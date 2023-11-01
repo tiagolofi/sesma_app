@@ -50,7 +50,7 @@ with c1:
 	
 	with st.expander('Estação de Entretenimento'):
 
-		tabs1, tabs2, tabs3 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes'])
+		tabs1, tabs2, tabs3, tabs4 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes', 'Futebol ao vivo'])
 		
 		with tabs1:
 
@@ -85,6 +85,17 @@ with c1:
 		    		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 		      	</iframe>
 		  	''', unsafe_allow_html=True
+			)
+
+		with tabs4:
+
+			st.markdown(
+			'''
+   			<iframe 
+      				width="100%" height="315"
+      				src="https://canaisplay.com/categoria/futebol-ao-vivo/">
+	  		</iframe>
+    			'''
 			)
 
 with c3:

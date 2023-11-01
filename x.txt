@@ -804,7 +804,6 @@ Sem entender, ela olha confusa para ele, que completa:
 - Agora, não, Maria...
 - Ana...
 - Huuum, estou superocupada.
-
 Irritada, Maria pergunta por que Ana não parava para ouvir a sua opinião. Eis que ela responde:
 - Maria, a sua opinião é muito importante para mim. Tão importante que eu quero que você guarde até o dia em que eu te pedir."
 384. "Desesperado, um rapaz entra na igreja e diz ao padre:
@@ -853,3 +852,4 @@ Ouvindo aquelas palavras, o padre coloca a mão no ombro do homem, sorri e respo
 394. "Um belo dia, Maria vira para a mãe e diz:
 - Mãe, quero começar a organizar a minha festa de 15 anos.
 - Isso vai sair caro, filha. Não é melhor uma festa de um dia só?"
+395. "Nada é mamão" (Leôncio Primo)

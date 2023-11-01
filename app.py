@@ -46,8 +46,6 @@ c1, c2, c3 = st.columns([2, 1, 1])
 with c1:
 
 	st.write('''##### Versão 1.12''')
-
-with c2:
 	
 	with st.expander('Estação de Entretenimento'):
 

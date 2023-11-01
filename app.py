@@ -45,7 +45,17 @@ with c1:
 
 	st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-	st.write('''##### Versão 1.11''')
+	st.write('''##### Versão 1.12''')
+
+	st.markdown(
+	'''
+	<iframe 
+		style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator&theme=0" 
+	 	width="70%" height="370" frameBorder="0" allowfullscreen="" 
+	  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+	</iframe>
+	''', unsafe_allow_html=True
+	)
 
 with c2:
 
@@ -68,7 +78,8 @@ with c3:
 	type_problem = st.selectbox(
 			label='Fonte de Informação',
 			options=[
-				'Balancete Contábil', 'Balancete Contábil Mensal', 'FNS', 'Relatório de Diárias', 'Extrato Bancário', 'Listar Ordem Bancária',
+				'Descentralização', 'Balancete Contábil', 'Balancete Contábil Mensal', 'FNS',
+				'Relatório de Diárias', 'Extrato Bancário', 'Listar Ordem Bancária',
 				'Imprimir Pagamento Efetuado', 'Imprimir Preparação Pagamento',
 				'Listar Preparação Pagamento', 'Crédito Disponível',
 				'Imprimir Nota Empenho Célula', 'Imprimir Nota Empenho Célula (2019)', 'Imprimir Nota Empenho Célula (2020)',
@@ -78,7 +89,7 @@ with c3:
 				'Listar Nota Empenho', 'Cota Execução Financeira'
 			]
 		)
-
+	
 with c4:
 
 	info_skip = st.number_input(label = 'Linhas para pular:', min_value = 0)
@@ -91,6 +102,7 @@ st.sidebar.write('''**Instruções de Linhas**''')
 
 st.sidebar.write(
 	'''
+	Descentralização - Primeira linha da DC;\n
 	Balancete Contábil - Primeira linha do nome da conta;\n
 	Balancete Contábil Mensal -  Primeira linha do nome da conta;\n
 	FNS - 8 Linhas;\n
@@ -112,7 +124,29 @@ st.sidebar.write(
 	'''
 )
 
-if type_problem == 'Balancete Contábil Mensal' and file != None:
+if type_problem == 'Descentralização' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data1, data2, data3 = descentralizacao(file = file, skip = info_skip)
+		
+			st.success('Arquivo lido com sucesso!')
+	
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel3(data1= data1, data2 = data2, data3 = data3),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+elif type_problem == 'Balancete Contábil Mensal' and file != None:
 
 	visualizar = st.button('Visualizar Planilha')
 
@@ -136,7 +170,7 @@ if type_problem == 'Balancete Contábil Mensal' and file != None:
 	
 			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
-if type_problem == 'Balancete Contábil' and file != None:
+elif type_problem == 'Balancete Contábil' and file != None:
 
 	visualizar = st.button('Visualizar Planilha')
 
@@ -160,7 +194,7 @@ if type_problem == 'Balancete Contábil' and file != None:
 	
 			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
-if type_problem == 'Crédito Disponível' and file != None:
+elif type_problem == 'Crédito Disponível' and file != None:
 
 	visualizar = st.button('Visualizar Planilha')
 
@@ -184,7 +218,7 @@ if type_problem == 'Crédito Disponível' and file != None:
 	
 			# st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 		
-if type_problem == 'FNS' and file != None:
+elif type_problem == 'FNS' and file != None:
 
 	visualizar = st.button('Visualizar Planilha')
 

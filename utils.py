@@ -1152,6 +1152,38 @@ def listar_empenho(file, skip):
 
 	return df
 
+def descentralizacao(file, skip):
+
+	df = read_excel(
+		io = file, 
+		skiprows = skip - 1,
+		header = None
+	)
+
+	df = df.dropna(how = 'all', axis = 'columns')
+
+	descs = df[df[2].str.contains('DC\d+', na = False)].dropna(how = 'all', axis = 'columns')
+	descs.columns = [
+		'NotaDescentalizacao', 'DataDescentralizacao', 'ObservacaoDC', 
+		'Subacao', 'Fonte', 'Natureza', 'ValorDescentralizado', 'ValorAnulado', 'ValorNotaDC'
+	]
+
+	notas = df[df[4].str.contains('NE\d+', na = False) | df[2].str.contains('DC\d+', na = False)]
+	notas[2] = notas[2].ffill()
+	notas = notas[notas[4].str.contains('NE\d+', na = False)].dropna(how = 'all', axis = 'columns')
+	notas.columns = [
+		'NotaDescentalizacao', 'NotaEmpenho', 'DataEmpenho', 'Empenhado'
+	]
+
+	liqs = df[df[6].str.contains('NL\d+', na = False) | df[4].str.contains('NE\d+', na = False)].dropna(how = 'all', axis = 'columns')
+	liqs[4] = liqs[4].ffill()
+	liqs = liqs[liqs[6].str.contains('NL\d+', na = False)].dropna(how = 'all', axis = 'columns')
+	liqs.columns = [
+		'NotaEmpenho', 'NotaLiquidacao', 'DataLiquidacao', 'ObservacaoNL', 'Liquidado', 'Saldo'
+	]
+
+	return descs, notas, liqs
+
 def cota_execucao_financeira(file, skip):
 
 	df = read_excel(
@@ -1200,6 +1232,24 @@ def export_excel2(data1, data2):
 	data1.to_excel(writer, index = False, sheet_name = 'Ordenadores')
 
 	data2.to_excel(writer, index = False, sheet_name = 'Todos os Funcionários')
+
+	writer.close()
+
+	processed_data = output.getvalue()
+
+	return processed_data
+
+def export_excel3(data1, data2, data3):
+
+	output = BytesIO()
+
+	writer = ExcelWriter(output)
+
+	data1.to_excel(writer, index = False, sheet_name = 'Descentralizacao')
+
+	data2.to_excel(writer, index = False, sheet_name = 'Empenhos')
+
+	data3.to_excel(writer, index = False, sheet_name = 'Liquidacao')
 
 	writer.close()
 

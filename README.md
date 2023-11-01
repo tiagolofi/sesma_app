@@ -95,6 +95,10 @@ Layout:
 
 34. Frases Motivacionais
 
+#### Versão 1.12
+
+35. Descentralização
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

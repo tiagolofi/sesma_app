@@ -89,11 +89,7 @@ with c1:
 
 		with tabs4:
 
-			st.markdown(
-			f'''
-			![{st.image(Image.open('vasco.png'))}](https://canaisplay.com/categoria/times/vasco/)
-   			''', unsafe_allow_html=True
-			)
+			st.image(Image.open('vasco.png'), caption = 'https://canaisplay.com/categoria/times/vasco/')
 
 with c3:
 

@@ -49,7 +49,7 @@ with c1:
 
 	tabs1, tabs2 = st.tabs()
 	
-	with st.expander('Estação de Entretenimentos')
+	with st.expander('Estação de Entretenimentos'):
 
 		with tabs1:
 

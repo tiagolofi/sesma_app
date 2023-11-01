@@ -92,7 +92,7 @@ with c1:
 			st.markdown(
 			'''
 			<a href="https://canaisplay.com/categoria/times/vasco/">
-				<img src="vasco.png" alt="Vasco" style="width:42px;height:42px;">
+				<img src="vasco.png" alt="Vasco" style="width:100%;height:300px;">
 			</a>
    			''', unsafe_allow_html=True
 			)

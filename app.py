@@ -41,12 +41,14 @@ st.markdown(css, unsafe_allow_html=True)
 
 st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-c1, c2 = st.columns([2, 1])
+c1, c2, c3 = st.columns([2, 1, 1])
 
 with c1:
 
 	st.write('''##### Versão 1.12''')
 
+with c2:
+	
 	with st.expander('Estação de Entretenimento'):
 
 		tabs1, tabs2 = st.tabs(['Spotify', 'Youtube Music'])
@@ -77,7 +79,7 @@ with c1:
 			''', unsafe_allow_html=True
 			)
 
-with c2:
+with c3:
 
 	st.image('img/logo_ses.png')
 

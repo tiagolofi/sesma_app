@@ -47,10 +47,10 @@ with c1:
 
 	st.write('''##### Versão 1.12''')
 
-	tabs1, tabs2 = st.tabs(['Spotify', 'Youtube Music'])
-	
-	with st.expander('Estação de Entretenimentos'):
+	with st.expander('Estação de Entretenimento'):
 
+		tabs1, tabs2 = st.tabs(['Spotify', 'Youtube Music'])
+		
 		with tabs1:
 
 			st.write('Spotify')

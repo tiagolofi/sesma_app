@@ -78,7 +78,15 @@ with c1:
 
 with c2: 
 
-	st.image(Image.open('betnacional.gif'))
+	st.markdown(
+	'''
+ 	<iframe 
+  		width="560" height="315" src="https://www.youtube-nocookie.com/embed/tYzMYcUty6s?si=6mysQ7urBpKjRYv0" 
+  		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+   		encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+	</iframe>
+  	'''
+	)
 
 with c3:
 

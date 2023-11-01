@@ -62,8 +62,9 @@ with c2:
 	st.markdown(
 	'''
 	<iframe 
-		style="border-radius:12px" src="https://music.youtube.com/playlist?list=PL_SfgS4VS-cR9Q1DLsXgCDlNc9kh-wNRo&si=l6rkulcJ1k-rpSvF" 
-	 	width="50%" height="370" frameBorder="0">
+ 		width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=TSXW4Fk9I0N9Yxwf&amp;list=PL_SfgS4VS-cR9Q1DLsXgCDlNc9kh-wNRo" 
+   		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+     		gyroscope; picture-in-picture; web-share" allowfullscreen>
 	</iframe>
 	''', unsafe_allow_html=True
 	)

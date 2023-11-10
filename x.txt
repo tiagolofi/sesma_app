@@ -853,3 +853,11 @@ Ouvindo aquelas palavras, o padre coloca a mão no ombro do homem, sorri e respo
 - Mãe, quero começar a organizar a minha festa de 15 anos.
 - Isso vai sair caro, filha. Não é melhor uma festa de um dia só?"
 395. "Nada é mamão" (Leôncio Primo)
+396.	"A vida não é sobre quão duro você é capaz de bater, mas sobre quão duro você é capaz de apanhar e continuar indo em frente." (Rocky Balboa)
+397.	"Ninguém baterá tão forte quanto a vida. Porém, não se trata de quão forte pode bater, se trata de quão forte pode ser atingido e continuar seguindo em frente. É assim que a vitória é conquistada." (Rocky Balboa)
+398.	"Não importa o quanto você bate, mas sim o quanto aguenta apanhar e continuar. O quanto pode suportar e seguir em frente. É assim que se ganha." (Rocky Balboa)
+399.	"Não se lembrarão de você, se lembrarão da sua reputação." (Rocky Balboa)
+400.	"Já levou 500 socos na cara em uma noite só? Depois de um tempo começa a doer." (Rocky Balboa)
+401.	"Ninguém deve nada a ninguém. Você deve a si próprio." (Rocky Balboa)
+402.	"Previsão pra luta: Dor." (Rocky Balboa)
+403.	"Não é o quão forte você bate, é o quão forte você pode apanhar, e continuar avançando." (Rocky Balboa)

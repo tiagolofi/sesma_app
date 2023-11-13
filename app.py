@@ -106,7 +106,7 @@ with c2:
 
 	msg = st.text_input('Mensagem:')
 
-	cripto = ''.join([dic.get(i) for i in msg])
+	cripto = ''.join([dic.get(i) for i in msg.lower()])
 
 	st.success(cripto)
 

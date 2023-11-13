@@ -108,13 +108,21 @@ with c2:
 
 	cripto = ''.join([dic.get(i) for i in msg.lower()])
 
-	st.success(cripto)
-
 	msg2 = st.text_input('Mensagem Criptografada:')
 
 	decripto = ''.join([' ' if i in ['0', '1'] else list(dic.keys())[list(dic.values()).index(i)] for i in msg2])
 
-	st.success(decripto)
+	cript_but = st.button('Criptografar/Descriptografar')
+
+	if cript_but:
+
+		if msg != None:
+
+			st.success(cripto)
+
+		elif msg2 != None:
+
+			st.success(decripto)
 
 with c3:
 

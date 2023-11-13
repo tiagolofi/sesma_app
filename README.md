@@ -99,6 +99,10 @@ Layout:
 
 35. Descentralização
 
+#### Versão 1.13 
+
+36. Divertimentos
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

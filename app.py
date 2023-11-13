@@ -116,11 +116,11 @@ with c2:
 
 	if cript_but:
 
-		if msg != None and msg2 == None:
+		if len(msg) > 0 and len(msg2) < 1:
 
 			st.success(cripto)
 
-		elif msg2 != None and msg == None:
+		elif len(msg2) > 0 and len(msg) < 1:
 
 			st.success(decripto)
 

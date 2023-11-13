@@ -16,6 +16,17 @@ st.set_page_config(
 	initial_sidebar_state = 'collapsed' 
 )
 
+dic = {
+    'a': '$', 'b': '!', 'c': '7', 'd': 'd', 'e': '8',
+    'f': '>', 'g': '#', 'h': '|', 'i': '4', 'j': 'j',
+    'k': '+', 'l': 'x', 'm': '2', 'n': '5', 'o': '6',
+    'p': '(', 'q':'~', 'r': 's', 's': '¬', 't': '¢',
+    'u': ')', 'v': '@', 'w': 'm', 'x': '?', 'y': '3', 
+    'z': '&', ',': 'º', ' ': sample(['0', '1'], 1)[0],
+    '\n': sample(['0', '1'], 1)[0], '.': ';'
+}
+
+
 css = """
 
 <style>
@@ -90,6 +101,20 @@ with c1:
 		with tabs4:
 
 			st.image(Image.open('vasco.png'), caption = 'https://canaisplay.com/categoria/times/vasco/')
+
+with c2:
+
+	msg = st.text_input('Mensagem:')
+
+	cripto = ''.join([dic.get(i) for i in msg])
+
+	st.success(cripto)
+
+	msg2 = st.text_input('Mensagem Criptografada:')
+
+	decripto = ''.join([' ' if i in ['0', '1'] else list(dic.keys())[list(dic.values()).index(i)] for i in cripto])
+
+	st.success(decripto)
 
 with c3:
 

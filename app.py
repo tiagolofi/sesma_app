@@ -23,7 +23,7 @@ dic = {
     'p': '(', 'q':'~', 'r': 's', 's': '¬', 't': '¢',
     'u': ')', 'v': '@', 'w': 'm', 'x': '?', 'y': '3', 
     'z': '&', ',': 'º', ' ': sample(['0', '1'], 1)[0],
-    '\n': sample(['0', '1'], 1)[0], '.': ';'
+    '\n': sample(['0', '1'], 1)[0], '.': ';', 'ç': '='
 }
 
 
@@ -104,7 +104,7 @@ with c1:
 
 with c2:
 
-	msg = st.text_input('Mensagem:')
+	msg = st.text_input('Mensagem (sem acento):')
 
 	cripto = ''.join([dic.get(i) for i in msg.lower()])
 

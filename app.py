@@ -112,7 +112,7 @@ with c2:
 
 	msg2 = st.text_input('Mensagem Criptografada:')
 
-	decripto = ''.join([' ' if i in ['0', '1'] else list(dic.keys())[list(dic.values()).index(i)] for i in cripto])
+	decripto = ''.join([' ' if i in ['0', '1'] else list(dic.keys())[list(dic.values()).index(i)] for i in msg2])
 
 	st.success(decripto)
 

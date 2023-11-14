@@ -22,10 +22,11 @@ dic = {
     'k': '+', 'l': 'x', 'm': '2', 'n': '5', 'o': '6',
     'p': '(', 'q':'<', 'r': 's', 's': '¬', 't': '¢',
     'u': ')', 'v': '@', 'w': 'm', 'x': '?', 'y': '3', 
-    'z': '&', ',': 'º', ' ': sample(['0', '1'], 1)[0],
-    '\n': sample(['0', '1'], 1)[0], '.': ';', 'ç': '=',
+    'z': '&', ',': 'º', ' ': sample(['§', 'a'], 1)[0],
+    '\n': sample(['§', 'a'], 1)[0], '.': ';', 'ç': '=',
 	'=': ':', ':': 'i', '/': ',', '&': 'z', '?': '²',
-	'_': '['
+	'_': '[', '0': '0', '1': '9', '2': '8', '3': '7',
+	'4': '6', '5': '5', '6': '4', '7': '3', '8': '2', '9': '1'
 }
 
 
@@ -112,7 +113,7 @@ with c2:
 
 	msg2 = st.text_input('Mensagem Criptografada:')
 
-	decripto = ''.join([' ' if i in ['0', '1'] else list(dic.keys())[list(dic.values()).index(i)] for i in msg2])
+	decripto = ''.join([' ' if i in ['§', 'a'] else list(dic.keys())[list(dic.values()).index(i)] for i in msg2])
 
 	cript_but = st.button('Criptografar/Descriptografar')
 

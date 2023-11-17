@@ -63,7 +63,7 @@ def pdf_objeto(file):
 
 	df = concat(l).reset_index(drop = True)
 
-	df = df.dropna(how = 'all', axis = 'index')
+	df = df.dropna(thresh = 1, axis = 'index')
 
 	df.columns = ['Contrato', 'Aditivo', 'Processo', 'Fonte', 'CnpjCpf', 'Contratado', 'Objeto', 'Observacao', 'FimVigencia']
 

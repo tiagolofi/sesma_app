@@ -61,7 +61,13 @@ def pdf_objeto(file):
 
 	l = [DataFrame(pdf.pages[i].extract_table(table_settings = settings)) for i in range(len(pdf.pages))]
 
-	return concat(l).reset_index(drop = True)
+	df = concat(l).reset_index(drop = True)
+
+	df = df.dropna(how = 'all', axis = 'index')
+
+	df.columns = ['Contrato', 'Aditivo', 'Processo', 'Fonte', 'CnpjCpf', 'Contratado', 'Objeto', 'Observacao', 'FimVigencia']
+
+	return df
 
 def balancete(file: str, skip: int):
 	

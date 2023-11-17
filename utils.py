@@ -59,7 +59,7 @@ def pdf_objeto(file):
 		'explicit_vertical_lines': [30, 75, 105, 155, 210, 285, 420, 600, 770, 820]
 	}
 
-	l = [DataFrame(pdf.pages[i].extract_table(table_settings = settings)) for i in range(len(pdf.pages)]
+	l = [DataFrame(pdf.pages[i].extract_table(table_settings = settings)) for i in range(len(pdf.pages))]
 
 	return concat(l).reset_index(drop = True)
 

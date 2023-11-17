@@ -227,6 +227,8 @@ elif type_problem == 'Contratos por Objeto' and file != None:
 			data = pdf_objeto(file = file)
 		
 			st.success('Arquivo lido com sucesso!')
+
+			st.dataframe(data)
 	
 			st.download_button(
 				label = 'Baixar Planilha',

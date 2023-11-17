@@ -67,6 +67,8 @@ def pdf_objeto(file):
 
 	df.columns = ['Contrato', 'Aditivo', 'Processo', 'Fonte', 'CnpjCpf', 'Contratado', 'Objeto', 'Observacao', 'FimVigencia']
 
+	df = df[df['Contrato'] != '']
+
 	return df
 
 def balancete(file: str, skip: int):

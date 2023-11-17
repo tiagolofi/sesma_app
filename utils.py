@@ -5,6 +5,7 @@ from numpy import nan
 from io import BytesIO
 import warnings
 import base64
+import pdfplumber
 
 # teste de deploy
 
@@ -48,6 +49,20 @@ def nivel_detalhe(text):
 
 		return 'Não Detalhada'
 	
+def pdf_objeto(file):
+
+	pdf = pdfplumber.open(file)
+
+	settings = {
+		'vertical_strategy': 'explicit',
+		'horizontal_strategy': 'lines',
+		'explicit_vertical_lines': [30, 75, 105, 155, 210, 285, 420, 600, 770, 820]
+	}
+
+	l = [pd.DataFrame(pdf.pages[i].extract_table(table_settings = settings) for i in range(len(pdf.pages)]
+
+	return concat(l).reset_index(drop = True)
+
 def balancete(file: str, skip: int):
 	
 	df = read_excel(

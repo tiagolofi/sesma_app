@@ -148,7 +148,7 @@ with c3:
 	type_problem = st.selectbox(
 			label='Fonte de Informação',
 			options=[
-				'Descentralização', 'Balancete Contábil', 'Balancete Contábil Mensal', 'FNS',
+				'Contratos por Objeto', 'Descentralização', 'Balancete Contábil', 'Balancete Contábil Mensal', 'FNS',
 				'Relatório de Diárias', 'Extrato Bancário', 'Listar Ordem Bancária',
 				'Imprimir Pagamento Efetuado', 'Imprimir Preparação Pagamento',
 				'Listar Preparação Pagamento', 'Crédito Disponível',
@@ -166,7 +166,7 @@ with c4:
 
 with c5:
 
-	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
+	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls', 'pdf'])
 
 st.sidebar.write('''**Instruções de Linhas**''')
 
@@ -209,6 +209,28 @@ if type_problem == 'Descentralização' and file != None:
 			st.download_button(
 				label = 'Baixar Planilha',
 				data = export_excel3(data1= data1, data2 = data2, data3 = data3),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+	
+		except:
+	
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+elif type_problem == 'Contratos por Objeto' and file != None:
+
+	visualizar = st.button('Visualizar Planilha')
+
+	if visualizar:
+
+		try:
+	
+			data = pdf_objeto(file = file)
+		
+			st.success('Arquivo lido com sucesso!')
+	
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
 				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
 			)
 	

@@ -59,11 +59,7 @@ def pdf_objeto(file):
 		'explicit_vertical_lines': [30, 75, 105, 155, 210, 285, 420, 600, 770, 820]
 	}
 
-	l = [DataFrame(pdf.pages[i].extract_table(table_settings = settings)) for i in range(len(pdf.pages))]
-
-	df = concat(l).reset_index(drop = True)
-
-	df = df.dropna(thresh = 1, axis = 'index')
+	df = concat([DataFrame(pdf.pages[i].extract_table(table_settings = settings)) for i in range(len(pdf.pages))]).reset_index(drop = True)
 
 	df.columns = ['Contrato', 'Aditivo', 'Processo', 'Fonte', 'CnpjCpf', 'Contratado', 'Objeto', 'Observacao', 'FimVigencia']
 

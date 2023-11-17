@@ -60,7 +60,7 @@ c1, c2, c3 = st.columns([2, 1, 1])
 
 with c1:
 
-	st.write('''##### Versão 1.13''')
+	st.write('''##### Versão 1.14''')
 	
 	with st.expander('Estação de Entretenimento'):
 

@@ -103,6 +103,10 @@ Layout:
 
 36. Divertimentos
 
+#### Versão 1.14
+
+37. Tratamento de PDFs
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

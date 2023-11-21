@@ -64,7 +64,7 @@ with c1:
 	
 	with st.expander('Estação de Entretenimento'):
 
-		tabs1, tabs2, tabs3, tabs4 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes', 'Vasco ao vivo', 'JecoTube'])
+		tabs1, tabs2, tabs3, tabs4, tabs5 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes', 'Vasco ao vivo', 'JecoTube'])
 		
 		with tabs1:
 

@@ -112,7 +112,7 @@ with c1:
 			st.markdown(
 			f'''
 		 	<iframe 
-				width="1440" height="762" src="https://www.youtube-nocookie.com/embed/{re.search('=(.*?)&', link).group(1)}"
+				width="100%" height="315" src="https://www.youtube-nocookie.com/embed/{re.search('=(.*?)&', link).group(1)}"
 				frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 			</iframe>
 		  	''', unsafe_allow_html=True

@@ -64,7 +64,7 @@ with c1:
 	
 	with st.expander('Estação de Entretenimento'):
 
-		tabs1, tabs2, tabs3, tabs4 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes', 'Vasco ao vivo'])
+		tabs1, tabs2, tabs3, tabs4 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes', 'Vasco ao vivo', 'JecoTube'])
 		
 		with tabs1:
 
@@ -85,7 +85,7 @@ with c1:
 			<iframe 
 		 		width="100%" height="370" src="https://www.youtube-nocookie.com/embed/videoseries?si=TSXW4Fk9I0N9Yxwf&amp;list=PL_SfgS4VS-cR9Q1DLsXgCDlNc9kh-wNRo" 
 		   		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-		     		gyroscope; picture-in-picture; web-share" allowfullscreen>
+		     	gyroscope; picture-in-picture; web-share" allowfullscreen>
 			</iframe>
 			''', unsafe_allow_html=True
 			)
@@ -96,14 +96,27 @@ with c1:
 			'''
 		 	<iframe 
 		  		width="100%" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=CaUHlx_d11n1P56V&amp;list=PL5Ofn03WIAXbsPazmkYwvV1YBwzurJNqA" 
-		    		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-		      	</iframe>
+		    	title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+		    </iframe>
 		  	''', unsafe_allow_html=True
 			)
 
 		with tabs4:
 
 			st.image(Image.open('vasco.png'), caption = 'https://canaisplay.com/categoria/times/vasco/')
+
+		with tabs5:
+
+			link = re.search('=(.*?)&', st.text_input('URL Video:')).group(1)
+
+			st.markdown(
+			f'''
+		 	<iframe 
+				width="1440" height="762" src="https://www.youtube-nocookie.com/embed/{link}"
+				frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+			</iframe>
+		  	''', unsafe_allow_html=True
+			)
 
 with c2:
 

@@ -103,7 +103,9 @@ with c1:
 
 		with tabs4:
 
-			st.image(Image.open('vasco.png'), caption = 'https://canaisplay.com/categoria/times/vasco/')
+			st.image(Image.open('vasco.png'))
+
+			st.link_button('Canais Play - Vasco ao vivo', 'https://canaisplay.com/categoria/times/vasco/')
 
 		with tabs5:
 

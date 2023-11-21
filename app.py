@@ -107,12 +107,12 @@ with c1:
 
 		with tabs5:
 
-			link = re.search('=(.*?)&', st.text_input('URL Video:')).group(1)
+			link = st.text_input('URL Video:', value = 'https://www.youtube.com/watch?v=oCt_LiCPJfQ&ab_channel=McSuave')
 
 			st.markdown(
 			f'''
 		 	<iframe 
-				width="1440" height="762" src="https://www.youtube-nocookie.com/embed/{link}"
+				width="1440" height="762" src="https://www.youtube-nocookie.com/embed/{re.search('=(.*?)&', link).group(1)}"
 				frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 			</iframe>
 		  	''', unsafe_allow_html=True

@@ -122,8 +122,6 @@ with c1:
 
 	files_pdf = st.file_uploader('Lista de PDFs', type = 'pdf', accept_multiple_files = True)
 
-	file_pdf_junt = st.button('Juntar')
-
 	st.download_button(
 		label = 'Juntar e Baixar PDF',
 		data = export_pdf(junta_pdf(files_pdf)),

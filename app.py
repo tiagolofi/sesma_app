@@ -122,10 +122,12 @@ with c1:
 
 	files_pdf = st.file_uploader('Juntar PDFs', type = 'pdf', accept_multiple_files = True)
 
+	name = st.text_input('Nome do Arquivo')
+
 	st.download_button(
 		label = 'Juntar e Baixar PDF',
 		data = export_pdf(junta_pdf(files_pdf)),
-		file_name = 'PDF_FILE_' + str(int(datetime.now().timestamp())) + '.pdf'
+		file_name = f'''{name}_'{str(int(datetime.now().timestamp()))}.pdf''''
 	)
 
 with c2:

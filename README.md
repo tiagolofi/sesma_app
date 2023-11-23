@@ -107,6 +107,10 @@ Layout:
 
 37. Tratamento de PDFs
 
+#### Versão 1.15
+
+38. Juntar PDFs
+
 ## Conquistas
 
 * Redução no tempo de tratamento de dados para a construção do fluxo de caixa diário;

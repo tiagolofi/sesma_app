@@ -120,6 +120,18 @@ with c1:
 		  	''', unsafe_allow_html=True
 			)
 
+	files_pdf = st.file_uploader('Pdfs', accept_multiple_files = True)
+
+	file_pdf_junt = st.button('Juntar')
+
+	if file_pdf_junt:
+
+		st.download_button(
+			label = 'Baixar Pdf',
+			data = export_pdf(junta_pdf(files_pdf)),
+			file_name = 'PDF_FILE_' + str(int(datetime.now().timestamp())) + '.pdf'
+		)
+
 with c2:
 
 	msg = st.text_input('Mensagem (sem acento):')

@@ -6,8 +6,19 @@ from io import BytesIO
 import warnings
 import base64
 import pdfplumber
+from pypdf import PdfMerger
 
 # teste de deploy
+
+def junta_pdf(lista: list):
+
+	pdf = PdfMerger()
+
+	for i in lista:
+
+		pdf.append(i)
+
+	return pdf
 
 def remainder(x):
 
@@ -1227,6 +1238,18 @@ def cota_execucao_financeira(file, skip):
 	df.columns = ['CodigoGrupo', 'Grupo', 'Fonte', 'NomeFonte', 'CotaAutorizada', 'Empenhado']
 
 	return df
+
+def export_pdf(pdf):
+
+	output = BytesIO()
+	
+	pdf.write(output)
+		
+	# writer.close()
+	
+	processed_data = output.getvalue()
+	
+	return processed_data
 
 def export_excel(data):
 

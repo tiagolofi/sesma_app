@@ -147,6 +147,8 @@ with c3:
 	st.image('img/logo_ses.png')
 
 	sorte = st.button('Está com sorte hoje? clique aqui!')
+
+	st.link_button('JecoTube, o seu YouTube sem anúncios', 'https://jeco-tube.streamlit.app/', type = 'primary')
 	
 	if sorte:
 	

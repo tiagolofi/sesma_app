@@ -1001,7 +1001,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 
 	for j in [6, 7, 8, 10, 12]:
 	
-	  	df[j] = [float(sub(' |nan', '0', sub('\,', '.', sub('[A-Z]|\.', '', str(i))))) for i in df[j]]
+		  df[j] = [float(sub(' |nan', '0', sub('\,', '.', sub('[A-Z]|\.', '', str(i))))) for i in df[j]]
 	
 	df = df.drop(columns = [4, 8, 10, 12])
 
@@ -1096,7 +1096,7 @@ def credito(file: str, skip: int):
 	df.columns = ['Disponivel', 'InvSaldo', 'Subacao', 'Fonte', 'Natureza']
 	
 	df = df.reindex(
-	 	['Subacao', 'Fonte', 'Natureza', 'Disponivel', 'InvSaldo'],
+		 ['Subacao', 'Fonte', 'Natureza', 'Disponivel', 'InvSaldo'],
 		axis = 'columns'
 	)
 	

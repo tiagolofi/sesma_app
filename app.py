@@ -127,7 +127,7 @@ with c1:
 	st.download_button(
 		label = 'Juntar e Baixar PDF',
 		data = export_pdf(junta_pdf(files_pdf)),
-		file_name = f'''{name}_'{str(int(datetime.now().timestamp()))}.pdf'''
+		file_name = f'''{name}_{str(int(datetime.now().timestamp()))}.pdf'''
 	)
 
 with c2:

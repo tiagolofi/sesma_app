@@ -6,13 +6,13 @@ from io import BytesIO
 import warnings
 import base64
 import pdfplumber
-from pypdf import PdfMerger
+from pypdf import PdfWriter
 
 # teste de deploy
 
 def junta_pdf(lista: list):
 
-	pdf = PdfMerger()
+	pdf = PdfWriter()
 
 	for i in lista:
 
@@ -1245,7 +1245,7 @@ def export_pdf(pdf):
 	
 	pdf.write(output)
 		
-	# writer.close()
+	pdf.close()
 	
 	processed_data = output.getvalue()
 	

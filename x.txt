@@ -861,3 +861,4 @@ Ouvindo aquelas palavras, o padre coloca a mão no ombro do homem, sorri e respo
 401.	"Ninguém deve nada a ninguém. Você deve a si próprio." (Rocky Balboa)
 402.	"Previsão pra luta: Dor." (Rocky Balboa)
 403.	"Não é o quão forte você bate, é o quão forte você pode apanhar, e continuar avançando." (Rocky Balboa)
+404. "Toda inação humana é resultado da ausência de motivação" (Felipe Pessoa)

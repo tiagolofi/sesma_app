@@ -189,15 +189,17 @@ with c3:
 				'Listar Nota Empenho', 'Cota Execução Financeira'
 			]
 		)
+
+	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls', 'pdf'])
 	
 with c4:
 
 	info_skip = st.number_input(label = 'Linhas para pular:', min_value = 0)
 
-with c5:
-
-	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls', 'pdf'])
-
+# with c5:
+# 
+# 	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls', 'pdf'])
+# 
 st.sidebar.write('''**Instruções de Linhas**''')
 
 st.sidebar.write(

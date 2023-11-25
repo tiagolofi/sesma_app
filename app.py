@@ -195,9 +195,6 @@ with c5:
 
 	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls', 'pdf'])
 
-	st.image('vini/vini.gif')
-	st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
-
 st.sidebar.write('''**Instruções de Linhas**''')
 
 st.sidebar.write(
@@ -396,6 +393,9 @@ elif type_problem == 'Listar Nota Empenho' and file != None:
 
 	if visualizar:
 
+		st.image('vini/vini.gif')
+		st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
+
 		try:
 	
 			data = listar_empenho(file = file, skip = info_skip)
@@ -444,6 +444,9 @@ elif type_problem == 'Extrato Bancário' and file != None:
 
 	if visualizar:
 
+		st.image('vini/vini.gif')
+		st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
+
 		try:
 	
 			data = extrato(file = file, skip = info_skip)
@@ -467,6 +470,9 @@ elif type_problem == 'Listar Ordem Bancária' and file != None:
 	visualizar = st.button('Visualizar Planilha')
 
 	if visualizar:
+
+		st.image('vini/vini.gif')
+		st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
 
 		try:
 	

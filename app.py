@@ -6,6 +6,8 @@ from PIL import Image
 
 import re
 from random import sample
+from time import sleep
+from os import listdir
 
 icon = 'https://bluefocus.com.br/sites/default/files/styles/medium/public/icon-financeiro.png'
 
@@ -167,6 +169,15 @@ with c3:
 		lista = re.split(r'\d{1,3}\. ', x)
 
 		st.info(sample(lista, 1)[0])
+
+	
+	while True:
+	
+		for i in listdir('vini'):
+
+			st.image('vini/' + i)
+	
+			sleep(2)
 
 c3, c4, c5 = st.columns(3)
 

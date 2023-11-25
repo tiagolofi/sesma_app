@@ -169,7 +169,8 @@ with c3:
 		st.info(sample(lista, 1)[0])
 
 	st.image('vini/vini.gif')
-	
+	st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
+
 c3, c4, c5 = st.columns(3)
 
 with c3:

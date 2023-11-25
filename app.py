@@ -170,7 +170,6 @@ with c3:
 
 		st.info(sample(lista, 1)[0])
 
-	
 	while True:
 	
 		for i in listdir('vini'):

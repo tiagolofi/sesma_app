@@ -393,9 +393,6 @@ elif type_problem == 'Listar Nota Empenho' and file != None:
 
 	if visualizar:
 
-		st.image('vini/vini.gif')
-		st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
-
 		try:
 	
 			data = listar_empenho(file = file, skip = info_skip)
@@ -545,6 +542,9 @@ elif type_problem == 'Listar Preparação Pagamento' and file != None:
 	visualizar = st.button('Visualizar Planilha')
 
 	if visualizar:
+
+		st.image('vini/vini.gif')
+		st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
 
 		try:
 	

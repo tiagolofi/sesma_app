@@ -448,7 +448,7 @@ elif type_problem == 'Extrato Bancário' and file != None:
 	if visualizar:
 
 		st.image('vini/vini.gif')
-		st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
+		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 
 		try:
 	
@@ -553,7 +553,7 @@ elif type_problem == 'Listar Preparação Pagamento' and file != None:
 	if visualizar:
 
 		st.image('vini/vini.gif')
-		st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
+		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 
 		try:
 	

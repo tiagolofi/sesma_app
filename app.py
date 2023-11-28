@@ -227,6 +227,9 @@ if type_problem == 'Descentralização' and file != None:
 
 	if visualizar:
 
+		st.image('vini/vini.gif')
+		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
+
 		try:
 	
 			data1, data2, data3 = descentralizacao(file = file, skip = info_skip)
@@ -321,6 +324,9 @@ elif type_problem == 'Crédito Disponível' and file != None:
 
 	if visualizar:
 
+		st.image('vini/vini.gif')
+		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
+		
 		try:
 	
 			data = credito(file = file, skip = info_skip)
@@ -469,7 +475,7 @@ elif type_problem == 'Listar Ordem Bancária' and file != None:
 	if visualizar:
 
 		st.image('vini/vini.gif')
-		st.audio('vini/Abertura de Chiquititas  1° Fase.mp4')
+		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 
 		try:
 	
@@ -518,6 +524,9 @@ elif type_problem == 'Imprimir Preparação Pagamento' and file != None:
 	visualizar = st.button('Visualizar Planilha')
 
 	if visualizar:
+
+		st.image('vini/vini.gif')
+		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 
 		try:
 	
@@ -569,6 +578,9 @@ elif type_problem == 'Imprimir Nota Empenho Célula' and file != None:
 	visualizar = st.button('Visualizar Planilha')
 
 	if visualizar:
+
+		st.image('vini/vini.gif')
+		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 
 		try:
 	
@@ -642,6 +654,9 @@ elif type_problem == 'Imprimir Execução Orçamentária' and file != None:
 
 	if visualizar:
 
+		st.image('vini/vini.gif')
+		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
+
 		try:
 	
 			data = orc(file = file, skip = info_skip)
@@ -690,23 +705,23 @@ elif type_problem == 'Imprimir Nota Pré-Empenho Célula' and file != None:
 
 	if visualizar:
 
-		# try:
+		try:
 	
-		data = nota_pre_empenho_celula(file = file, skip = info_skip)
+			data = nota_pre_empenho_celula(file = file, skip = info_skip)
 
-		st.dataframe(data)
+			st.dataframe(data)
 
-		st.success('Arquivo lido com sucesso!')
-		
-		st.download_button(
-			label = 'Baixar Planilha',
-			data = export_excel(data = data),
-			file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
-		)
+			st.success('Arquivo lido com sucesso!')
+
+			st.download_button(
+				label = 'Baixar Planilha',
+				data = export_excel(data = data),
+				file_name = type_problem + ' ' + str(int(datetime.now().timestamp())) + '.xlsx'
+			)
+
+		except:
 	
-		# except:
-	
-			# st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
 
 elif type_problem == 'Detalhar Conta 8.2.1.7.2.01' and file != None:
 

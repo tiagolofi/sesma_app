@@ -64,8 +64,13 @@ with c1:
 	
 	with st.expander('Estação de Entretenimento'):
 
-		tabs1, tabs2, tabs3, tabs4, tabs5 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes', 'Vasco ao vivo', 'JecoTube'])
+		tabs1, tabs2, tabs3, tabs4, tabs5, tabs6 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes', 'Vasco ao vivo', 'JecoTube', 'Vini'])
 		
+		with tabs6:
+
+			st.image('vini/vini.gif')
+			st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
+
 		with tabs1:
 
 			st.markdown(
@@ -161,6 +166,9 @@ with c3:
 	st.link_button('JecoTube, o seu YouTube sem anúncios', 'https://jeco-tube.streamlit.app/', type = 'primary')
 	
 	if sorte:
+
+		st.image('vini/vini.gif')
+		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 	
 		x = open('x.txt', 'r', encoding = 'utf-8').read()
 

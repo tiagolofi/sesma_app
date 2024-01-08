@@ -344,11 +344,11 @@ def pagamento(file: str, skip: int):
 
 def valida_numero_obpp(number: str):
 	
-	if number[0:4] in ['2023', '2022', '2021', '2020', '2019'] and len(number) == 10:
+	if number[0:4] in ['2027', '2026', '2025', '2024', '2023', '2022', '2021', '2020', '2019'] and len(number) == 10:
 		
 		return sub(number[0:4], number[0:4] + 'OB', number)
 	
-	elif number[0:4] in ['2023', '2022', '2021', '2020', '2019'] and len(number) == 14:
+	elif number[0:4] in ['2027', '2026', '2025', '2024', '2023', '2022', '2021', '2020', '2019'] and len(number) == 14:
 		
 		return sub(number, number[0:4] + 'PP0' + number[5:10], number)
 
@@ -494,7 +494,73 @@ def nota_empenho_celula(file: str, skip: int):
 		'CpfCnpj', 'Credor'
 	]
 
-	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
+	subacao = read_excel('files/RELATORIO_SUBACAO_2027.xls', skiprows=12, usecols='B:F', dtype=str)
+	
+	subacao = subacao.dropna(how='all', axis='columns')
+	
+	subacao = subacao.dropna(how='all', axis='index')
+	
+	subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
+
+	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
+	
+	df = df.drop(columns=['Codigo'])
+
+	df['Chave'] = df.apply(lambda a: create_key(a.Subacao, a.Fonte, a.Natureza), axis = 1)
+
+	df = df.reindex(
+		[
+			'Chave', 'Subfuncao', 'NotaEmpenho', 'NotaPreEmpenho', 'Acao', 'Subacao', 'SubacaoNome', 'Fonte', 
+			'Natureza', 'CpfCnpj', 'Credor', 'Empenhado',
+			'Liquidado', 'Retido', 'ALiquidar', 'Pago', 'APagar'
+		], axis = 'columns'
+	)
+
+	return df
+
+def nota_empenho_celula_2023(file: str, skip: int):
+
+	df = read_excel(
+		io = file, 
+		skiprows = skip - 1, 
+		usecols = 'A:L', 
+		header = None
+	)
+	
+	df = df.dropna(how = 'all', axis = 'index')
+	df = df.dropna(how = 'all', axis = 'columns')
+	
+	df[0] = df[0].ffill()
+	
+	df[2] = df[2].astype(str)
+	
+	df = df[df[2].str.contains('NE')]
+	
+	for j in [6, 7, 8, 9, 10, 11]:
+	
+		df[j] = [float(sub(' ', '0', sub('\,', '.', sub('[A-Z]|\.', '', i)))) for i in df[j]]
+	
+	df['NotaEmpenho'] = [i.split(' / ')[0] for i in df[2]]
+
+	df['NotaPreEmpenho'] = [check_pre_empenho(i.split(' / ')) for i in df[2]]
+
+	df['Subacao'] = [i.split(' ')[1] for i in df[4]]
+	df['Fonte'] = [i.split(' ')[2] for i in df[4]]
+	df['Natureza'] = [i.split(' ')[3] for i in df[4]]
+	
+	df['CpfCnpj'] = [i.split(' ', 1)[0] for i in df[5]]
+	df['Credor'] = [i.split(' ', 1)[1] for i in df[5]]
+	
+	df = df.drop(columns = [1, 2, 4, 5])
+	
+	df.columns = [
+		'Subfuncao', 'Empenhado', 'Liquidado', 
+		'Retido', 'ALiquidar', 'Pago', 'APagar', 
+		'NotaEmpenho', 'NotaPreEmpenho', 'Subacao', 'Fonte', 'Natureza',
+		'CpfCnpj', 'Credor'
+	]
+
+	subacao = read_excel('files/RELATORIO_SUBACAO_2023.xls', skiprows=12, usecols='B:F', dtype=str)
 	
 	subacao = subacao.dropna(how='all', axis='columns')
 	
@@ -558,7 +624,7 @@ def nota_empenho_celula2(file: str, skip: int):
 		'CpfCnpj', 'Credor'
 	]
 
-	subacao = read_excel('files/Relatorio_07122022152748.xls', skiprows=12, usecols='B:F', dtype=str)
+	subacao = read_excel('files/RELATORIO_SUBACAO_2019.xls', skiprows=12, usecols='B:F', dtype=str)
 	
 	subacao = subacao.dropna(how='all', axis='columns')
 	
@@ -620,7 +686,7 @@ def nota_empenho_celula3(file: str, skip: int):
 		'CpfCnpj', 'Credor'
 	]
 
-	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
+	subacao = read_excel('files/RELATORIO_SUBACAO_2023.xls', skiprows=12, usecols='B:F', dtype=str)
 	
 	subacao = subacao.dropna(how='all', axis='columns')
 	
@@ -910,7 +976,98 @@ def orc(file: str, skip: int):
 	df['Indisponivel'] = df['Indisponivel'].apply(money)
 	df['PreEmpenhado'] = df['PreEmpenhado'].apply(money)
 
-	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
+	subacao = read_excel('files/RELATORIO_SUBACAO_2027.xls', skiprows=12, usecols='B:F', dtype=str)
+	
+	subacao = subacao.dropna(how='all', axis='columns')
+	
+	subacao = subacao.dropna(how='all', axis='index')
+	
+	subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
+
+	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
+	
+	df = df.drop(columns=['Codigo', 'SubacaoNome'])
+
+	df = df.reindex(
+		['Fonte', 'Acao', 'Subacao', 'NomeSubacao', 'Natureza', 'NivelNatureza', 'Dotacao', 'Atualizado', 'Indisponivel', 'PreEmpenhado'], 
+		axis = 'columns'
+	)
+
+	df['Chave'] = df.apply(lambda a: create_key(a.Subacao, a.Fonte, a.Natureza), axis = 1)
+
+	return df
+
+def orc_2023(file: str, skip: int):
+	
+	df = read_excel(
+		io = file, 
+		skiprows = skip - 1,
+		usecols = 'B:Z',
+		header = None
+	)
+
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index') 
+
+	df[1] = df[1].ffill()
+
+	df['subacao'] = [i if match('(\d\d)+', i[0:2]) else 'Vazio' for i in df[1]]
+	df['fonte'] = [i if match('(\d\.)+', i[0:2]) else 'Vazio' for i in df[1]]
+
+	df['subacao'] = df['subacao'].replace('Vazio', nan)
+	df['fonte'] = df['fonte'].replace('Vazio', nan)
+
+	df['subacao'] = df['subacao'].ffill()
+	df['fonte'] = df['fonte'].ffill()
+
+	df = df.drop(columns = [1])
+
+	df = df.dropna(subset=[2])
+
+	df = df.filter(['subacao', 'fonte', 2, 6, 7, 8, 9, 10, 11, 12])
+
+	df['nivel'] = df[2].apply(nivel)
+
+	df[7] = df[7].replace(nan, '')
+
+	df[8] = df[8].replace(nan, '')
+
+	df[9] = df[9].replace(nan, '')
+
+	df[10] = df[10].replace(nan, '')
+
+	df[11] = df[11].replace(nan, '')
+
+	df[12] = df[12].replace(nan, '')
+
+	df[7] = df[7] + df[8]
+
+	df[9] = df[9] + df[10]
+
+	df[11] = df[11] + df[12]
+
+	df[['CodigoSubacao', 'NomeSubacao']] = df['subacao'].str.split(' ', 1, expand = True)
+
+	df[['Fonte', 'NomeFonte']] = df['fonte'].str.split(' ', 1, expand = True)
+
+	df = df.drop(columns = [8, 10, 12, 'subacao', 'fonte', 'NomeFonte'])
+
+	df.columns = ['Natureza', 'Dotacao', 'Atualizado', 'Indisponivel', 'PreEmpenhado', 'NivelNatureza', 'Subacao', 'NomeSubacao', 'Fonte']
+
+	df['Dotacao'] = df['Dotacao'].replace([nan, ''], 0)
+
+	df['Atualizado'] = df['Atualizado'].replace([nan, ''], 0)
+
+	df['Indisponivel'] = df['Indisponivel'].replace([nan, ''], 0)
+
+	df['PreEmpenhado'] = df['PreEmpenhado'].replace([nan, ''], 0)
+
+	df['Dotacao'] = df['Dotacao'].apply(money)
+	df['Atualizado'] = df['Atualizado'].apply(money)
+	df['Indisponivel'] = df['Indisponivel'].apply(money)
+	df['PreEmpenhado'] = df['PreEmpenhado'].apply(money)
+
+	subacao = read_excel('files/RELATORIO_SUBACAO_2023.xls', skiprows=12, usecols='B:F', dtype=str)
 	
 	subacao = subacao.dropna(how='all', axis='columns')
 	
@@ -995,7 +1152,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	
 	df = df.drop(columns = [4, 8, 10, 12])
 
-	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
+	subacao = read_excel('files/RELATORIO_SUBACAO_2027.xls', skiprows=12, usecols='B:F', dtype=str)
 	
 	subacao = subacao.dropna(how='all', axis='columns')
 	

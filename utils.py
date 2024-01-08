@@ -1155,7 +1155,7 @@ def despesa_certificada_situacao(file, skip): # processo
 	df[0] = df[9].apply(filter_NL)
 	df = df[df[0] == True]
 	
-	df = df.drop(columns = [8])
+	df = df.drop(columns = [8, 0])
 
 	df = df.ffill()
 

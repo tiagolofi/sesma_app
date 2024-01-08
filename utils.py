@@ -1152,7 +1152,7 @@ def despesa_certificada_situacao(file, skip): # processo
 	df = df.dropna(how='all', axis='columns')
 	# df = df.dropna(how='all', axis='index')
 
-	# df[0] = df[9].apply(filter_NL)
+	df = df[df[9].contains('NL')]
 # 
 	# df = df[df[0] == True]
 	# 

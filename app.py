@@ -41,7 +41,7 @@ st.markdown(css, unsafe_allow_html=True)
 
 st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-c1, c2, c3, c4 = st.columns(3)
+c1, c2, c3, c4 = st.columns(4)
 
 with c1:
 

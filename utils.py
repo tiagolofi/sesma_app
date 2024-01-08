@@ -1114,6 +1114,20 @@ def filter_NL(x):
 
 		return False
 
+def listar_restos(file, skip):
+
+	df = read_excel(
+		io = file,
+		skiprows = skip - 1,
+		usecols = 'B:L',
+		header = None
+	)
+
+	df = df.dropna(how='all', axis='columns')
+	df = df.dropna(how='all', axis='index')
+
+	return df
+
 def liquidacao_credor(file, skip):
 
 	df = read_excel(

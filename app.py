@@ -2,7 +2,6 @@
 import streamlit as st
 from utils import * 
 from datetime import datetime
-from PIL import Image
 
 import re
 from random import sample
@@ -15,20 +14,6 @@ st.set_page_config(
 	page_icon = icon,
 	initial_sidebar_state = 'collapsed' 
 )
-
-dic = {
-	'a': '£', 'b': '!', 'c': '7', 'd': 'd', 'e': '8',
-    	'f': '^', 'g': '#', 'h': '|', 'i': '4', 'j': 'j',
-    	'k': '+', 'l': 'x', 'm': '2', 'n': '5', 'o': '6',
-   	'p': '(', 'q':'<', 'r': 's', 's': '¬', 't': '¢',
-   	'u': ')', 'v': '@', 'w': 'm', 'x': '?', 'y': '3', 
-    	'z': '&', ',': 'º', ' ': sample(['§', 'a'], 1)[0],
-	'\n': sample(['§', 'a'], 1)[0], '.': ';', 'ç': '=',
-	'=': ':', ':': 'i', '/': ',', '&': 'z', '?': '²',
-	'_': '[', '0': '0', '1': '9', '2': '8', '3': '7',
-	'4': '6', '5': '5', '6': '4', '7': '3', '8': '2', '9': '1'
-}
-
 
 css = """
 
@@ -58,117 +43,13 @@ st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
 c1, c2, c3 = st.columns([2, 1, 1])
 
-with c1:
-
-	st.write('''##### Versão 1.15''')
-	
-	with st.expander('Estação de Entretenimento'):
-
-		tabs1, tabs2, tabs3, tabs4, tabs5, tabs6 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes', 'Vasco ao vivo', 'JecoTube', 'Vini'])
-		
-		with tabs6:
-
-			st.image('vini/vini.gif')
-			st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
-
-		with tabs1:
-
-			st.markdown(
-			'''
-			<iframe 
-				style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator&theme=0" 
-			 	width="100%" height="370" frameBorder="0" allowfullscreen="" 
-			  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-			</iframe>
-			''', unsafe_allow_html=True
-			)
-
-		with tabs2:
-
-			st.markdown(
-			'''
-			<iframe 
-		 		width="100%" height="370" src="https://www.youtube-nocookie.com/embed/videoseries?si=TSXW4Fk9I0N9Yxwf&amp;list=PL_SfgS4VS-cR9Q1DLsXgCDlNc9kh-wNRo" 
-		   		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-		     	gyroscope; picture-in-picture; web-share" allowfullscreen>
-			</iframe>
-			''', unsafe_allow_html=True
-			)
-			
-		with tabs3:
-	
-			st.markdown(
-			'''
-		 	<iframe 
-		  		width="100%" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=CaUHlx_d11n1P56V&amp;list=PL5Ofn03WIAXbsPazmkYwvV1YBwzurJNqA" 
-		    	title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-		    </iframe>
-		  	''', unsafe_allow_html=True
-			)
-
-		with tabs4:
-
-			st.image(Image.open('vasco.png'))
-
-			st.link_button('Canais Play - Vasco ao vivo', 'https://canaisplay.com/categoria/times/vasco/')
-
-		with tabs5:
-
-			link = st.text_input('URL Video:', value = 'https://www.youtube.com/watch?v=oCt_LiCPJfQ&ab_channel=McSuave')
-
-			st.markdown(
-			f'''
-		 	<iframe 
-				width="100%" height="315" src="https://www.youtube-nocookie.com/embed/{re.search('=(.*?)&', link).group(1)}"
-				frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-			</iframe>
-		  	''', unsafe_allow_html=True
-			)
-
-	files_pdf = st.file_uploader('Juntar PDFs', type = 'pdf', accept_multiple_files = True)
-
-	name = st.text_input('Nome do Arquivo')
-
-	st.download_button(
-		label = 'Juntar e Baixar PDF',
-		data = export_pdf(junta_pdf(files_pdf)),
-		file_name = f'''{name}_{str(int(datetime.now().timestamp()))}.pdf'''
-	)
-
-with c2:
-
-	msg = st.text_input('Mensagem (sem acento):')
-
-	cripto = ''.join([dic.get(i) for i in msg.lower()])
-
-	msg2 = st.text_input('Mensagem Criptografada:')
-
-	decripto = ''.join([' ' if i in ['§', 'a'] else list(dic.keys())[list(dic.values()).index(i)] for i in msg2])
-
-	cript_but = st.button('Criptografar/Descriptografar')
-
-	if cript_but:
-
-		if len(msg) > 0 and len(msg2) < 1:
-
-			st.success(cripto)
-
-		elif len(msg2) > 0 and len(msg) < 1:
-
-			st.success(decripto)
-
 with c3:
 
 	st.image('img/logo_ses.png')
 
 	sorte = st.button('Está com sorte hoje? clique aqui!')
-
-	st.link_button('JecoTube, o seu YouTube sem anúncios', 'https://jeco-tube.streamlit.app/', type = 'primary')
 	
 	if sorte:
-
-		st.image('vini/vini.gif')
-		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 	
 		x = open('x.txt', 'r', encoding = 'utf-8').read()
 
@@ -176,9 +57,9 @@ with c3:
 
 		st.info(sample(lista, 1)[0])
 
-c3, c4, c5 = st.columns(3)
+c4, c5, c6 = st.columns(3)
 
-with c3:
+with c4:
 
 	type_problem = st.selectbox(
 			label='Fonte de Informação',
@@ -195,13 +76,13 @@ with c3:
 			]
 		)
 	
-with c4:
+with c5:
 
 	info_skip = st.number_input(label = 'Linhas para pular:', min_value = 0)
 
-with c5:
+with c6:
 
-	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls', 'pdf'])
+	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
 
 st.sidebar.write('''**Instruções de Linhas**''')
 

@@ -1,0 +1,126 @@
+
+# criptografia felipeana
+
+dic = {
+	'a': '£', 'b': '!', 'c': '7', 'd': 'd', 'e': '8',
+    	'f': '^', 'g': '#', 'h': '|', 'i': '4', 'j': 'j',
+    	'k': '+', 'l': 'x', 'm': '2', 'n': '5', 'o': '6',
+   	'p': '(', 'q':'<', 'r': 's', 's': '¬', 't': '¢',
+   	'u': ')', 'v': '@', 'w': 'm', 'x': '?', 'y': '3', 
+    	'z': '&', ',': 'º', ' ': sample(['§', 'a'], 1)[0],
+	'\n': sample(['§', 'a'], 1)[0], '.': ';', 'ç': '=',
+	'=': ':', ':': 'i', '/': ',', '&': 'z', '?': '²',
+	'_': '[', '0': '0', '1': '9', '2': '8', '3': '7',
+	'4': '6', '5': '5', '6': '4', '7': '3', '8': '2', '9': '1'
+}
+
+with c2:
+
+	msg = st.text_input('Mensagem (sem acento):')
+
+	cripto = ''.join([dic.get(i) for i in msg.lower()])
+
+	msg2 = st.text_input('Mensagem Criptografada:')
+
+	decripto = ''.join([' ' if i in ['§', 'a'] else list(dic.keys())[list(dic.values()).index(i)] for i in msg2])
+
+	cript_but = st.button('Criptografar/Descriptografar')
+
+	if cript_but:
+
+		if len(msg) > 0 and len(msg2) < 1:
+
+			st.success(cripto)
+
+		elif len(msg2) > 0 and len(msg) < 1:
+
+			st.success(decripto)
+
+# fotos de vini
+
+st.image('vini/vini.gif')
+st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
+
+# jecotube
+
+st.link_button('JecoTube, o seu YouTube sem anúncios', 'https://jeco-tube.streamlit.app/', type = 'primary')
+
+# juntador de pdf
+
+files_pdf = st.file_uploader('Juntar PDFs', type = 'pdf', accept_multiple_files = True)
+name = st.text_input('Nome do Arquivo')
+st.download_button(
+	label = 'Juntar e Baixar PDF',
+	data = export_pdf(junta_pdf(files_pdf)),
+	file_name = f'''{name}_{str(int(datetime.now().timestamp()))}.pdf'''
+)
+
+# entrenimento
+
+with c1:
+
+	st.write('''##### Versão 1.15''')
+	
+	with st.expander('Estação de Entretenimento'):
+
+		tabs1, tabs2, tabs3, tabs4, tabs5, tabs6 = st.tabs(['Spotify', 'Youtube Music', 'Transmmissão Looney Tunes', 'Vasco ao vivo', 'JecoTube', 'Vini'])
+		
+		with tabs6:
+
+			st.image('vini/vini.gif')
+			st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
+
+		with tabs1:
+
+			st.markdown(
+			'''
+			<iframe 
+				style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6knNdMEAqhuP7ZCe9dXHKk?utm_source=generator&theme=0" 
+			 	width="100%" height="370" frameBorder="0" allowfullscreen="" 
+			  	allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+			</iframe>
+			''', unsafe_allow_html=True
+			)
+
+		with tabs2:
+
+			st.markdown(
+			'''
+			<iframe 
+		 		width="100%" height="370" src="https://www.youtube-nocookie.com/embed/videoseries?si=TSXW4Fk9I0N9Yxwf&amp;list=PL_SfgS4VS-cR9Q1DLsXgCDlNc9kh-wNRo" 
+		   		title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+		     	gyroscope; picture-in-picture; web-share" allowfullscreen>
+			</iframe>
+			''', unsafe_allow_html=True
+			)
+			
+		with tabs3:
+	
+			st.markdown(
+			'''
+		 	<iframe 
+		  		width="100%" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=CaUHlx_d11n1P56V&amp;list=PL5Ofn03WIAXbsPazmkYwvV1YBwzurJNqA" 
+		    	title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+		    </iframe>
+		  	''', unsafe_allow_html=True
+			)
+
+		with tabs4:
+
+			st.image(Image.open('vasco.png'))
+
+			st.link_button('Canais Play - Vasco ao vivo', 'https://canaisplay.com/categoria/times/vasco/')
+
+		with tabs5:
+
+			link = st.text_input('URL Video:', value = 'https://www.youtube.com/watch?v=oCt_LiCPJfQ&ab_channel=McSuave')
+
+			st.markdown(
+			f'''
+		 	<iframe 
+				width="100%" height="315" src="https://www.youtube-nocookie.com/embed/{re.search('=(.*?)&', link).group(1)}"
+				frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+			</iframe>
+		  	''', unsafe_allow_html=True
+			)
+

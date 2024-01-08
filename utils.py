@@ -10,16 +10,6 @@ from pypdf import PdfWriter
 
 # teste de deploy
 
-def junta_pdf(lista: list):
-
-	pdf = PdfWriter()
-
-	for i in lista:
-
-		pdf.append(i)
-
-	return pdf
-
 def remainder(x):
 
 	if x % 2 == 0:
@@ -1126,6 +1116,10 @@ def listar_restos(file, skip):
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
 
+	df[11] = df[11].apply(money)
+
+	df.columns = ['NotaEmpenho', 'Evento', 'TipoRestos', 'DataReferencia', 'Data', 'Credor', 'Valor']
+
 	return df
 
 def liquidacao_credor(file, skip):
@@ -1249,18 +1243,6 @@ def cota_execucao_financeira(file, skip):
 	df.columns = ['CodigoGrupo', 'Grupo', 'Fonte', 'NomeFonte', 'CotaAutorizada', 'Empenhado']
 
 	return df
-
-def export_pdf(pdf):
-
-	output = BytesIO()
-	
-	pdf.write(output)
-		
-	pdf.close()
-	
-	processed_data = output.getvalue()
-	
-	return processed_data
 
 def export_excel(data):
 

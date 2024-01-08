@@ -1115,7 +1115,7 @@ def listar_restos(file, skip):
 
 	df = df.dropna(how='all', axis='columns')
 	df = df.dropna(how='all', axis='index')
-	df = df.dropna(axis='columns', thresh=3)
+	df = df.dropna(axis='index', thresh=3)
 
 	# df[11] = df[11].apply(money)
 

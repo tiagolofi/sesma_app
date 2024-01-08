@@ -125,3 +125,5 @@ Layout:
 **Guilherme**: "A aplicação otimizou meu tempo de trabalho que antes era dedicado a resolução de tarefas que poderiam ser automatizadas."
 
 **Vinicius**: "Não altera nada nesse código não siô, esse negócio salva meu fluxo todo dia..."
+
+**Felipe**: "Rapaz, acho que tá bom..."

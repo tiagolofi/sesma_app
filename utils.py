@@ -1155,13 +1155,11 @@ def despesa_certificada_situacao(file, skip): # processo
 	df[0] = df[9].apply(filter_NL)
 	df = df[df[0] == True]
 	
-	# df = df.drop(columns = [6, 8, 0])
-# 
-	# df.columns = ['Processo', 'NotaLiquidacao']
-# 
-	# df['Processo'] = df['Processo'].apply(processo)
-# 
-	# df = df.reindex(['NotaLiquidacao', 'Processo'], axis = 'columns')
+	df = df.drop(columns = [8])
+
+	df = df.ffill()
+
+	df.columns = ['NotaCertificacao', 'TipoDocumento', 'NumDocumento', 'DataAceite', 'NotaLiquidacao', 'Valor']
 	
 	return df
 

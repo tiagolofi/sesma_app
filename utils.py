@@ -1117,10 +1117,10 @@ def listar_restos(file, skip):
 	df = df.dropna(how='all', axis='index')
 	df = df.dropna(axis='index', thresh=3)
 
-	# df[11] = df[11].apply(money)
+	df[11] = df[11].apply(money)
 
-	#$ df.columns = ['NotaEmpenho', 'Evento', 'TipoRestos', 'DataReferencia', 'Data', 'Credor', 'Valor']
-
+	df.columns = ['NotaEmpenho', 'Evento', 'TipoRestos', 'DataReferencia', 'Data', 'CnpjCpf', 'Credor', 'Valor']
+	
 	return df
 
 def liquidacao_credor(file, skip):

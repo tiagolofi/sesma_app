@@ -1145,7 +1145,7 @@ def despesa_certificada_situacao(file, skip): # processo
 	df = read_excel(
 		io = file,
 		skiprows = skip - 1,
-		usecols = 'B:L',
+		usecols = 'B:Q',
 		header = None
 	)
 
@@ -1159,7 +1159,7 @@ def despesa_certificada_situacao(file, skip): # processo
 
 	df = df.ffill()
 
-	df.columns = ['NotaCertificacao', 'TipoDocumento', 'NumDocumento', 'DataAceite', 'NotaLiquidacao', 'Valor']
+	# df.columns = ['NotaCertificacao', 'TipoDocumento', 'NumDocumento', 'DataAceite', 'NotaLiquidacao', 'Valor']
 	
 	return df
 

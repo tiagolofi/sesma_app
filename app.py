@@ -41,25 +41,9 @@ st.markdown(css, unsafe_allow_html=True)
 
 st.write('''# **Tratamento das Fontes de Dados - SES/MA**''')
 
-c1, c2, c3 = st.columns([2, 1, 1])
+c1, c2, c3, c4 = st.columns(3)
 
-with c3:
-
-	st.image('img/logo_ses.png')
-
-	sorte = st.button('Está com sorte hoje? clique aqui!')
-	
-	if sorte:
-	
-		x = open('x.txt', 'r', encoding = 'utf-8').read()
-
-		lista = re.split(r'\d{1,3}\. ', x)
-
-		st.info(sample(lista, 1)[0])
-
-c4, c5, c6 = st.columns(3)
-
-with c4:
+with c1:
 
 	type_problem = st.selectbox(
 			label='Fonte de Informação',
@@ -76,11 +60,11 @@ with c4:
 			]
 		)
 	
-with c5:
+with c2:
 
 	info_skip = st.number_input(label = 'Linhas para pular:', min_value = 0)
 
-with c6:
+with c3:
 
 	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
 
@@ -683,3 +667,17 @@ elif type_problem == 'Imprimir Despesa Certificada Situação' and file != None:
 		except:
 
 			st.error('Erro ao tentar ler o arquivo, verifique a quantidade de linhas a pular.')
+
+with c4:
+
+	st.image('img/logo_ses.png')
+
+	sorte = st.button('Está com sorte hoje? clique aqui!')
+	
+	if sorte:
+	
+		x = open('x.txt', 'r', encoding = 'utf-8').read()
+
+		lista = re.split(r'\d{1,3}\. ', x)
+
+		st.info(sample(lista, 1)[0])

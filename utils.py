@@ -1119,7 +1119,7 @@ def listar_restos(file, skip):
 
 	# df[11] = df[11].apply(money)
 
-	df.columns = ['NotaEmpenho', 'Evento', 'TipoRestos', 'DataReferencia', 'Data', 'Credor', 'Valor']
+	#$ df.columns = ['NotaEmpenho', 'Evento', 'TipoRestos', 'DataReferencia', 'Data', 'Credor', 'Valor']
 
 	return df
 

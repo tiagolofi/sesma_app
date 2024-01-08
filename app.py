@@ -100,9 +100,6 @@ if type_problem == 'Descentralização' and file != None:
 
 	if visualizar:
 
-		st.image('vini/vini.gif')
-		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
-
 		try:
 	
 			data1, data2, data3 = descentralizacao(file = file, skip = info_skip)
@@ -196,9 +193,6 @@ elif type_problem == 'Crédito Disponível' and file != None:
 	visualizar = st.button('Visualizar Planilha')
 
 	if visualizar:
-
-		st.image('vini/vini.gif')
-		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 		
 		try:
 	
@@ -320,9 +314,6 @@ elif type_problem == 'Extrato Bancário' and file != None:
 
 	if visualizar:
 
-		st.image('vini/vini.gif')
-		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
-
 		try:
 	
 			data = extrato(file = file, skip = info_skip)
@@ -346,9 +337,6 @@ elif type_problem == 'Listar Ordem Bancária' and file != None:
 	visualizar = st.button('Visualizar Planilha')
 
 	if visualizar:
-
-		st.image('vini/vini.gif')
-		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 
 		try:
 	
@@ -398,9 +386,6 @@ elif type_problem == 'Imprimir Preparação Pagamento' and file != None:
 
 	if visualizar:
 
-		st.image('vini/vini.gif')
-		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
-
 		try:
 	
 			data = observacoes(file = file, skip = info_skip)
@@ -425,9 +410,6 @@ elif type_problem == 'Listar Preparação Pagamento' and file != None:
 
 	if visualizar:
 
-		st.image('vini/vini.gif')
-		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
-
 		try:
 	
 			data = situacao_pp(file = file, skip = info_skip)
@@ -451,9 +433,6 @@ elif type_problem == 'Imprimir Nota Empenho Célula' and file != None:
 	visualizar = st.button('Visualizar Planilha')
 
 	if visualizar:
-
-		st.image('vini/vini.gif')
-		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 
 		try:
 	
@@ -526,9 +505,6 @@ elif type_problem == 'Imprimir Execução Orçamentária' and file != None:
 	visualizar = st.button('Visualizar Planilha')
 
 	if visualizar:
-
-		st.image('vini/vini.gif')
-		st.audio('vini/Justin Bieber - Baby ft Ludacris (Lyrics).mp4')
 
 		try:
 	

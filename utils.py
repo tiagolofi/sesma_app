@@ -1002,7 +1002,7 @@ def nota_pre_empenho_celula(file: str, skip: int):
 	for j in [6, 7, 8, 10, 12]:
 	
 		  df[j] = [float(sub(' |nan', '0', sub('\,', '.', sub('[A-Z]|\.', '', str(i))))) for i in df[j]]
-		  
+	
 	df = df.drop(columns = [4, 8, 10, 12])
 
 	subacao = read_excel('files/Relatorio_30052022092044.xls', skiprows=12, usecols='B:F', dtype=str)
@@ -1145,24 +1145,24 @@ def despesa_certificada_situacao(file, skip): # processo
 	df = read_excel(
 		io = file,
 		skiprows = skip - 1,
-		usecols = 'E:J',
+		usecols = 'B:L',
 		header = None
 	)
 
 	df = df.dropna(how='all', axis='columns')
-	df = df.dropna(how='all', axis='index')
+	# df = df.dropna(how='all', axis='index')
 
-	df[0] = df[9].apply(filter_NL)
-
-	df = df[df[0] == True]
-	
-	df = df.drop(columns = [6, 8, 0])
-
-	df.columns = ['Processo', 'NotaLiquidacao']
-
-	df['Processo'] = df['Processo'].apply(processo)
-
-	df = df.reindex(['NotaLiquidacao', 'Processo'], axis = 'columns')
+	# df[0] = df[9].apply(filter_NL)
+# 
+	# df = df[df[0] == True]
+	# 
+	# df = df.drop(columns = [6, 8, 0])
+# 
+	# df.columns = ['Processo', 'NotaLiquidacao']
+# 
+	# df['Processo'] = df['Processo'].apply(processo)
+# 
+	# df = df.reindex(['NotaLiquidacao', 'Processo'], axis = 'columns')
 	
 	return df
 

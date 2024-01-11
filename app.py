@@ -68,7 +68,7 @@ with c2:
 
 with c3:
 
-	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls'])
+	file = st.file_uploader('Navegar pelo Computador:', ['xlsx', 'xls', 'pdf'])
 
 st.sidebar.write('''**Instruções de Linhas**''')
 

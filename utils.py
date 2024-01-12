@@ -1242,12 +1242,24 @@ def credito(file: str, skip: int):
 	
 	df.columns = ['Disponivel', 'InvSaldo', 'Subacao', 'Fonte', 'Natureza']
 	
+	df = df.dropna(thresh = 5, axis = 'index')
+
+	subacao = read_excel('files/RELATORIO_SUBACAO_2027.xls', skiprows=12, usecols='B:F', dtype=str)
+	
+	subacao = subacao.dropna(how='all', axis='columns')
+	
+	subacao = subacao.dropna(how='all', axis='index')
+	
+	subacao.columns = ['Codigo', 'SubacaoNome', 'Acao']
+
+	df = df.merge(subacao, how='left', left_on='Subacao', right_on='Codigo')
+	
+	df = df.drop(columns=['Codigo', 'InvSaldo'])
+
 	df = df.reindex(
-		 ['Subacao', 'Fonte', 'Natureza', 'Disponivel', 'InvSaldo'],
+		['Acao', 'Subacao', 'SubacaoNome', 'Fonte', 'Natureza', 'Disponivel'],
 		axis = 'columns'
 	)
-	
-	df = df.dropna(thresh = 5, axis = 'index')
 
 	return df
 

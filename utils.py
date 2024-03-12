@@ -246,7 +246,7 @@ def processo(text):
 
 	try:
 
-		proc = findall('\d{4,8}/\d{2,4}', text)[0]
+		proc = findall('\d{4,8}/\d{2,4}|\d{4}\.\d{6}\.\d{5}|\d{15}', text)[0]
 
 		return proc.upper()
 
